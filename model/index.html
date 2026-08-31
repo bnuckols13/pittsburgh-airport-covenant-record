@@ -80,216 +80,271 @@ color:var(--ink);cursor:pointer}
 .work{font-family:"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--ink2);
 background:var(--surface2);border-radius:8px;padding:.8rem .9rem;margin-top:.9rem;
 white-space:pre-wrap;line-height:1.55}
-.ifthen{font-family:system-ui,sans-serif;font-size:1rem;line-height:1.55;
-background:color-mix(in srgb,var(--blue) 9%,transparent);border-left:3px solid var(--blue);
-border-radius:0 8px 8px 0;padding:.85rem 1rem;margin:1.3rem 0 .6rem}
-#chart{margin:.4rem 0 1rem}
-#tbl td.under{color:var(--orange);font-weight:600}
-#tbl .nv{font-size:.7rem;color:var(--yellow);border:1px solid currentColor;border-radius:99px;
-padding:0 .35rem;vertical-align:middle}
-.presets button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 @media print{.toggle,.presets{display:none}}
+
+.hero{position:sticky;top:0;z-index:5;background:var(--plane);padding:.6rem 0 1rem;
+margin:0 0 .2rem;border-bottom:1px solid var(--ring)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin:0 0 .8rem}
+@media(max-width:640px){.tiles{grid-template-columns:1fr;gap:.45rem}}
+.tile b{display:block;font-family:system-ui,sans-serif;font-size:2.05rem;line-height:1.05;
+letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--blue)}
+.tile.warn b{color:var(--orange)}
+.tile span{display:block;font-family:system-ui,sans-serif;font-size:.75rem;color:var(--muted);
+margin-top:.15rem;line-height:1.35}
+.reading{font-family:system-ui,sans-serif;font-size:1rem;line-height:1.5;margin:0}
+.reading em{font-style:normal;color:var(--blue);font-weight:600}
+.reading em.warn{color:var(--orange)}
+#chart{margin:.15rem 0 0}
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:.6rem;
+margin:1.5rem 0 .7rem}
+.scen button{font:inherit;font-family:system-ui,sans-serif;text-align:left;cursor:pointer;
+line-height:1.32;
+background:var(--surface);border:1px solid var(--ring);border-radius:11px;padding:.7rem .85rem;
+color:var(--ink);transition:border-color .12s,transform .12s}
+.scen button:hover{border-color:var(--blue);transform:translateY(-1px)}
+.scen button.on{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 9%,transparent);
+box-shadow:inset 0 0 0 1px var(--blue)}
+.scen button strong{display:block;font-size:.89rem;line-height:1.25;margin-bottom:.2rem}
+.scen button span{font-size:.755rem;color:var(--muted);line-height:1.35}
+details.more{border-top:1px solid var(--ring);margin-top:.2rem}
+details.more>summary{cursor:pointer;font-family:system-ui,sans-serif;font-size:.87rem;
+color:var(--blue);padding:.75rem 0;list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"+";display:inline-block;width:1rem;font-weight:600}
+details.more[open]>summary::before{content:"\2013"}
+details.more>*:not(summary){margin-bottom:1rem}
+.lev{margin:0 0 1rem}
+.lev label{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+font-family:system-ui,sans-serif;font-size:.88rem;margin-bottom:.2rem}
+.lev label b{font-variant-numeric:tabular-nums;color:var(--blue);white-space:nowrap}
+.lev input[type=range]{width:100%;accent-color:var(--blue)}
+.lev .why{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--muted);margin-top:.15rem}
+#tbl td.under{color:var(--orange);font-weight:600}
+#tbl .nv{font-size:.66rem;color:var(--yellow);border:1px solid currentColor;border-radius:99px;
+padding:0 .32rem;margin-left:.3rem;white-space:nowrap}
+.caveat{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--muted);margin:.2rem 0 1.4rem}
+/* Sticky is a gift on a tall screen and a thief on a short one: the band is about
+420px, and on a laptop it was covering the first row of scenarios. Pin it only where
+there is room, and let it scroll normally otherwise. */
+@media (max-height:820px){.hero{position:static}}
+@media print{.scen,.toggle{display:none}.hero{position:static}}
 </style></head><body><button class="toggle">&#9686; theme</button><div class="wrap">
 <p class="kicker">Model</p>
 <h1>If the Authority decides differently</h1>
-<p class="sub">The covenant clears because the Authority makes two decisions every year, and its
-consultant assumes it goes on making them. Change the decisions and read the whole forecast,
-rather than one year of it.</p>
+<p class="sub">The covenant clears because the Authority makes two discretionary decisions every
+year, and its consultant assumes it goes on making them. Change the decisions and read the whole
+forecast.</p>
 
-<div class="disc"><b>Arithmetic on documents. Not a forecast, and not a prediction.</b> Every
-baseline here is the Authority's own figure from the April 2025 Official Statement, page-cited in
-<code>02-data/coverage-table.csv</code>. With every dial left at the Authority's own value this
-model reproduces its printed ratios and its charge to the cent, and the build refuses to ship the
-page if it does not. Everything away from that baseline is our arithmetic, and it is written out
-in full at the bottom. The model knows nothing the documents do not say, and it cannot tell you
-what the Authority will choose.</div>
-
-<div class="rig">
-  <div class="presets">
-    <button data-p="base" class="on">As the Authority forecasts it</button>
-    <button data-p="after28">Nothing designated once the vote runs out</button>
-    <button data-p="nodesig">Nothing designated, ever</button>
-    <button data-p="halve">Gaming halved</button>
-    <button data-p="noacct">No Coverage Account deposit</button>
-    <button data-p="short">Traffic 10 percent short</button>
-    <button data-p="stack">All of it at once</button>
+<div class="hero">
+  <div class="tiles">
+    <div class="tile" id="t1"><b>&#8211;</b><span>&#8211;</span></div>
+    <div class="tile" id="t2"><b>&#8211;</b><span>&#8211;</span></div>
+    <div class="tile" id="t3"><b>&#8211;</b><span>&#8211;</span></div>
   </div>
+  <p class="reading" id="ifthen"></p>
+  <svg id="chart" viewBox="0 0 900 250" role="img" aria-label="Coverage ratio across the six forecast years under the settings chosen, against the Authority's own forecast shown as a dotted line."></svg>
+</div>
 
+<div class="scen">
+  <button data-p="base" class="on"><strong>As the Authority forecasts it</strong>
+    <span>Every dial on the document. The baseline.</span></button>
+  <button data-p="after28"><strong>After the vote runs out</strong>
+    <span>Nothing designated in 2029 and 2030, which no vote covers.</span></button>
+  <button data-p="nodesig"><strong>Nothing designated, ever</strong>
+    <span>What the Authority actually did in 2024, carried through.</span></button>
+  <button data-p="noacct"><strong>No Coverage Account deposit</strong>
+    <span>The second lever left at zero.</span></button>
+  <button data-p="short"><strong>Traffic ten percent short</strong>
+    <span>Watch what this moves, and what it leaves alone.</span></button>
+  <button data-p="stack"><strong>All of it at once</strong>
+    <span>Both levers down and traffic short.</span></button>
+</div>
+
+<p class="caveat">Arithmetic on the Authority's own rows. Not a forecast, and not a prediction. At
+the baseline this model reproduces its printed ratios and its charge to the cent, and the build
+refuses to publish the page if it does not.</p>
+
+<details class="more"><summary>Adjust it yourself</summary>
   <div class="lev">
     <label for="s0">Designated into the pledge <b id="v0">as forecast</b></label>
     <input type="range" id="s0" min="0" max="110" value="100" step="5">
-    <div class="why">Other Pledged Revenues: slot-machine tax and gas royalty. Shown as a share of
-      what the Authority itself assumes, because it assumes $8.8m for 2025 and $11.575m after, so
-      one dollar figure could not mean "as forecast" in every year. It takes in about $12.4m a
-      year in gaming money and designates as much as it chooses, or none, as it did in 2024. Moves
-      Net Revenues one for one and the airline charge by the same amount over boardings.</div>
+    <div class="why">Slot-machine tax and gas royalty, as a share of what the Authority assumes.
+      A share rather than a sum because it assumes $8.8m for 2025 and $11.575m after, so no single
+      figure could mean &#8220;as forecast&#8221; in every year. Moves Net Revenues one for one.</div>
   </div>
   <div class="lev">
-    <label for="s3">Apply that change <b id="v3">to every forecast year</b></label>
+    <label for="s3">Apply that <b id="v3">to every year</b></label>
     <input type="range" id="s3" min="0" max="1" value="0" step="1">
-    <div class="why">The airlines voted the designation for 2026 through 2028. 2029 and 2030 sit
-      past it. Slide right to change only the years no vote covers.</div>
+    <div class="why">The airlines voted the designation for 2026 through 2028 only.</div>
   </div>
   <div class="lev">
     <label for="s1">Coverage Account deposit <b id="v1">25% of debt service</b></label>
     <input type="range" id="s1" min="0" max="25" value="25" step="1">
-    <div class="why">Funded monthly at the Authority's discretion and capped at 25 percent. The
-      forecast assumes the ceiling in five of its six years. This moves the printed ratio only:
+    <div class="why">Discretionary, monthly, capped at 25 percent. Moves the printed ratio only:
       the account is not part of pledged Net Revenues.</div>
   </div>
   <div class="lev">
     <label for="s2">Boardings against forecast <b id="v2">as forecast</b></label>
     <input type="range" id="s2" min="-25" max="10" value="0" step="1">
     <div class="why">Holds the airline requirement constant, which is what a residual agreement
-      does with fixed costs and debt service. Watch which line this moves and which it leaves
-      alone.</div>
+      does with fixed costs and debt service.</div>
   </div>
+</details>
 
-  <p class="ifthen" id="ifthen"></p>
-  <svg id="chart" viewBox="0 0 900 300" role="img" aria-label="Coverage ratio across the six forecast years under the settings chosen. A dotted line shows the Authority's own forecast for comparison."></svg>
-
+<details class="more"><summary>Every year, in numbers</summary>
   <div class="scroll"><table id="tbl"><thead><tr>
     <th>year</th><th class="num">designated $m</th><th class="num">net revenues $m</th>
     <th class="num">pledged alone</th><th class="num">as printed</th>
     <th class="num">charge</th><th class="num">vs forecast</th>
   </tr></thead><tbody></tbody></table></div>
+</details>
+
+<details class="more"><summary>Show the arithmetic</summary>
   <div class="work" id="work"></div>
-</div>
+</details>
 
-<div class="note"><b>What the boardings lever teaches.</b> Drag it a long way down. The coverage
-lines barely stir while the charge climbs. That is the residual agreement working exactly as
-written: when traffic disappoints, the carriers are billed the difference and the covenant is
-insulated from it. It is also why the passengers arriving on forecast, which they did in 2024,
-settles less than it appears to.</div>
+<details class="more"><summary>Where the numbers come from, and what this cannot tell you</summary>
+  <p>Every baseline is the Authority's own figure from the April 2025 Official Statement at
+  os-2025ab PDF 202 (printed B-16), carried in <code>02-data/coverage-table.csv</code>.
+  Designations come from Exhibit E at PDF 316 by way of
+  <code>02-data/other-pledged-revenue.csv</code>. The window the airlines actually voted is at
+  PDF 67.</p>
+  <p>The relationship between a designation and the airline charge is not asserted here. It is
+  checked at build time against <code>02-data/who-pays-opr.csv</code>, and separately the whole
+  model is required to reproduce the Authority's printed ratios and its charge at baseline before
+  this page can be written at all.</p>
+  <p>What it cannot tell you: what the Authority will decide, what Harrisburg will do to the
+  gaming appropriation, or what traffic will be. It is arithmetic on published rows, and moving a
+  dial states a consequence rather than a probability.</p>
+  <p>This page never says default, breach or violation. The indenture lets the Coverage Account
+  count toward the 1.25 test, and on that test the Authority's forecasts comply in every year.
+  Missing the covenant once would not be an event of default either: the indenture requires the
+  Authority to hire a consultant, take its advice and raise its rates, and only a second
+  consecutive miss after rates have gone up is an Event of Default. The finding here is narrower
+  and is stated in those words: what the ratio is on pledged Net Revenues alone.</p>
+</details>
 
-<p><a href="../covenant/index.html">&#8592; What the two pots are</a> &#160;&#183;&#160;
-<a href="../appendix-dataviz/index.html">The plates</a> &#160;&#183;&#160;
-<a href="../index.html">The package</a></p>
+<p style="margin-top:2rem"><a href="../covenant/index.html">&#8592; What the two pots are</a>
+&#160;&#183;&#160; <a href="../appendix-dataviz/index.html">The plates</a>
+&#160;&#183;&#160; <a href="../index.html">The package</a></p>
 
-<p class="src">Baselines: <code>02-data/coverage-table.csv</code>, from os-2025ab PDF 202 (printed
-B-16). Designations: <code>other-pledged-revenue.csv</code>, from PDF 316. The commitment window
-is from PDF 67. The charge relationship is checked at build time against
-<code>who-pays-opr.csv</code>. This page never says default, breach or violation, because on the
-covenant as written the Authority's forecasts comply. Built 2026-08-31.</p>
+<p class="src">Built 2026-08-31 from the CSVs in <code>02-data/</code>. Rebuild with
+<code>python 03-harness/build_explainer.py</code>, check with <code>--check</code>.</p>
 </div><script>document.querySelector('.toggle').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')};</script><script>var B=[{"year":2025,"net":79417.0,"cov":14745.0,"ads":58980.0,"cpe":15.71,"enpl":5064.0,"opr":8800.0},{"year":2026,"net":94616.0,"cov":21168.0,"ads":84670.0,"cpe":19.13,"enpl":5140.0,"opr":11575.0},{"year":2027,"net":102774.0,"cov":21168.0,"ads":91112.0,"cpe":19.44,"enpl":5217.0,"opr":11575.0},{"year":2028,"net":101815.0,"cov":22707.0,"ads":90827.0,"cpe":19.06,"enpl":5295.0,"opr":11575.0},{"year":2029,"net":107144.0,"cov":22639.0,"ads":90556.0,"cpe":20.25,"enpl":5374.0,"opr":11575.0},{"year":2030,"net":107243.0,"cov":22566.0,"ads":90264.0,"cpe":20.53,"enpl":5455.0,"opr":11575.0}];
 var el=function(i){return document.getElementById(i)};
 var s0=el('s0'),s1=el('s1'),s2=el('s2'),s3=el('s3');
 function m(k){return '$'+(k/1000).toFixed(1)+'m'}
 var NS='http://www.w3.org/2000/svg';
-function mk(n,a,txt){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);
-  if(txt!==undefined)e.textContent=txt;return e}
+function mk(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);
+  if(t!==undefined)e.textContent=t;return e}
 
 function compute(){
   var share=+s0.value/100, pct=+s1.value/100, dpax=+s2.value/100, lateOnly=(+s3.value===1);
   return B.map(function(b){
     var d=(lateOnly && b.year<=2028)?b.opr:b.opr*share;
-    var net=b.net-b.opr+d;
-    var acct=pct*b.ads;
-    var enpl=b.enpl*(1+dpax);
+    var net=b.net-b.opr+d, acct=pct*b.ads, enpl=b.enpl*(1+dpax);
     var req=(b.cpe+b.opr/b.enpl)*b.enpl;   // the airline requirement before any designation
-    return {year:b.year,desig:d,net:net,acct:acct,
-            alone:net/b.ads, printed:(net+acct)/b.ads,
-            cpe:(req-d)/enpl, base:b, voted:(b.year>=2026 && b.year<=2028)};
+    return {year:b.year,desig:d,net:net,acct:acct,alone:net/b.ads,printed:(net+acct)/b.ads,
+            cpe:(req-d)/enpl,base:b};
   });
 }
+function baseAlone(b){return b.net/b.ads}
+function basePrinted(b){return (b.net+b.cov)/b.ads}
 
 function draw(rows){
   var svg=el('chart'); while(svg.firstChild)svg.removeChild(svg.firstChild);
-  var W=900,H=300,L=54,R=168,T=16,BM=46;
+  var W=900,H=250,L=46,R=196,T=14,BM=30;
   var v=[1.25];
-  rows.forEach(function(r){v.push(r.alone,r.printed,
-    r.base.net/r.base.ads,(r.base.net+r.base.cov)/r.base.ads)});
+  rows.forEach(function(r){v.push(r.alone,r.printed,baseAlone(r.base),basePrinted(r.base))});
   var lo=Math.min.apply(null,v),hi=Math.max.apply(null,v);
-  var pad=(hi-lo)*0.14||0.1; lo-=pad; hi+=pad;
+  var pad=(hi-lo)*0.16||0.1; lo-=pad; hi+=pad;
   var X=function(i){return L+i*(W-L-R)/(rows.length-1)};
   var Y=function(t){return H-BM-(t-lo)/(hi-lo)*(H-BM-T)};
+  var half=((W-L-R)/(rows.length-1))/2;
 
-  var step=(hi-lo)>0.9?0.2:0.1;
-  for(var t=Math.ceil(lo/step)*step;t<=hi;t+=step){
-    svg.appendChild(mk('line',{x1:L,y1:Y(t),x2:W-R,y2:Y(t),stroke:'var(--grid)'}));
-    svg.appendChild(mk('text',{x:L-8,y:Y(t)+4,'text-anchor':'end','class':'ax'},t.toFixed(2)));
-  }
-  // the years no majority-in-interest vote covers
-  var firstUn=rows.filter(function(r){return !r.voted && r.year>2028})[0];
-  if(firstUn){
-    var xi=rows.indexOf(firstUn);
-    svg.appendChild(mk('rect',{x:X(xi)-((W-L-R)/(rows.length-1))/2,y:T,
-      width:(W-R)-(X(xi)-((W-L-R)/(rows.length-1))/2),height:H-BM-T,
-      fill:'var(--yellow)','fill-opacity':0.10}));
-    svg.appendChild(mk('text',{x:X(xi)+4,y:T+13,'class':'ax'},'no vote covers these years'));
+  var xi=-1; rows.forEach(function(r,i){if(xi<0&&r.year>2028)xi=i});
+  if(xi>0){
+    svg.appendChild(mk('rect',{x:X(xi)-half,y:T,width:(W-R)-(X(xi)-half),height:H-BM-T,
+      fill:'var(--yellow)','fill-opacity':0.09}));
+    svg.appendChild(mk('text',{x:X(xi)-half+6,y:T+12,'class':'ax'},'no vote covers these'));
   }
   svg.appendChild(mk('line',{x1:L,y1:Y(1.25),x2:W-R,y2:Y(1.25),stroke:'var(--ink2)',
-    'stroke-width':1.4,'stroke-dasharray':'5 3'}));
-  svg.appendChild(mk('text',{x:W-R+8,y:Y(1.25)+4,'class':'lab2'},'1.25, the covenant'));
+    'stroke-width':1.3,'stroke-dasharray':'5 3'}));
+  svg.appendChild(mk('text',{x:W-R+8,y:Y(1.25)+4,'class':'lab2'},'1.25'));
 
-  // the Authority's own forecast, faint, so the deviation is seen rather than remembered
-  [['alone',function(r){return r.base.net/r.base.ads}],
-   ['printed',function(r){return (r.base.net+r.base.cov)/r.base.ads}]].forEach(function(c){
-    var d=rows.map(function(r,i){return (i?'L':'M')+X(i)+','+Y(c[1](r))}).join(' ');
-    svg.appendChild(mk('path',{d:d,fill:'none',stroke:'var(--muted)','stroke-width':1,
-      'stroke-dasharray':'2 3',opacity:0.75}));
+  [baseAlone,basePrinted].forEach(function(fn){
+    svg.appendChild(mk('path',{d:rows.map(function(r,i){
+      return (i?'L':'M')+X(i)+','+Y(fn(r.base))}).join(' '),
+      fill:'none',stroke:'var(--muted)','stroke-width':1,'stroke-dasharray':'2 3',opacity:.6}));
   });
-
-  [['printed','var(--blue-lt)','as the statement prints it'],
-   ['alone','var(--blue)','on pledged revenue alone']].forEach(function(c){
-    var k=c[0],col=c[1];
-    var d=rows.map(function(r,i){return (i?'L':'M')+X(i)+','+Y(r[k])}).join(' ');
-    svg.appendChild(mk('path',{d:d,fill:'none',stroke:col,'stroke-width':2.4,
-      'stroke-linejoin':'round'}));
-    rows.forEach(function(r,i){svg.appendChild(mk('circle',{cx:X(i),cy:Y(r[k]),r:4,fill:col}))});
+  [['printed','var(--blue-lt)',2,'as printed'],
+   ['alone','var(--blue)',2.8,'pledged alone']].forEach(function(c){
+    var k=c[0];
+    svg.appendChild(mk('path',{d:rows.map(function(r,i){
+      return (i?'L':'M')+X(i)+','+Y(r[k])}).join(' '),
+      fill:'none',stroke:c[1],'stroke-width':c[2],'stroke-linejoin':'round'}));
+    rows.forEach(function(r,i){svg.appendChild(mk('circle',
+      {cx:X(i),cy:Y(r[k]),r:(i===rows.length-1?4.6:3.2),fill:c[1]}))});
     var last=rows[rows.length-1];
-    svg.appendChild(mk('text',{x:W-R+8,y:Y(last[k])+4,'class':'lab2',fill:col},c[2]));
+    svg.appendChild(mk('text',{x:W-R+9,y:Y(last[k])+4,'class':'lab2',fill:c[1]},
+      c[3]+'  '+last[k].toFixed(2)));
   });
+  svg.appendChild(mk('text',{x:W-R+9,y:H-BM-1,'class':'ax'},'dotted: the forecast'));
   rows.forEach(function(r,i){
-    svg.appendChild(mk('text',{x:X(i),y:H-BM+18,'text-anchor':'middle','class':'ax'},r.year));
-    svg.appendChild(mk('text',{x:X(i),y:H-BM+31,'text-anchor':'middle','class':'ax',
-      fill:r.alone<1.25?'var(--orange)':'var(--muted)'},r.alone.toFixed(2)));
-  });
+    svg.appendChild(mk('text',{x:X(i),y:H-BM+16,'text-anchor':'middle','class':'ax'},r.year))});
   svg.appendChild(mk('line',{x1:L,y1:H-BM,x2:W-R,y2:H-BM,stroke:'var(--axis)'}));
-  svg.appendChild(mk('text',{x:W-R+8,y:H-BM-2,'class':'ax',fill:'var(--muted)'},
-    'dotted: the Authority’s forecast'));
+}
+
+function tiles(rows){
+  var under=rows.filter(function(r){return r.alone<1.25});
+  var worst=rows.reduce(function(a,b){return b.alone<a.alone?b:a});
+  var chg=rows.map(function(r,i){return r.cpe-B[i].cpe});
+  var big=chg.reduce(function(a,b){return Math.abs(b)>Math.abs(a)?b:a},0);
+  function set(id,val,lab,warn){
+    var t=el(id); t.querySelector('b').textContent=val;
+    t.querySelector('span').textContent=lab; t.classList.toggle('warn',!!warn);
+  }
+  set('t1',worst.alone.toFixed(2),'lowest on pledged revenue alone, in '+worst.year,
+      worst.alone<1.25);
+  set('t2',under.length+' of '+rows.length,'forecast years under 1.25 on pledged revenue alone',
+      under.length>0);
+  set('t3',(Math.abs(big)<0.005?'no change':(big>0?'+':'−')+'$'+Math.abs(big).toFixed(2)),
+      'to the charge per boarded passenger, against the forecast',big>0.005);
 }
 
 function sentence(rows){
   var under=rows.filter(function(r){return r.alone<1.25});
-  var nBase=B.filter(function(b){return b.net/b.ads<1.25}).length;
-  var chg=rows.map(function(r,i){return r.cpe-B[i].cpe});
-  var up=Math.max.apply(null,chg), dn=Math.min.apply(null,chg);
-  var s;
-  if(!under.length){
-    s='On these settings pledged Net Revenues alone clear 1.25 in every forecast year. ';
-  }else{
-    var worst=under.reduce(function(a,b){return b.alone<a.alone?b:a});
-    s='On these settings, pledged Net Revenues alone come in under 1.25 in '+under.length+' of '+
-      rows.length+' forecast years ('+under.map(function(r){return r.year}).join(', ')+
-      '), lowest at '+worst.alone.toFixed(2)+' in '+worst.year+'. ';
+  var nB=B.filter(function(b){return baseAlone(b)<1.25}).length;
+  var worst=rows.reduce(function(a,b){return b.alone<a.alone?b:a});
+  var f=document.createDocumentFragment();
+  function t(x){f.appendChild(document.createTextNode(x))}
+  function e(x,w){var n=document.createElement('em');n.textContent=x;
+    if(w)n.className='warn';f.appendChild(n)}
+  if(!under.length){ t('Pledged Net Revenues alone clear 1.25 in every forecast year. '); }
+  else{
+    t('Pledged Net Revenues alone come in under 1.25 in ');
+    e(under.length+' of '+rows.length,true);
+    t(' forecast years, lowest at '); e(worst.alone.toFixed(2),true);
+    t(' in '+worst.year+'. ');
   }
-  s+='The Authority’s own forecast has '+nBase+' of '+rows.length+'. ';
-  if(up>0.005) s+='The charge to airlines rises as much as $'+up.toFixed(2)+
-    ' a boarded passenger above the forecast. ';
-  else if(dn<-0.005) s+='The charge to airlines falls as much as $'+Math.abs(dn).toFixed(2)+
-    ' a boarded passenger below the forecast. ';
-  if(+s3.value===1) s+='The change applies only to 2029 and 2030, the years the January 2025 '+
-    'majority-in-interest vote does not cover.';
-  return s;
+  t('The Authority’s own forecast has '+nB+' of '+rows.length+'. ');
+  if(+s3.value===1) t('This change applies only to 2029 and 2030, the years the January 2025 '+
+    'majority-in-interest vote does not cover.');
+  return f;
 }
 
 function render(){
   var rows=compute();
-  var sh=+s0.value;
-  el('v0').textContent=(sh===100?'as forecast':(sh===0?'nothing at all':sh+'% of the forecast'))
-    +(sh===100?'':' ('+m(B[1].opr*sh/100)+' in 2026)');
+  el('v0').textContent=(+s0.value===100?'as forecast':(+s0.value===0?'nothing':(+s0.value)+'%'));
   el('v1').textContent=(+s1.value)+'% of debt service';
-  var dp=+s2.value;
-  el('v2').textContent=(dp===0?'as forecast':(dp>0?'+':'')+dp+'%');
-  el('v3').textContent=(+s3.value===1?'only to 2029 and 2030':'to every forecast year');
-  el('ifthen').textContent=sentence(rows);
-  draw(rows);
+  var dp=+s2.value; el('v2').textContent=(dp===0?'as forecast':(dp>0?'+':'')+dp+'%');
+  el('v3').textContent=(+s3.value===1?'only to 2029 and 2030':'to every year');
+  tiles(rows); draw(rows);
+  var p=el('ifthen'); p.innerHTML=''; p.appendChild(sentence(rows));
   var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
   rows.forEach(function(r,i){
-    var d=r.cpe-B[i].cpe;
-    var tr=document.createElement('tr');
-    tr.innerHTML='<td>'+r.year+(r.year>2028?' <span class="nv">no vote</span>':'')+'</td>'+
+    var d=r.cpe-B[i].cpe, tr=document.createElement('tr');
+    tr.innerHTML='<td>'+r.year+(r.year>2028?'<span class="nv">no vote</span>':'')+'</td>'+
       '<td class="num">'+(r.desig/1000).toFixed(1)+'</td>'+
       '<td class="num">'+(r.net/1000).toFixed(1)+'</td>'+
       '<td class="num'+(r.alone<1.25?' under':'')+'">'+r.alone.toFixed(2)+'</td>'+
@@ -311,30 +366,26 @@ function render(){
     '\n  charge            requirement less '+m(b.desig)+' designated, over boardings = $'+b.cpe.toFixed(2);
 }
 
-var P={base:[100,25,0,0], after28:[0,25,0,1], nodesig:[0,25,0,0], halve:[50,25,0,0],
-       noacct:[100,0,0,0], short:[100,25,-10,0], stack:[0,0,-10,0]};
-[].forEach.call(document.querySelectorAll('.presets button'),function(btn){
+var P={base:[100,25,0,0],after28:[0,25,0,1],nodesig:[0,25,0,0],
+       noacct:[100,0,0,0],short:[100,25,-10,0],stack:[0,0,-10,0]};
+[].forEach.call(document.querySelectorAll('.scen button'),function(btn){
   btn.addEventListener('click',function(){
     var p=P[btn.dataset.p];
     s0.value=p[0];s1.value=p[1];s2.value=p[2];s3.value=p[3];render();
-    [].forEach.call(document.querySelectorAll('.presets button'),function(o){
+    [].forEach.call(document.querySelectorAll('.scen button'),function(o){
       o.classList.toggle('on',o===btn)});
   });
 });
 [s0,s1,s2,s3].forEach(function(x){
   x.addEventListener('input',function(){
-    [].forEach.call(document.querySelectorAll('.presets button'),function(o){
-      o.classList.remove('on')});
+    [].forEach.call(document.querySelectorAll('.scen button'),function(o){o.classList.remove('on')});
     render();
   });
   // A range input under the cursor swallows the wheel and rewrites itself, so simply
-  // scrolling past this rig silently changed the scenario and the reader was left
-  // looking at numbers that did not match the dials. Take the wheel and scroll the
-  // page by hand instead. Keyboard arrows still adjust the slider when it is focused.
-  x.addEventListener('wheel',function(e){
-    e.preventDefault();
-    window.scrollBy(0,e.deltaY);
-  },{passive:false});
+  // scrolling past the dials silently changed the scenario and left the reader looking
+  // at numbers that did not match what was on the screen. Take the wheel, scroll by hand.
+  x.addEventListener('wheel',function(ev){ev.preventDefault();window.scrollBy(0,ev.deltaY)},
+    {passive:false});
 });
 render();
 </script></body></html>

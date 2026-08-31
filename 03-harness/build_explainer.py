@@ -115,14 +115,6 @@ color:var(--ink);cursor:pointer}
 .work{font-family:"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--ink2);
 background:var(--surface2);border-radius:8px;padding:.8rem .9rem;margin-top:.9rem;
 white-space:pre-wrap;line-height:1.55}
-.ifthen{font-family:system-ui,sans-serif;font-size:1rem;line-height:1.55;
-background:color-mix(in srgb,var(--blue) 9%,transparent);border-left:3px solid var(--blue);
-border-radius:0 8px 8px 0;padding:.85rem 1rem;margin:1.3rem 0 .6rem}
-#chart{margin:.4rem 0 1rem}
-#tbl td.under{color:var(--orange);font-weight:600}
-#tbl .nv{font-size:.7rem;color:var(--yellow);border:1px solid currentColor;border-radius:99px;
-padding:0 .35rem;vertical-align:middle}
-.presets button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 @media print{.toggle,.presets{display:none}}
 """
 
@@ -132,10 +124,10 @@ TOGGLE_JS = ("<script>document.querySelector('.toggle').onclick=function(){"
              "r.setAttribute('data-theme',d?'light':'dark')};</script>")
 
 
-def page(title, body, extra_js=""):
+def page(title, body, extra_js="", extra_css=""):
     return ("<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-            f"<title>{title}</title><style>{CSS}</style></head><body>{TOGGLE}"
+            f"<title>{title}</title><style>{CSS}{extra_css}</style></head><body>{TOGGLE}"
             f"<div class=\"wrap\">{body}</div>{TOGGLE_JS}{extra_js}</body></html>")
 
 
@@ -347,7 +339,8 @@ def build_model():
     js = json.dumps(base, separators=(",", ":"))
     body = model_page.BODY.replace("__BUILT__", BUILT)
     js_block = "<script>var B=" + js + ";" + model_page.JS + "</script>"
-    return page("The model &#183; Pittsburgh Airport Covenant Record", body, js_block)
+    return page("The model &#183; Pittsburgh Airport Covenant Record", body,
+                js_block, model_page.CSS)
 
 
 def main():
