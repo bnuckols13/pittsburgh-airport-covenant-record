@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The covenant, decomposed</title>
+<style>
+:root{--ink:#1a1a1a;--soft:#4a4a4a;--paper:#fbfaf7;--rule:#d9d4c8;--accent:#1c5cab;
+--accent-soft:#e7eefa;--card:#fff;--bad:#a8321e;--warn:#8a6410;--good:#1d6b3f;}
+@media (prefers-color-scheme:dark){:root{--ink:#f4f2e9;--soft:#c3c2b7;--paper:#0f130f;
+--rule:#26302a;--accent:#5598e7;--accent-soft:#152232;--card:#181a17;--bad:#ff9b86;
+--warn:#e8be5c;--good:#7fd3a1;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+font-family:Georgia,"Palatino Linotype",serif;line-height:1.65}
+.wrap{max-width:52rem;margin:0 auto;padding:3rem 1.4rem 5rem}
+.kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;letter-spacing:.08em;
+text-transform:uppercase;color:var(--accent);margin:0 0 .4rem}
+h1{font-size:2rem;line-height:1.15;margin:0 0 .5rem;letter-spacing:-.01em}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem;line-height:1.25}
+.sub{color:var(--soft);font-style:italic;margin:0 0 1.4rem}
+.stat-strip{display:flex;flex-wrap:wrap;gap:1.4rem;font-family:-apple-system,system-ui,sans-serif;
+border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.9rem 0;margin:0 0 2rem}
+.stat-strip b{display:block;font-size:1.35rem;letter-spacing:-.02em;color:var(--accent);
+font-variant-numeric:tabular-nums}
+.stat-strip span{font-size:.78rem;color:var(--soft)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+a.card{display:block;text-decoration:none;color:inherit;background:var(--card);
+border:1px solid var(--rule);border-radius:12px;padding:1.1rem 1.2rem;transition:transform .1s,border-color .1s}
+a.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+a.card.big{grid-column:1/-1;background:var(--accent-soft);border-color:var(--accent)}
+.card h2{font-family:-apple-system,system-ui,sans-serif;font-size:1.05rem;margin:0 0 .25rem}
+.card.big h2{font-size:1.3rem}
+.card p{font-size:.88rem;color:var(--soft);margin:0}
+table{border-collapse:collapse;width:100%;font-family:-apple-system,system-ui,sans-serif;
+font-size:.86rem;margin:1rem 0}
+th,td{text-align:left;padding:.45rem .6rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--soft)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+code{font-family:"Cascadia Code",Consolas,monospace;background:var(--accent-soft);
+padding:.1rem .4rem;border-radius:4px;font-size:.85em}
+pre{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:.9rem 1rem;
+overflow-x:auto;font-size:.82rem}
+pre code{background:none;padding:0}
+.foot{color:var(--soft);font-size:.82rem;margin-top:3rem;border-top:1px solid var(--rule);
+padding-top:1rem;font-family:-apple-system,system-ui,sans-serif}
+.pill{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;
+text-transform:uppercase;letter-spacing:.05em;padding:.14rem .5rem;border-radius:99px;
+border:1px solid currentColor}
+.s-failed{color:var(--bad)} .s-attention{color:var(--warn)}
+.s-verified{color:var(--good)} .s-unsourced{color:var(--soft)} .s-slot{color:var(--soft)}
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);padding:.9rem 1.1rem;
+border-radius:0 8px 8px 0;margin:1.4rem 0;font-size:.92rem}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker"><a href="../index.html">&larr; evidence package</a></p><h1>The covenant, decomposed</h1><p class="sub">The Official Statements print one combined ratio. This separates it into the two things it combines.</p><div class="note">The covenant as written lets the Coverage Account count toward the 1.25 test, and on that test every forecast year complies. No payment is missed in any forecast year. The column that matters is the last but one: what the ratio is on pledged Net Revenues alone, before the discretionary deposit. <b>11 of 14 forecast years come in under 1.25 on that basis.</b></div><div class="scroll"><table><thead><tr><th>vintage</th><th>scenario</th><th>year</th><th>net revenues $k</th><th>coverage account $k</th><th>debt service $k</th><th>printed</th><th>recomputed</th><th>net revenues alone</th><th>shortfall to 1.25 $k</th></tr></thead><tbody><tr><td>2021</td><td>Strong recovery</td><td class="num">2025</td><td class="num">76,132</td><td class="num">16,149</td><td class="num">64,597</td><td class="num">1.43</td><td class="num">1.4286</td><td class="num"><b class="s-failed">1.1786</b></td><td class="num">4,614</td></tr>
+<tr><td>2021</td><td>Strong recovery</td><td class="num">2026</td><td class="num">79,506</td><td class="num">16,059</td><td class="num">64,237</td><td class="num">1.49</td><td class="num">1.4877</td><td class="num"><b class="s-failed">1.2377</b></td><td class="num">790</td></tr>
+<tr><td>2021</td><td>Strong recovery</td><td class="num">2027</td><td class="num">80,038</td><td class="num">15,965</td><td class="num">63,862</td><td class="num">1.5</td><td class="num">1.5033</td><td class="num"><b class="">1.2533</b></td><td class="num">-210</td></tr>
+<tr><td>2021</td><td>Strong recovery</td><td class="num">2028</td><td class="num">79,998</td><td class="num">15,871</td><td class="num">63,485</td><td class="num">1.51</td><td class="num">1.5101</td><td class="num"><b class="">1.2601</b></td><td class="num">-642</td></tr>
+<tr><td>2021</td><td>Slow recovery</td><td class="num">2025</td><td class="num">79,786</td><td class="num">16,332</td><td class="num">67,926</td><td class="num">1.42</td><td class="num">1.415</td><td class="num"><b class="s-failed">1.1746</b></td><td class="num">5,122</td></tr>
+<tr><td>2021</td><td>Slow recovery</td><td class="num">2026</td><td class="num">82,611</td><td class="num">16,919</td><td class="num">67,677</td><td class="num">1.47</td><td class="num">1.4707</td><td class="num"><b class="s-failed">1.2207</b></td><td class="num">1,985</td></tr>
+<tr><td>2021</td><td>Slow recovery</td><td class="num">2027</td><td class="num">83,254</td><td class="num">16,856</td><td class="num">67,424</td><td class="num">1.48</td><td class="num">1.4848</td><td class="num"><b class="s-failed">1.2348</b></td><td class="num">1,026</td></tr>
+<tr><td>2021</td><td>Slow recovery</td><td class="num">2028</td><td class="num">83,163</td><td class="num">16,741</td><td class="num">66,964</td><td class="num">1.49</td><td class="num">1.4919</td><td class="num"><b class="s-failed">1.2419</b></td><td class="num">542</td></tr>
+<tr><td>2025</td><td>Single forecast</td><td class="num">2025</td><td class="num">79,417</td><td class="num">14,745</td><td class="num">58,980</td><td class="num">1.6</td><td class="num">1.5965</td><td class="num"><b class="">1.3465</b></td><td class="num">-5,692</td></tr>
+<tr><td>2025</td><td>Single forecast</td><td class="num">2026</td><td class="num">94,616</td><td class="num">21,168</td><td class="num">84,670</td><td class="num">1.37</td><td class="num">1.3675</td><td class="num"><b class="s-failed">1.1175</b></td><td class="num">11,222</td></tr>
+<tr><td>2025</td><td>Single forecast</td><td class="num">2027</td><td class="num">102,774</td><td class="num">21,168</td><td class="num">91,112</td><td class="num">1.36</td><td class="num">1.3603</td><td class="num"><b class="s-failed">1.128</b></td><td class="num">11,116</td></tr>
+<tr><td>2025</td><td>Single forecast</td><td class="num">2028</td><td class="num">101,815</td><td class="num">22,707</td><td class="num">90,827</td><td class="num">1.37</td><td class="num">1.371</td><td class="num"><b class="s-failed">1.121</b></td><td class="num">11,719</td></tr>
+<tr><td>2025</td><td>Single forecast</td><td class="num">2029</td><td class="num">107,144</td><td class="num">22,639</td><td class="num">90,556</td><td class="num">1.43</td><td class="num">1.4332</td><td class="num"><b class="s-failed">1.1832</b></td><td class="num">6,051</td></tr>
+<tr><td>2025</td><td>Single forecast</td><td class="num">2030</td><td class="num">107,243</td><td class="num">22,566</td><td class="num">90,264</td><td class="num">1.44</td><td class="num">1.4381</td><td class="num"><b class="s-failed">1.1881</b></td><td class="num">5,587</td></tr></tbody></table></div><p><em>Recomputed</em> reproduces the Authority's own printed ratio from its own printed rows, which is the check that the decomposition is arithmetic rather than interpretation. A negative shortfall means the year clears without the account.</p>
+<p class="foot">Data CC BY 4.0, code MIT. Figures attributed to the Allegheny County Airport Authority are its own, archived and hashed, not independently audited here. Media clips are Tier C: an utterance, never a figure. Package built 2026-08-31.</p>
+</div>
+</body>
+</html>

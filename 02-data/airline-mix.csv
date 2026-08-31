@@ -1,0 +1,58 @@
+year,airline,share
+2014,Southwest,0.2667
+2014,American,0.3473
+2014,Delta,0.186
+2014,United,0.1632
+2014,Spirit,0.0
+2014,Allegiant,0.0
+2014,JetBlue,0.0263
+2014,Breeze,0.0
+2014,Alaska,0.0
+2014,Frontier,0.0035
+2014,British Airways,0.0
+2014,Air Canada,0.0059
+2014,Icelandair,0.0
+2014,Sun Country,0.0
+2014,Southern Airways,0.0001
+2014,All other,0.001
+2014,__low_cost_and_ulcc__,0.2965
+2014,__legacy__,0.6965
+2014,__hhi__,2537.1
+2019,Southwest,0.2527
+2019,American,0.2331
+2019,Delta,0.189
+2019,United,0.1565
+2019,Spirit,0.0589
+2019,Allegiant,0.0385
+2019,JetBlue,0.0311
+2019,Breeze,0.0
+2019,Alaska,0.0104
+2019,Frontier,0.0061
+2019,British Airways,0.0053
+2019,Air Canada,0.0113
+2019,Icelandair,0.0
+2019,Sun Country,0.0
+2019,Southern Airways,0.0042
+2019,All other,0.0028
+2019,__low_cost_and_ulcc__,0.3873
+2019,__legacy__,0.5786
+2019,__hhi__,1846.5
+2024,Southwest,0.2532
+2024,American,0.2214
+2024,Delta,0.16
+2024,United,0.1398
+2024,Spirit,0.0969
+2024,Allegiant,0.0441
+2024,JetBlue,0.0197
+2024,Breeze,0.0175
+2024,Alaska,0.0136
+2024,Frontier,0.0103
+2024,British Airways,0.0094
+2024,Air Canada,0.0079
+2024,Icelandair,0.0023
+2024,Sun Country,0.0017
+2024,Southern Airways,0.0018
+2024,All other,0.0004
+2024,__low_cost_and_ulcc__,0.4434
+2024,__legacy__,0.5211
+2024,__hhi__,1707.4

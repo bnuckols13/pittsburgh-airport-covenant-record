@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+02-data/.pagecache/
+01-sources-archive/raw/

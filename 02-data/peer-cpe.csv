@@ -1,0 +1,10 @@
+airport,year,cpe,series,source_id,source_page,credibility,note
+Pittsburgh,2025,16.10,actual,faa-cats-127,"Form 5100-127, FY2025",2,Fifth highest of 32 medium hubs.
+Kansas City,2025,15.37,actual,dwu-dashboard,FAA CATS Form 127 via the DWU dashboard,3,Comparable origin-and-destination market. New single terminal opened February 2023. Verify against Kansas City's own Official Statement before print.
+Pittsburgh,2026,19.13,forecast,os-2025ab,PDF 202 (printed B-16),2,
+Pittsburgh,2027,19.44,forecast,os-2025ab,PDF 202 (printed B-16),2,
+Pittsburgh,2028,19.06,forecast,os-2025ab,PDF 202 (printed B-16),2,
+Pittsburgh,2029,20.25,forecast,os-2025ab,PDF 202 (printed B-16),2,
+Pittsburgh,2030,20.53,forecast,os-2025ab,PDF 202 (printed B-16),2,
+Kansas City,2026,17.40,forecast,dwu-dashboard,Kansas City Official Statement via the DWU dashboard,3,"The peak of the Kansas City forecast, after which it falls."
+Kansas City,2027,16.68,forecast,dwu-dashboard,Kansas City Official Statement via the DWU dashboard,3,"Kansas City comes back down. Pittsburgh does not, for three more years."

@@ -1,0 +1,13 @@
+source_id,reliability,vault,publisher,basis
+os-2021ab,A,hashed,Allegheny County Airport Authority,"Official Statement, Series 2021A/B. The issuer's own disclosure to the market, made under securities liability. Hashed in the vault."
+os-2023abc,A,hashed,Allegheny County Airport Authority,"Official Statement, Series 2023A/B/C, from the EMMA posting. Hashed in the vault."
+os-2025ab,A,hashed,Allegheny County Airport Authority,"Official Statement, Series 2025A/B, dated April 22 2025. Carries the LeighFisher report of April 8 2025. Hashed in the vault."
+annual-report-2021,A,hashed,Allegheny County Airport Authority,The Authority's own 2021 annual report. Hashed in the vault.
+board-minutes-2023-11,A,hashed,Allegheny County Airport Authority,"Signed board minutes, November 2023. Hashed in the vault."
+faa-cats-127,B,"located, not captured",Federal Aviation Administration,"Form 5100-127, the operating and financial summary the sponsor is required to file with the FAA. The Authority's own numbers on a federal form. Reachable through the CATS portal in one browser session; not yet in the vault, which is the only reason this is B and not A."
+faa-compliance-2025,B,"located, not captured",FAA Office of Airport Compliance,"Financial compliance audit of PIT, fieldwork February 2024, closeout August 1 2025, published on faa.gov."
+bondbuyer-2025,C,"located, not captured",The Bond Buyer,"Municipal-finance trade press, April 21 2025, quoting two named rating analysts on this credit by name."
+dwu-dashboard,C,"located, not captured",DWU Consulting,"Consultant dashboard. A finding aid, not a source: its actuals are FAA CATS Form 127 filings and its projections are named Official Statement pages, so every row it reports is traceable to a primary that can be pulled. PIT's own row was checked against the vault copy and matched, page included."
+ppg-clip,C,"located, not captured",Pittsburgh Post-Gazette,Reporting a figure attributed to the Authority. Located and paywalled; not read.
+allegheny-institute,D,"located, not captured",Allegheny Institute for Public Policy,"A numerate, named, on-the-record critic of this Authority, and an interested party. Its figures are usable with attribution and must not be treated as neutral."
+blueskypit,D,"located, not captured",Blue Sky News,"Published by the Authority; its editor is the Authority's own spokesman. Usable as the Authority speaking, never as an independent check."

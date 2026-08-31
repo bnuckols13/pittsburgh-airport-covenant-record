@@ -1,0 +1,7 @@
+vintage,year,forecast_cpe,actual_cpe,fcst_over_actual
+2021 OS (base case),2021,12.76,12.35,0.0332
+2021 OS (base case),2022,9.78,10.57,-0.0747
+2021 OS (base case),2023,9.73,11.34,-0.142
+2021 OS (base case),2024,9.83,11.56,-0.1497
+2023 OS,2023,11.11,11.34,-0.0203
+2023 OS,2024,11.52,11.56,-0.0035

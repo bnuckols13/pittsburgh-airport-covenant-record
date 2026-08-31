@@ -1,0 +1,15 @@
+vintage,source_page,scenario,year,net_revenues_incl_OPR_k,coverage_amount_k,senior_bond_debt_service_k,pfcs_available_for_debt_service_k,aggregate_annual_debt_service_k,coverage_as_printed,coverage_recomputed_with_account,coverage_on_net_revenues_alone,below_1_25,coverage_amount_pct_of_ADS,cpe,enplanements_k,shortfall_to_1_25_k
+2021,os-2021ab PDF 185 (printed B-19),Strong recovery,2025,76132,16149,84542,19945,64597,1.43,1.4286,1.1786,yes,0.25,,,4614
+2021,os-2021ab PDF 185 (printed B-19),Strong recovery,2026,79506,16059,84548,20311,64237,1.49,1.4877,1.2377,yes,0.25,,,790
+2021,os-2021ab PDF 185 (printed B-19),Strong recovery,2027,80038,15965,84545,20683,63862,1.5,1.5033,1.2533,no,0.25,,,-210
+2021,os-2021ab PDF 185 (printed B-19),Strong recovery,2028,79998,15871,84549,21064,63485,1.51,1.5101,1.2601,no,0.25,,,-642
+2021,os-2021ab PDF 185 (printed B-19),Slow recovery,2025,79786,16332,85954,18028,67926,1.42,1.415,1.1746,yes,0.2404,,,5122
+2021,os-2021ab PDF 185 (printed B-19),Slow recovery,2026,82611,16919,85954,18277,67677,1.47,1.4707,1.2207,yes,0.25,,,1985
+2021,os-2021ab PDF 185 (printed B-19),Slow recovery,2027,83254,16856,85954,18530,67424,1.48,1.4848,1.2348,yes,0.25,,,1026
+2021,os-2021ab PDF 185 (printed B-19),Slow recovery,2028,83163,16741,85954,18990,66964,1.49,1.4919,1.2419,yes,0.25,,,542
+2025,os-2025ab PDF 202 (printed B-16),Single forecast,2025,79417,14745,77005,18024,58980,1.6,1.5965,1.3465,no,0.25,15.71,5064,-5692
+2025,os-2025ab PDF 202 (printed B-16),Single forecast,2026,94616,21168,104555,19885,84670,1.37,1.3675,1.1175,yes,0.25,19.13,5140,11222
+2025,os-2025ab PDF 202 (printed B-16),Single forecast,2027,102774,21168,111307,20195,91112,1.36,1.3603,1.128,yes,0.2323,19.44,5217,11116
+2025,os-2025ab PDF 202 (printed B-16),Single forecast,2028,101815,22707,111298,20471,90827,1.37,1.371,1.121,yes,0.25,19.06,5295,11719
+2025,os-2025ab PDF 202 (printed B-16),Single forecast,2029,107144,22639,111307,20751,90556,1.43,1.4332,1.1832,yes,0.25,20.25,5374,6051
+2025,os-2025ab PDF 202 (printed B-16),Single forecast,2030,107243,22566,111300,21036,90264,1.44,1.4381,1.1881,yes,0.25,20.53,5455,5587

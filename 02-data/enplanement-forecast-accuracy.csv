@@ -1,0 +1,15 @@
+vintage,year,forecast_k,actual_k,fcst_over_actual,basis
+2021 OS (base case),2021,3070,3168.0,-0.0309,ACAA audited/reported
+2021 OS (base case),2022,4266,4053.7,0.0524,ACAA audited/reported
+2021 OS (base case),2023,4680,4598.9,0.0176,ACAA audited/reported
+2021 OS (base case),2024,4924,4964.4,-0.0081,ACAA audited/reported
+2021 OS (base case),2025,5086,4904.2,0.0371,"estimated, see enpl2025_est"
+2021 OS (slow growth case),2021,2849,3168.0,-0.1007,ACAA audited/reported
+2021 OS (slow growth case),2022,3689,4053.7,-0.09,ACAA audited/reported
+2021 OS (slow growth case),2023,4112,4598.9,-0.1059,ACAA audited/reported
+2021 OS (slow growth case),2024,4369,4964.4,-0.1199,ACAA audited/reported
+2021 OS (slow growth case),2025,4631,4904.2,-0.0557,"estimated, see enpl2025_est"
+2023 OS,2023,4535,4598.9,-0.0139,ACAA audited/reported
+2023 OS,2024,4875,4964.4,-0.018,ACAA audited/reported
+2023 OS,2025,5086,4904.2,0.0371,"estimated, see enpl2025_est"
+2025 OS (base case),2025,5064,4904.2,0.0326,"estimated, see enpl2025_est"

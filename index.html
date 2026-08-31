@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIT Terminal Financing Record</title>
+<style>
+:root{--ink:#1a1a1a;--soft:#4a4a4a;--paper:#fbfaf7;--rule:#d9d4c8;--accent:#1c5cab;
+--accent-soft:#e7eefa;--card:#fff;--bad:#a8321e;--warn:#8a6410;--good:#1d6b3f;}
+@media (prefers-color-scheme:dark){:root{--ink:#f4f2e9;--soft:#c3c2b7;--paper:#0f130f;
+--rule:#26302a;--accent:#5598e7;--accent-soft:#152232;--card:#181a17;--bad:#ff9b86;
+--warn:#e8be5c;--good:#7fd3a1;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+font-family:Georgia,"Palatino Linotype",serif;line-height:1.65}
+.wrap{max-width:52rem;margin:0 auto;padding:3rem 1.4rem 5rem}
+.kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;letter-spacing:.08em;
+text-transform:uppercase;color:var(--accent);margin:0 0 .4rem}
+h1{font-size:2rem;line-height:1.15;margin:0 0 .5rem;letter-spacing:-.01em}
+h2{font-size:1.35rem;margin:2.2rem 0 .6rem;line-height:1.25}
+.sub{color:var(--soft);font-style:italic;margin:0 0 1.4rem}
+.stat-strip{display:flex;flex-wrap:wrap;gap:1.4rem;font-family:-apple-system,system-ui,sans-serif;
+border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.9rem 0;margin:0 0 2rem}
+.stat-strip b{display:block;font-size:1.35rem;letter-spacing:-.02em;color:var(--accent);
+font-variant-numeric:tabular-nums}
+.stat-strip span{font-size:.78rem;color:var(--soft)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+a.card{display:block;text-decoration:none;color:inherit;background:var(--card);
+border:1px solid var(--rule);border-radius:12px;padding:1.1rem 1.2rem;transition:transform .1s,border-color .1s}
+a.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+a.card.big{grid-column:1/-1;background:var(--accent-soft);border-color:var(--accent)}
+.card h2{font-family:-apple-system,system-ui,sans-serif;font-size:1.05rem;margin:0 0 .25rem}
+.card.big h2{font-size:1.3rem}
+.card p{font-size:.88rem;color:var(--soft);margin:0}
+table{border-collapse:collapse;width:100%;font-family:-apple-system,system-ui,sans-serif;
+font-size:.86rem;margin:1rem 0}
+th,td{text-align:left;padding:.45rem .6rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--soft)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+code{font-family:"Cascadia Code",Consolas,monospace;background:var(--accent-soft);
+padding:.1rem .4rem;border-radius:4px;font-size:.85em}
+pre{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:.9rem 1rem;
+overflow-x:auto;font-size:.82rem}
+pre code{background:none;padding:0}
+.foot{color:var(--soft);font-size:.82rem;margin-top:3rem;border-top:1px solid var(--rule);
+padding-top:1rem;font-family:-apple-system,system-ui,sans-serif}
+.pill{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;
+text-transform:uppercase;letter-spacing:.05em;padding:.14rem .5rem;border-radius:99px;
+border:1px solid currentColor}
+.s-failed{color:var(--bad)} .s-attention{color:var(--warn)}
+.s-verified{color:var(--good)} .s-unsourced{color:var(--soft)} .s-slot{color:var(--soft)}
+.note{background:var(--accent-soft);border-left:3px solid var(--accent);padding:.9rem 1.1rem;
+border-radius:0 8px 8px 0;margin:1.4rem 0;font-size:.92rem}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="kicker">Evidence package</p><h1>The PIT Terminal Financing Record</h1><p class="sub">What happens if Pittsburgh International's revenue does not match the assumptions used to finance its new terminal, and who carries that risk. Every figure traced to an archived, hashed primary document.</p><div class="stat-strip"><div><b>$16.10</b><span>charged per boarded passenger</span></div><div><b>$20.53</b><span>the consultant's 2030 forecast</span></div><div><b>11 of 14</b><span>forecast years under 1.25 on pledged net revenues</span></div><div><b>$0</b><span>gas or gaming designated into the pledge, 2020-2024</span></div></div><div class="grid"><a class="card big" href="site/index.html"><h2>The article</h2><p>The working draft, with unreported passages marked in place.</p></a><a class="card" href="covenant/index.html"><h2>The covenant, decomposed</h2><p>The printed ratio separated into earnings and the discretionary account.</p></a><a class="card" href="fact-check/index.html"><h2>The claim ledger</h2><p>77 claims, each with locator and verdict. 21 currently fail.</p></a><a class="card" href="01-sources-archive/MANIFEST.md"><h2>Source manifest</h2><p>34 documents with SHA-256. Rebuild the vault from the public record.</p></a><a class="card" href="02-data/"><h2>The data</h2><p>Coverage tables, the revenue itemization, the cost series, peer benchmarks.</p></a></div><div class="note"><b>This package is unfinished and says so.</b> The Authority has not been asked for comment, no records request has been answered, and the claim ledger lists every claim that currently fails its own check. It is published as a working record, not as a finished case.</div><h2>How to check the work</h2><pre><code>python 03-harness/fetch_sources.py   # rebuild the vault, hash-checked
+python 03-harness/verify_claims.py    # hash gate + anchor gate
+python 03-harness/check.py            # both, one command</code></pre>
+<p class="foot">Data CC BY 4.0, code MIT. Figures attributed to the Allegheny County Airport Authority are its own, archived and hashed, not independently audited here. Media clips are Tier C: an utterance, never a figure. Package built 2026-08-31.</p>
+</div>
+</body>
+</html>

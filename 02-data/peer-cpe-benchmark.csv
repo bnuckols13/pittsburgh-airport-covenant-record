@@ -1,0 +1,17 @@
+group,airport,hub,cpe,year,basis,source
+reported/budgeted,Charlotte CLT,Large,9.0,2025,"Fitch peer note, approximate ('around $9')",Fitch RAC via City of Philadelphia
+reported/budgeted,Nashville BNA,Large,9.16,FY2025,"actual, per KBRA","Bond Buyer, 8 Jan 2026"
+reported/budgeted,Santa Ana SNA,Medium,11.13,2024,cited figure,"Bond Buyer, 19 Apr 2024"
+reported/budgeted,Pittsburgh PIT,Medium,11.56,2024,"reported by the Authority, unaudited","OS 2025, printed p.51"
+reported/budgeted,Orlando MCO,Large,11.92,FY2024-25,budget,"GOAA board release, 19 Sep 2024"
+reported/budgeted,Washington IAD,Large,12.77,2025,MWAA published,"Bond Buyer, 5 Aug 2026"
+reported/budgeted,Oakland OAK,Medium,13.18,2024,cited figure,"Bond Buyer, 19 Apr 2024"
+reported/budgeted,San Jose SJC,Medium,15.57,2024,cited figure,"Bond Buyer, 19 Apr 2024"
+reported/budgeted,Salt Lake City SLC,Large,17.88,FY2025,budget,"SLC Council staff report, 7 May 2024"
+forecast peak,Philadelphia PHL,Large,19.63,2025-31 avg,Fitch base case,"Fitch RAC, 29 Jul 2025"
+forecast peak,Pittsburgh PIT,Medium,19.13,2026,"forecast, 2025 statement","OS 2025, folio B-16"
+forecast peak,Pittsburgh PIT,Medium,20.53,2030,"forecast, 2025 statement","OS 2025, folio B-16"
+forecast peak,Washington IAD,Large,20.71,2030,MWAA forecast,"Bond Buyer, 5 Aug 2026"
+forecast peak,Tampa TPA,Large,21.44,FY2030,"forecast, per KBRA","KBRA report, 31 Jul 2024"
+forecast peak,Burbank BUR,Medium,22.84,post-programme,Fitch projection,"Bond Buyer, 19 Apr 2024"
+forecast peak,Miami MIA,Large,25.0,peak,"Fitch peer note, approximate ('about $25')",Fitch RAC via City of Philadelphia

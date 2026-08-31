@@ -1,0 +1,19 @@
+year,cpe,series,label,source_id,source_page,credibility,year_basis,note
+2011,14.97,record,Before the subsidy,ppg-clip,ppg-201810190132,2,stated,"The charge before the July 2013 cut, as reported in 2019 alongside the then-current figure."
+2013,14.66,record,Before the July 2013 cut,ppg-clip,PressReader 20190921,2,stated,The figure the 55-cent cut came off.
+2013,14.11,record,After the July 1 2013 cut,ppg-clip,PressReader 20190921,2,stated,"The first year of the subsidy, funded by a $46.3 million gas-lease bonus."
+2019,10.35,record,Budgeted,ppg-clip,ppg-201810190132,2,stated,"The low point of the subsidy era, in the year the Authority became debt-free for the first time since 1992."
+2019,9.77,record,"Pre-pandemic, as the Institute reports it",allegheny-institute,"about-pits-new-terminal, Jan 14 2026",3,inferred,"The Institute says pre-pandemic without naming a year; plotted at 2019 and marked inferred. It disagrees with the $10.35 budgeted figure for the same period, and both are shown."
+2021,12.33,record,"Lowered to, as the Authority reported it",annual-report-2021,2021 annual report,2,stated,The Authority's own published figure for the year the first TMP bonds were sold.
+2024,11.95,record,Budgeted,board-minutes-2023-11,November 2023 minutes,2,stated,"The 2024 budget figure, adopted by the board."
+2024,11.56,record,Unaudited actual,os-2025ab,PDF 57 (printed 47),2,stated,"The actual came in $1.73 above the 2021 statement's base case of $9.83 for the same year, in a year enplanements beat that case."
+2025,16.10,record,"Actual, on the sponsor's federal filing",faa-cats-127,"Form 5100-127, FY2025",2,stated,Fifth highest of 32 medium hubs. The single most load-bearing unhashed number in the case; capture it.
+2026,17.64,record,"Stated by the Authority, second hand",ppg-clip,"paywalled, not read",3,stated,Reaches the case through the Allegheny Institute quoting the Post-Gazette quoting the Authority. Two removes from the Authority and one from a document.
+2025,15.71,forecast25,2025 statement forecast,os-2025ab,PDF 202 (printed B-16),2,stated,"The first year of the six-year forecast, and the year the forecast was written."
+2026,19.13,forecast25,2025 statement forecast,os-2025ab,PDF 202 (printed B-16),2,stated,
+2027,19.44,forecast25,2025 statement forecast,os-2025ab,PDF 202 (printed B-16),2,stated,
+2028,19.06,forecast25,2025 statement forecast,os-2025ab,PDF 202 (printed B-16),2,stated,
+2029,20.25,forecast25,2025 statement forecast,os-2025ab,PDF 202 (printed B-16),2,stated,
+2030,20.53,forecast25,2025 statement forecast,os-2025ab,PDF 202 (printed B-16),2,stated,
+2026,12.92,forecast21,"2021 statement, base case",os-2021ab,PDF 185 (printed B-19),2,stated,What the plan of finance projected for the opening year when the first bonds were sold.
+2026,16.07,forecast21,"2021 statement, slow growth",os-2021ab,PDF 185 (printed B-19),2,stated,The downside case in the same table.
