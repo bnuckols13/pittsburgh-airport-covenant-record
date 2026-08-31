@@ -1,95 +1,17 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The model &#183; Pittsburgh Airport Covenant Record</title><style>
-:root{--plane:#fbfaf7;--surface:#fff;--surface2:#f4f2ec;--ink:#1a1a1a;--ink2:#4a4a4a;
---muted:#6b6b6b;--grid:#e6e2d8;--axis:#b9b3a5;--ring:#d9d4c8;--blue:#1c5cab;
---blue-lt:#7ba7de;--aqua:#2b8a8a;--yellow:#b8860b;--orange:#c2570f;--red:#a8321e;}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--plane:#0f130f;
---surface:#181a17;--surface2:#1f221e;--ink:#f4f2e9;--ink2:#c3c2b7;--muted:#9a988d;
---grid:#26302a;--axis:#4a544c;--ring:#26302a;--blue:#5598e7;--blue-lt:#2f4f74;
---aqua:#5fc0bd;--yellow:#d8ad4a;--orange:#e8843f;--red:#ff9b86;}}
-:root[data-theme=dark]{--plane:#0f130f;--surface:#181a17;--surface2:#1f221e;--ink:#f4f2e9;
---ink2:#c3c2b7;--muted:#9a988d;--grid:#26302a;--axis:#4a544c;--ring:#26302a;--blue:#5598e7;
---blue-lt:#2f4f74;--aqua:#5fc0bd;--yellow:#d8ad4a;--orange:#e8843f;--red:#ff9b86;}
-*{box-sizing:border-box}
-body{margin:0;background:var(--plane);color:var(--ink);
-font-family:Georgia,"Palatino Linotype",serif;line-height:1.68}
-.wrap{max-width:50rem;margin:0 auto;padding:2.6rem 1.3rem 5rem}
-.sans{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-h1{font-size:1.95rem;line-height:1.18;margin:0 0 .5rem;letter-spacing:-.01em}
-h2{font-size:1.28rem;margin:2.4rem 0 .7rem;line-height:1.3}
-h3{font-family:system-ui,sans-serif;font-size:1rem;margin:1.6rem 0 .4rem}
-.kicker{font-family:system-ui,sans-serif;font-size:.74rem;letter-spacing:.1em;
-text-transform:uppercase;color:var(--blue);margin:0 0 .5rem}
-.sub{color:var(--ink2);margin:0 0 1.8rem;font-size:1.03rem}
-blockquote{margin:1.1rem 0;padding:.7rem 0 .7rem 1.1rem;border-left:3px solid var(--blue);
-color:var(--ink2);font-size:.97rem}
-blockquote .cite{display:block;font-family:system-ui,sans-serif;font-size:.76rem;
-color:var(--muted);margin-top:.45rem}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0}
-@media(max-width:640px){.two{grid-template-columns:1fr}}
-.pot{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:1.1rem 1.2rem}
-.pot h3{margin-top:0;color:var(--blue)}
-.pot dl{margin:0;font-size:.88rem}
-.pot dt{font-family:system-ui,sans-serif;font-size:.7rem;text-transform:uppercase;
-letter-spacing:.05em;color:var(--muted);margin-top:.7rem}
-.pot dd{margin:.1rem 0 0}
-table{border-collapse:collapse;width:100%;font-family:system-ui,sans-serif;font-size:.85rem;
-margin:1rem 0}
-th,td{text-align:left;padding:.42rem .6rem;border-bottom:1px solid var(--ring)}
-th{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-td.num{text-align:right;font-variant-numeric:tabular-nums}
-.scroll{overflow-x:auto}
-code{font-family:"Cascadia Code",Consolas,monospace;background:var(--surface2);
-padding:.1rem .35rem;border-radius:4px;font-size:.86em}
-.disc{font-family:system-ui,sans-serif;font-size:.84rem;color:var(--ink);
-background:color-mix(in srgb,var(--yellow) 12%,transparent);border-left:3px solid var(--yellow);
-border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:1.3rem 0}
-.note{background:color-mix(in srgb,var(--blue) 8%,transparent);border-left:3px solid var(--blue);
-border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:1.3rem 0;font-size:.94rem}
-.src{font-size:.78rem;color:var(--muted);border-top:1px solid var(--ring);padding-top:.7rem;
-margin-top:2.4rem;font-family:system-ui,sans-serif}
-.toggle{position:fixed;top:.8rem;right:.8rem;font:inherit;font-size:.8rem;padding:.3rem .7rem;
-border-radius:99px;border:1px solid var(--ring);background:var(--surface);color:var(--ink);
-cursor:pointer;z-index:9}
-a{color:var(--blue)}
-svg{width:100%;height:auto;overflow:visible;display:block;margin:.6rem 0}
-text{font-family:system-ui,sans-serif;font-variant-numeric:tabular-nums}
-.ax{font-size:10.5px;fill:var(--muted)}
-.lab{font-size:12.5px;fill:var(--ink);font-weight:600}
-.lab2{font-size:11.5px;fill:var(--ink2)}
-.val{font-size:11.5px;fill:var(--ink);font-weight:600}
-/* model */
-.rig{background:var(--surface);border:1px solid var(--ring);border-radius:12px;
-padding:1.2rem 1.3rem;margin:1.4rem 0}
-.lev{margin:0 0 1.1rem}
-.lev label{display:flex;justify-content:space-between;font-family:system-ui,sans-serif;
-font-size:.86rem;margin-bottom:.25rem}
-.lev label b{font-variant-numeric:tabular-nums;color:var(--blue)}
-.lev input[type=range]{width:100%;accent-color:var(--blue)}
-.lev .why{font-family:system-ui,sans-serif;font-size:.74rem;color:var(--muted);margin-top:.2rem}
-.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;
-margin:1.2rem 0 .4rem}
-.out div{background:var(--surface2);border-radius:10px;padding:.8rem .9rem}
-.out b{display:block;font-family:system-ui,sans-serif;font-size:1.5rem;letter-spacing:-.02em;
-font-variant-numeric:tabular-nums}
-.out span{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--muted)}
-.presets{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 1rem}
-.presets button{font:inherit;font-family:system-ui,sans-serif;font-size:.78rem;
-padding:.3rem .7rem;border-radius:99px;border:1px solid var(--ring);background:var(--surface);
-color:var(--ink);cursor:pointer}
-.presets button:hover{border-color:var(--blue);color:var(--blue)}
-.work{font-family:"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--ink2);
-background:var(--surface2);border-radius:8px;padding:.8rem .9rem;margin-top:.9rem;
-white-space:pre-wrap;line-height:1.55}
-.ifthen{font-family:system-ui,sans-serif;font-size:1rem;line-height:1.55;
-background:color-mix(in srgb,var(--blue) 9%,transparent);border-left:3px solid var(--blue);
-border-radius:0 8px 8px 0;padding:.85rem 1rem;margin:1.3rem 0 .6rem}
-#chart{margin:.4rem 0 1rem}
-#tbl td.under{color:var(--orange);font-weight:600}
-#tbl .nv{font-size:.7rem;color:var(--yellow);border:1px solid currentColor;border-radius:99px;
-padding:0 .35rem;vertical-align:middle}
-.presets button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
-@media print{.toggle,.presets{display:none}}
-</style></head><body><button class="toggle">&#9686; theme</button><div class="wrap">
+"""model_page.py — the markup and behaviour of the interactive model.
+
+Kept apart from build_explainer.py because it is mostly a long template, and
+because the model is a reading instrument rather than a published plate. The
+plates are generated at build time and never move; this page recomputes in the
+reader's browser as they move the dials.
+
+The discipline that makes it publishable lives in build_explainer.py: with every
+dial at the Authority's own forecast value the model must reproduce the
+Authority's own printed ratios and its charge per boarded passenger, or the
+build refuses to write the page.
+"""
+
+BODY = """
 <p class="kicker">Model</p>
 <h1>If the Authority decides differently</h1>
 <p class="sub">The covenant clears because the Authority makes two decisions every year, and its
@@ -170,8 +92,10 @@ settles less than it appears to.</div>
 B-16). Designations: <code>other-pledged-revenue.csv</code>, from PDF 316. The commitment window
 is from PDF 67. The charge relationship is checked at build time against
 <code>who-pays-opr.csv</code>. This page never says default, breach or violation, because on the
-covenant as written the Authority's forecasts comply. Built 2026-08-31.</p>
-</div><script>document.querySelector('.toggle').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')};</script><script>var B=[{"year":2025,"net":79417.0,"cov":14745.0,"ads":58980.0,"cpe":15.71,"enpl":5064.0,"opr":8800.0},{"year":2026,"net":94616.0,"cov":21168.0,"ads":84670.0,"cpe":19.13,"enpl":5140.0,"opr":11575.0},{"year":2027,"net":102774.0,"cov":21168.0,"ads":91112.0,"cpe":19.44,"enpl":5217.0,"opr":11575.0},{"year":2028,"net":101815.0,"cov":22707.0,"ads":90827.0,"cpe":19.06,"enpl":5295.0,"opr":11575.0},{"year":2029,"net":107144.0,"cov":22639.0,"ads":90556.0,"cpe":20.25,"enpl":5374.0,"opr":11575.0},{"year":2030,"net":107243.0,"cov":22566.0,"ads":90264.0,"cpe":20.53,"enpl":5455.0,"opr":11575.0}];
+covenant as written the Authority's forecasts comply. Built __BUILT__.</p>
+"""
+
+JS = r"""
 var el=function(i){return document.getElementById(i)};
 var s0=el('s0'),s1=el('s1'),s2=el('s2'),s3=el('s3');
 function m(k){return '$'+(k/1000).toFixed(1)+'m'}
@@ -337,4 +261,4 @@ var P={base:[100,25,0,0], after28:[0,25,0,1], nodesig:[0,25,0,0], halve:[50,25,0
   },{passive:false});
 });
 render();
-</script></body></html>
+"""

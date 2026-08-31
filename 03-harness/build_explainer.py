@@ -16,6 +16,7 @@ import csv, io, json, os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import charts as ch
+import model_page
 from charts import Frame, C
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -114,6 +115,14 @@ color:var(--ink);cursor:pointer}
 .work{font-family:"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--ink2);
 background:var(--surface2);border-radius:8px;padding:.8rem .9rem;margin-top:.9rem;
 white-space:pre-wrap;line-height:1.55}
+.ifthen{font-family:system-ui,sans-serif;font-size:1rem;line-height:1.55;
+background:color-mix(in srgb,var(--blue) 9%,transparent);border-left:3px solid var(--blue);
+border-radius:0 8px 8px 0;padding:.85rem 1rem;margin:1.3rem 0 .6rem}
+#chart{margin:.4rem 0 1rem}
+#tbl td.under{color:var(--orange);font-weight:600}
+#tbl .nv{font-size:.7rem;color:var(--yellow);border:1px solid currentColor;border-radius:99px;
+padding:0 .35rem;vertical-align:middle}
+.presets button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 @media print{.toggle,.presets{display:none}}
 """
 
@@ -336,128 +345,8 @@ def build_model():
     print(f"  model fidelity OK: all {len(base)} forecast years reproduce at baseline")
 
     js = json.dumps(base, separators=(",", ":"))
-    body = f"""
-<p class="kicker">Model</p>
-<h1>Move the two levers</h1>
-<p class="sub">The covenant clears because the Authority makes two decisions each year. This lets
-you make them differently and read what happens, on the Authority's own forecast rows.</p>
-
-<div class="disc"><b>This is arithmetic on documents, not a forecast and not a prediction.</b>
-Every baseline below is the Authority's own figure from the April 2025 Official Statement,
-page-cited in <code>02-data/coverage-table.csv</code>. Every movement away from that baseline is
-our arithmetic, shown in full under the dials. The model does not know anything the documents do
-not say, and it cannot tell you what the Authority will decide.</div>
-
-<div class="rig">
-  <div class="lev">
-    <label for="yr">Forecast year <b id="vyr">2026</b></label>
-    <input type="range" id="yr" min="0" max="5" value="1" step="1">
-    <div class="why">The 2025 statement forecasts six years. The airline commitment behind the
-      designation covers 2026 through 2028 only.</div>
-  </div>
-  <div class="lev">
-    <label for="s0">Designated into the pledge <b id="v0">$11.6m</b></label>
-    <input type="range" id="s0" min="0" max="12400" value="11575" step="25">
-    <div class="why">Other Pledged Revenues: slot-machine tax and gas royalty. The Authority
-      receives about $12.4m a year in gaming money and designates what it chooses, or nothing, as
-      it did in 2024. Moves Net Revenues one for one, and moves the airline charge by the same
-      amount divided by boardings.</div>
-  </div>
-  <div class="lev">
-    <label for="s1">Coverage Account deposit <b id="v1">25% of debt service</b></label>
-    <input type="range" id="s1" min="0" max="25" value="25" step="1">
-    <div class="why">Funded monthly at the Authority's discretion and capped at 25 percent. The
-      forecast assumes the ceiling in five of its six years. Moves the printed ratio only: it is
-      not part of pledged Net Revenues.</div>
-  </div>
-  <div class="lev">
-    <label for="s2">Boardings against forecast <b id="v2">as forecast</b></label>
-    <input type="range" id="s2" min="-25" max="10" value="0" step="1">
-    <div class="why">Holds the airline requirement constant, which is what a residual agreement
-      does with fixed costs and debt service. Watch which number this moves and which it does not.</div>
-  </div>
-
-  <div class="presets">
-    <button data-p="base">As the Authority forecasts it</button>
-    <button data-p="nodesig">Designate nothing, as in 2024</button>
-    <button data-p="noacct">No Coverage Account deposit</button>
-    <button data-p="neither">Neither lever</button>
-    <button data-p="after28">2029, after the commitment expires</button>
-  </div>
-
-  <div class="out">
-    <div><b id="oAlone">1.12</b><span>on pledged Net Revenues alone</span></div>
-    <div><b id="oPrinted">1.37</b><span>as the statement prints it</span></div>
-    <div><b id="oCpe">$19.13</b><span>charged per boarded passenger</span></div>
-  </div>
-  <div class="work" id="work"></div>
-</div>
-
-<div class="note"><b>What the third lever teaches.</b> Move boardings a long way down and the
-coverage ratios barely stir, while the charge to airlines climbs. That is the residual agreement
-working as written: when traffic disappoints, the carriers are billed the difference, and the
-covenant is insulated. It is also why the passengers arriving on forecast, which they did in 2024,
-settles less than it appears to.</div>
-
-<p><a href="../covenant/index.html">&#8592; What the two pots are</a> &#160;&#183;&#160;
-<a href="../appendix-dataviz/index.html">The plates</a> &#160;&#183;&#160;
-<a href="../index.html">The package</a></p>
-
-<p class="src">Baseline rows: <code>02-data/coverage-table.csv</code>, from os-2025ab PDF 202
-(printed B-16). Designations: <code>02-data/other-pledged-revenue.csv</code>, from PDF 316. The
-charge relationship is checked at build time against <code>02-data/who-pays-opr.csv</code> and the
-build fails if it does not reproduce. Never says default, breach or violation, because on the
-covenant as written the forecasts comply. Built {BUILT}.</p>
-"""
-    js_block = f"""<script>
-var B={js};
-var el=function(i){{return document.getElementById(i)}};
-var yr=el('yr'),s0=el('s0'),s1=el('s1'),s2=el('s2');
-function money(k){{return '$'+(k/1000).toFixed(1)+'m'}}
-function render(){{
-  var b=B[+yr.value];
-  var desig=+s0.value, pct=+s1.value/100, dpax=+s2.value/100;
-  // Net Revenues include the designation. Swap the forecast one for the dialled one.
-  var net=b.net-b.opr+desig;
-  var acct=pct*b.ads;
-  var alone=net/b.ads, printed=(net+acct)/b.ads;
-  // Residual: hold the airline requirement constant, move boardings, and credit the
-  // designation against the bill. Both relations are the case's own.
-  var enpl=b.enpl*(1+dpax);
-  var req=(b.cpe+b.opr/b.enpl)*b.enpl;          // requirement before any designation
-  var cpe=(req-desig)/enpl;
-  el('vyr').textContent=b.year;
-  el('v0').textContent=money(desig);
-  el('v1').textContent=(+s1.value)+'% of debt service';
-  el('v2').textContent=(dpax===0?'as forecast':(dpax>0?'+':'')+(dpax*100).toFixed(0)+'%');
-  el('oAlone').textContent=alone.toFixed(2);
-  el('oPrinted').textContent=printed.toFixed(2);
-  el('oCpe').textContent='$'+cpe.toFixed(2);
-  el('oAlone').style.color=alone<1.25?'var(--orange)':'var(--blue)';
-  el('work').textContent=
-    b.year+', the Authority\\u2019s own rows: Net Revenues '+money(b.net)
-    +' (including '+money(b.opr)+' designated), Coverage Account '+money(b.cov)
-    +', debt service '+money(b.ads)+', boardings '+b.enpl.toLocaleString()+'k, charge $'+b.cpe.toFixed(2)
-    +'\\n\\nours, from the dials:'
-    +'\\n  Net Revenues        '+money(b.net)+' \\u2212 '+money(b.opr)+' designated + '+money(desig)+' dialled = '+money(net)
-    +'\\n  on pledged alone    '+money(net)+' \\u00f7 '+money(b.ads)+' = '+alone.toFixed(3)
-    +'\\n  Coverage Account    '+(+s1.value)+'% \\u00d7 '+money(b.ads)+' = '+money(acct)
-    +'\\n  as printed          ('+money(net)+' + '+money(acct)+') \\u00f7 '+money(b.ads)+' = '+printed.toFixed(3)
-    +'\\n  airline requirement '+money(req)+' \\u2212 '+money(desig)+' designated = '+money(req-desig)
-    +'\\n  charge              '+money(req-desig)+' \\u00f7 '+enpl.toFixed(0)+'k boardings = $'+cpe.toFixed(2)
-    +(b.year>2028?'\\n\\nnote: the airline commitment behind the designation covers 2026 through 2028. This year is beyond it.':'');
-}}
-var P={{base:[1,11575,25,0],nodesig:[1,0,25,0],noacct:[1,11575,0,0],
-        neither:[1,0,0,0],after28:[4,11575,25,0]}};
-[].forEach.call(document.querySelectorAll('.presets button'),function(btn){{
-  btn.addEventListener('click',function(){{
-    var p=P[btn.dataset.p];
-    yr.value=p[0];s0.value=p[1];s1.value=p[2];s2.value=p[3];render();
-  }});
-}});
-[yr,s0,s1,s2].forEach(function(x){{x.addEventListener('input',render)}});
-render();
-</script>"""
+    body = model_page.BODY.replace("__BUILT__", BUILT)
+    js_block = "<script>var B=" + js + ";" + model_page.JS + "</script>"
     return page("The model &#183; Pittsburgh Airport Covenant Record", body, js_block)
 
 
