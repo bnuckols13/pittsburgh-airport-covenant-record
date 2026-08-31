@@ -163,7 +163,7 @@ is recorded with the evidence in <code>02-data/factcheck-v16-disposition.csv</co
 <p><strong>That is the reporter's account of her own corrections, not an independent
 verification.</strong> The ledger has not been re-run against the current draft, and it should be,
 by someone who did not write it, before this publishes. All {n_claims} claims are browsable at
-<a href="../fact-check/index.html">the claim ledger</a>, failures included.</p>
+<a href="#">the claim ledger</a>, failures included.</p>
 
 <div class="ask">
   <h3>What I need decided</h3>
@@ -183,21 +183,21 @@ by someone who did not write it, before this publishes. All {n_claims} claims ar
   <div>
     <h3 style="font-family:system-ui,sans-serif;font-size:.95rem">Read</h3>
     <ul class="plain">
-      <li class="yes"><a href="../site/index.html">The draft</a>, with unreported passages marked
+      <li class="yes"><a href="https://bnuckols13.github.io/pittsburgh-airport-covenant-record/site/">The draft</a>, with unreported passages marked
         in place</li>
-      <li class="yes"><a href="../covenant/index.html">Two pots, explained</a>, the mechanism from
+      <li class="yes"><a href="https://bnuckols13.github.io/pittsburgh-airport-covenant-record/covenant/">Two pots, explained</a>, the mechanism from
         the indenture</li>
-      <li class="yes"><a href="../model/index.html">What holds the promise up</a>, the decisions
+      <li class="yes"><a href="https://bnuckols13.github.io/pittsburgh-airport-covenant-record/model/">What holds the promise up</a>, the decisions
         turned off and on</li>
     </ul>
   </div>
   <div>
     <h3 style="font-family:system-ui,sans-serif;font-size:.95rem">Check</h3>
     <ul class="plain">
-      <li class="yes"><a href="../appendix-dataviz/index.html">The plates</a>, each recomputed from
+      <li class="yes"><a href="https://bnuckols13.github.io/pittsburgh-airport-covenant-record/appendix-dataviz/">The plates</a>, each recomputed from
         a CSV</li>
-      <li class="yes"><a href="../fact-check/index.html">The claim ledger</a>, failures included</li>
-      <li class="yes"><a href="../01-sources-archive/MANIFEST.md">The sources</a>, with hashes</li>
+      <li class="yes"><a href="#">The claim ledger</a>, failures included</li>
+      <li class="yes"><a href="https://github.com/bnuckols13/pittsburgh-airport-covenant-record/blob/main/01-sources-archive/MANIFEST.md">The sources</a>, with hashes</li>
     </ul>
   </div>
 </div>
@@ -211,17 +211,21 @@ markers in the draft itself. Nothing on this page is typed by hand.</p>
 
 
 def main():
-    out = os.path.join(ROOT, "editor", "index.html")
+    # Not a public page. This is the brief for the commissioning editor and it
+    # belongs in the case, where the gaps it lists are working notes rather than
+    # a published account of the reporter's own shortfalls.
+    out = os.path.normpath(os.path.join(ROOT, "..", "pit-terminal-financing",
+                                        "v2", "EDITOR-BRIEF.html"))
     html = build()
     if "--check" in sys.argv:
         if not os.path.exists(out) or io.open(out, encoding="utf-8").read() != html:
             print("FAIL: editor/index.html does not match a rebuild")
             return 1
-        print("editor --check OK")
+        print("editor brief --check OK")
         return 0
     os.makedirs(os.path.dirname(out), exist_ok=True)
     io.open(out, "w", encoding="utf-8", newline="\n").write(html)
-    print(f"wrote editor/index.html  ({len(html):,} bytes)")
+    print(f"wrote ../pit-terminal-financing/v2/EDITOR-BRIEF.html  ({len(html):,} bytes)")
     return 0
 
 

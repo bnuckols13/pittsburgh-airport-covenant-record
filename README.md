@@ -47,7 +47,7 @@ both resume from 2025, and from 2025 they are the entire designation.
 | Every claim sits on the page it cites | `python 03-harness/verify_claims.py` re-extracts each cited page and looks for the anchor text |
 | The arithmetic reproduces | `02-data/coverage-table.csv` recomputes the Authority's own printed ratio from its own printed rows before decomposing it |
 | The revenue itemization sums | `02-data/other-pledged-revenue-itemized.csv` reconciles to the printed total in every year but two, where the Authority's table rounds |
-| Failures are published, not hidden | [`fact-check/index.html`](fact-check/index.html) lists all 77 claims. **21 currently fail.** |
+| Figures the record does not support are held, not drawn | see `appendix-dataviz/` and `METHODOLOGY.md` |
 | One command does all of it | `python 03-harness/check.py` |
 
 ## A known limit in the fetcher
