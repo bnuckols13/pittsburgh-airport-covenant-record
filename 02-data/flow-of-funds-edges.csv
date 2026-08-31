@@ -1,0 +1,7 @@
+from_node,to_node,kind,label,source_id,pdf_page
+revenues,net_revenues,flow,less operation and maintenance,os-2025ab,31
+opr,net_revenues,designation,designated annually at the Authority's discretion,os-2025ab,30
+net_revenues,p1,flow,,os-2025ab,31
+net_revenues,p9,discretionary_deposit,funded monthly at the Authority's discretion,os-2025ab,32
+net_revenues,test,test,counted in the numerator,os-2025ab,34
+p9,test,test,also counted in the numerator,os-2025ab,34

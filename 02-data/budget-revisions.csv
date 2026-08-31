@@ -1,0 +1,5 @@
+order,year,label,amount_usd,basis,source_id,pdf_page,printed_page,tier,plot,anchor,note
+1,2017,Board approval,1100000000,board approval as reported,ppg-clip,,,C,annotate,,"The $1.1 billion the board approved in September 2017. It appears in no hashed Official Statement in this vault; it reaches the case through news coverage. Annotated, never plotted on the line."
+2,2021,Airline-approved estimated project cost,1392700000,airline agreement,os-2021ab,479,,A,plot,"(equal to 102.5% of $1,392,700,000)","The Estimated Project Cost in the airline agreement, which caps total project cost at $1,427,517,500, or 102.5 percent of this figure."
+3,2023,Total project cost,1569362914,project cost table,os-2023abc,18,,A,plot,"Total $1,569,362,914","The project-cost table in the 2023 statement, 81 percent complete, $696,224,451 spent. Demolition carried at $33,000,000."
+4,2025,Total project cost,1702562914,project cost table,os-2025ab,16,,A,plot,"Total $1,702,562,914","The same table two years later, 96 percent complete, $1,395,561,842 spent. Demolition now carried at $0."
