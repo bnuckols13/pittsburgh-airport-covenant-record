@@ -12,5 +12,5 @@ p7,Renewal and Replacement Fund,priority,7,mandatory,,os-2025ab,32,"Seventh: to 
 p8,Equipment and Capital Outlay Fund,priority,8,authority_monthly,,os-2025ab,32,"Eighth: to the Equipment and Capital Outlay Fund",
 p9,Coverage Account,priority,9,authority_monthly,<= 25% of Annual Debt Service,os-2025ab,32,"Ninth: to the Coverage Account. On or prior to the tenth (10th) Business Day of each month, at the discretion of","Lever two. Funded monthly at the Authority's discretion and capped at 25 percent of annual debt service."
 p10,Rate Stabilization Fund,priority,10,authority_monthly,,os-2025ab,32,"Tenth: to the Rate Stabilization Fund",
-p11,Airport System Capital Fund,priority,11,mandatory,,os-2025ab,32,"Eleventh: to the Airport System Capital Fund",
+p11,Airport System Capital Fund,priority,11,authority_monthly,,os-2025ab,32,"the Authority, may from time to time, at its discretion, deposit all or a portion of",
 test,The 1.25 test,terminal,,mandatory,,os-2025ab,34,"125% of Annual Debt Service on the Outstanding Bonds for such Fiscal Y","Net Revenues together with the Coverage Account, against 1.25 times aggregate annual debt service."

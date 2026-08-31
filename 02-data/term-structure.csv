@@ -1,4 +1,5 @@
 item,start_year,end_year,amount_k_per_year,amount_qualifier,source_id,source_page,tier,note
-Bonds outstanding,2021,2056,,,os-2021ab,PDF 185 (printed B-19),A,"First TMP vintage issued 2021 with a thirty-five-year maturity. The bar spans all three vintages and none is drawn separately; the 2023 statement alone records $1,247,695,000 outstanding after its own issuance."
+Bonds outstanding,2021,2056,,,os-2025ab,PDF 39,A,"The combined principal and interest schedule for all three vintages runs to 2056 and totals $3,232,650,565."
+Airline Operating Agreements,2020,2028,,,os-2025ab,PDF 70,A,"Effective January 1, 2020, expiring December 31, 2028, extendable three years only by mutual agreement. This is the contract that makes the carriers responsible for whatever the airport does not earn."
 Discretionary money committed,2026,2028,11575,at least,os-2025ab,PDF 202 (printed B-16),A,"At least $11.575 million a year committed under the January 2025 Majority In Interest vote, which also waived a $5 million annual capital deposit. The vote record itself is a named empty cell."
-Airline Operating Agreements,2026,2028,,,os-2025ab,PDF 202 (printed B-16),A,"Expire December 31, 2028."
+Capital fund deposit waived,2026,2028,5000,waived,os-2025ab,PDF 67,A,The January 2025 majority-in-interest vote waived the $5 million annual capital fund deposit for the same three years the money was committed for.

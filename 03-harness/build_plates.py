@@ -139,11 +139,11 @@ def plate_dumbbell():
                           "coverage_as_printed", "_lab", C["blue"], C["blue"])
             + ch.axis_x_band(f, b, rotate=True))
     n_below = sum(1 for x in r if x["below_1_25"] == "yes")
-    aria = (f"A dumbbell for each of {len(r)} forecast years across the 2021 and 2025 "
-            f"statements. The open dot is the ratio as printed; the filled dot is the "
-            f"ratio on pledged Net Revenues alone. {n_below} of {len(r)} filled dots fall "
-            f"below the 1.25 line.")
-    return ch.svg(f, aria, body), r
+    aria = ("One dumbbell for each forecast year in the 2021 and 2025 statements, kept "
+            "apart by vintage and by recovery case and never added together. The open dot "
+            "is the ratio as printed; the filled dot is the ratio on pledged Net Revenues "
+            "alone. In the 2025 forecast, five of six filled dots fall below the 1.25 line.")
+    return ch.svg(f, aria, body), r, sc.d0, sc.d1
 
 
 def plate_opr():
@@ -171,6 +171,14 @@ def plate_opr():
                                ("gas royalty", gas, C["yellow"]),
                                ("slot-machine tax", gam, C["blue"])])
             + ch.axis_x_band(f, b))
+    # Direct labels, not a legend: the reader should not have to look away.
+    key = []
+    for i, (nm, col) in enumerate([("federal aid", C["aqua"]), ("gas royalty", C["yellow"]),
+                                   ("slot-machine tax", C["blue"])]):
+        kx = f.x0 + i * 168
+        key.append(f'<rect x="{kx}" y="{f.ytop-22}" width="11" height="11" fill="{col}"/>')
+        key.append(f'<text class="ax" x="{kx+16}" y="{f.ytop-12}">{nm}</text>')
+    body += "".join(key)
     aria = ("Other Pledged Revenues by component, 2019 to 2030, in thousands. Federal "
             "pandemic and disaster aid is the whole of the designation from 2020 through "
             "2023. Nothing is designated in 2024. Gas royalty is designated only in 2019. "
@@ -203,7 +211,7 @@ def plate_2026():
 def plate_budget():
     r = [x for x in rows("budget-revisions.csv")]
     drawn = [x for x in r if x["plot"] == "plot"]
-    ch.assert_plottable(drawn, "plate VIII")
+    annotated = [x for x in r if x["plot"] != "plot"]
     labels = [f'{x["year"]} {x["label"]}' for x in r]
     for x, lab in zip(r, labels):
         x["_lab"] = lab
@@ -211,14 +219,23 @@ def plate_budget():
     f = Frame(w=980, h=250, l=330, r=150, t=30, b=44)
     sc = Scale(0, max(vals) * 1.1, f.x0, f.x1)
     b = Band(labels, f.ytop + 18, f.ybot - 18)
-    body = ch.ranked_bars(f, sc, b, r, "amount_usd", "_lab",
+    # The guard runs on the rows actually handed to the renderer, not on a list
+    # already filtered, or it passes on evidence it was never shown.
+    ch.assert_plottable(drawn, "plate VIII")
+    body = ch.ranked_bars(f, sc, b, drawn, "amount_usd", "_lab",
                           fmt=lambda v: f"${v/1e9:.2f}bn")
-    # each step labelled with its own escalation, computed here not typed
+    # Escalations are derived only between hashed figures. A percentage computed
+    # off a newspaper number is that newspaper number wearing arithmetic.
     steps = []
-    for prev, cur in zip(r, r[1:]):
+    for prev, cur in zip(drawn, drawn[1:]):
         pct = (num(cur["amount_usd"]) / num(prev["amount_usd"]) - 1) * 100
+        yrs = int(cur["year"]) - int(prev["year"])
         steps.append(f'<text class="ax" x="{f.x0-8}" y="{b.center(cur["_lab"])+16:.1f}" '
-                     f'text-anchor="end">+{pct:.0f}% on the year before</text>')
+                     f'text-anchor="end">+{pct:.0f}% over {yrs} years</text>')
+    for x in annotated:
+        steps.append(f'<text class="ax" x="{f.x0+6}" y="{b.center(x["_lab"])+4:.1f}" '
+                     f'fill="{C["muted"]}">${num(x["amount_usd"])/1e9:.2f}bn &#8212; reported, '
+                     f'no document in this vault; not drawn</text>')
     aria = ("The project cost at four dates. The 2017 board figure is annotated from news "
             "coverage and carries no hashed document in this vault; the 2021, 2023 and "
             "2025 figures are the Authority's own.")
@@ -230,9 +247,18 @@ def plate_cpe():
     rec = [x for x in r if x["series"] == "record"]
     f25 = sorted([x for x in r if x["series"] == "forecast25"], key=lambda x: int(x["year"]))
 
-    # The document line: tier A and the Authority's own residual basis, only.
-    doc = sorted([x for x in rec if x["tier"] == "A" and x["basis"] == "acaa_residual"],
-                 key=lambda x: (int(x["year"]), num(x["cpe"])))
+    # The document line is ONE table: the Authority's five-year statement of airline
+    # costs per enplaned passenger at os-2025ab PDF 62. Taking the best-graded row per
+    # year instead would silently pick between two Authority figures for one year, and
+    # for 2024 it picked the budget over the actual. A line drawn through a set the
+    # reader cannot name is not a series. Everything else is a mark.
+    doc = sorted([x for x in rec if x["tier"] == "A" and x["basis"] == "acaa_residual"
+                  and x["source_page"] == "PDF 62 (printed 52)"],
+                 key=lambda x: int(x["year"]))
+    if len({x["year"] for x in doc}) != len(doc):
+        raise SystemExit("plate I: two values for one year on the line. Name one table.")
+    off_line = [x for x in rec if x["tier"] == "A" and x["basis"] == "acaa_residual"
+                and x not in doc]
     ch.assert_single_basis(doc, where="plate I document line")
     ch.assert_plottable(doc, "plate I document line")
     ch.assert_single_basis(f25, where="plate I forecast line")
@@ -251,7 +277,7 @@ def plate_cpe():
     for y in range(min(have), max(have) + 1):
         pts.append((xs(y), ys(num(have[y]["cpe"]))) if y in have else None)
 
-    out = [ch.axis_y(f, ys, ticks, lambda v: f"${v:.0f}")]
+    out = [ch.axis_y(f, ys, ticks, lambda v: f"${v:,.2f}")]
     out.append(ch.gapped_path(pts, C["blue"]))
     out.append(ch.gapped_path([(xs(int(x["year"])), ys(num(x["cpe"]))) for x in f25],
                               C["orange"], dash="6 4"))
@@ -264,11 +290,13 @@ def plate_cpe():
     out.append(ch.grade_key(f.x0, f.ybot + 42, C["ink2"]))
 
     missing = [y for y in range(min(have), max(have) + 1) if y not in have]
+    cpe_lo, cpe_hi = ys.d0, ys.d1
     aria = ("What an airline was charged per boarded passenger at Pittsburgh. The solid "
             "line joins only the Authority's own documents on its own residual basis. "
             "Newspaper figures and the federal filing are drawn as marks and are never "
             "joined to it. Years absent from the record are gaps, not segments.")
-    return ch.svg(f, aria, "".join(out)), {"doc": doc, "rec": rec, "missing": missing}
+    return ch.svg(f, aria, "".join(out)), {"doc": doc, "rec": rec, "missing": missing,
+                                           "lo": cpe_lo, "hi": cpe_hi, "off": off_line}
 
 
 def plate_spans():
@@ -362,7 +390,7 @@ def held_card(pid, roman, title, what, blocker, acquisition):
 def build():
     mech, mech_rows = plate_mechanism()
     reveal, shared, rev_rows = plate_reveal()
-    dumb, dumb_rows = plate_dumbbell()
+    dumb, dumb_rows, sc_lo, sc_hi = plate_dumbbell()
     opr, opr_d = plate_opr()
     dot, dot_rows = plate_2026()
     budget, bud_rows = plate_budget()
@@ -383,11 +411,11 @@ def build():
         '<code>--check</code>.</p>',
 
         card("exhibit-e1", "Exhibit E-1", "How the money moves, and where the discretion is",
-             "Dashed means the Authority chooses. Three of the eleven priorities are funded "
-             "at its discretion, and the eighth, ninth and tenth are the three. Only one of "
-             "them counts toward the 1.25 test, and it is the ninth. The fourth dashed "
-             "stroke is the designation entering Net Revenues on the left, which is the "
-             "second lever and the one that works on the numerator.",
+             "Dashed means the Authority chooses. Four of the eleven priorities are funded at "
+             "its discretion, the eighth through the eleventh, and only one of them counts "
+             "toward the 1.25 test. It is the ninth. The remaining dashed stroke is the "
+             "designation entering Net Revenues from the left, which is the second lever "
+             "and the one that works on the numerator.",
              mech,
              'Data <code>02-data/flow-of-funds.csv</code>, <code>flow-of-funds-edges.csv</code>. '
              'Priority order transcribed from os-2025ab PDF 31 and PDF 32; the 1.25 test from '
@@ -411,9 +439,10 @@ def build():
                 x["shortfall_to_1_25_k"]] for x in rev_rows])),
 
         card("plate-ii", "Plate II", "Without the discretionary account, the ratio runs from 1.12 to 1.35",
-             f"{n_below} of {len(dumb_rows)} forecast years across both statements come in under "
-             f"1.25 on pledged Net Revenues alone. Vintages sit side by side and are never summed, "
-             f"and neither are the recovery cases inside a vintage.",
+             f"Five of the six years in the 2025 forecast come in under 1.25 on pledged Net "
+             f"Revenues alone; so do two of the four base-case years and all four of the "
+             f"slow-recovery years in the 2021 forecast. Two documents, two bets. The dots sit "
+             f"side by side and are not added together. Vertical scale {sc_lo:.2f} to {sc_hi:.2f}.",
              dumb,
              'Data <code>02-data/coverage-table.csv</code>. Open dot as printed, filled dot on '
              'pledged Net Revenues alone.',
@@ -422,9 +451,10 @@ def build():
                 x["coverage_on_net_revenues_alone"], x["below_1_25"]] for x in dumb_rows])),
 
         card("plate-v", "Plate V", "What the Authority designated, and what it was",
-             "Federal pandemic aid is the whole of the designation from 2020 through 2023. "
-             "Nothing at all was designated in 2024. Gas and slot-machine money last entered "
-             "the pledge in 2019 and return only in the forecast.",
+             "Federal pandemic aid is the whole of the designation from 2020 through 2023, and "
+             "nothing at all was designated in 2024. Gas royalty was designated once, in 2019, "
+             "and is zero in every year after it, forecast included. Slot-machine money also "
+             "stops after 2019, and it alone returns, in the 2025 forecast year.",
              opr,
              'Data <code>02-data/other-pledged-revenue-itemized.csv</code>, from os-2025ab '
              'PDF 316 (Exhibit E). The 2023 total conflicts inside the same statement, $3,029k '
@@ -433,12 +463,18 @@ def build():
               [[y, f'{opr_d["federal"][y]:,.0f}', f'{opr_d["gas"][y]:,.0f}',
                 f'{opr_d["gaming"][y]:,.0f}'] for y in opr_d["years"]])),
 
-        card("plate-i", "Plate I", "The record is thinner than the story it is asked to carry",
-             f"The solid line joins only the Authority's own documents on its own residual basis. "
-             f"Three points qualify. Newspaper figures and the federal filing are marks and are "
+        card("plate-i", "Plate I", "What the Authority itself has reported, and what it has not",
+             f"The line joins only the Authority's own documents on its own residual basis. "
+             f"Newspaper figures and the federal Form 5100-127 filing are drawn as marks and are "
              f"never joined to it, because a clip may be an utterance and never a figure, and "
-             f"because the two bases are two series. Missing years are gaps: "
-             f"{', '.join(str(y) for y in cpe_d['missing']) or 'none'}.",
+             f"because the two bases are two series. Years the Authority has not published on "
+             f"this basis are gaps, never drawn through: "
+             f"{', '.join(str(y) for y in cpe_d['missing']) or 'none, the table is continuous'}. "
+             f"The line is one table, the five-year statement at os-2025ab PDF 62. Where a second "
+             f"Authority document gives a different figure for a year already on it, that figure "
+             f"is a mark beside the line and not a point on it: "
+             f"{'; '.join(x['year'] + ' $' + x['cpe'] + ' (' + x['label'] + ')' for x in cpe_d['off']) or 'none'}. "
+             f"Vertical scale ${cpe_d['lo']:.2f} to ${cpe_d['hi']:.2f}.",
              cpe,
              'Data <code>02-data/cpe-record.csv</code>. Mark shape carries source grade. The '
              'federal Form 5100-127 figure is drawn in a second colour and is never joined to '
@@ -476,7 +512,7 @@ def build():
              (["item", "from", "to", "note"],
               [[x["item"], x["start_year"], x["end_year"], x.get("note", "")] for x in span_rows])),
 
-        held_card("plate-fc", "Plate FC", "Pittsburgh against the sixteen large hubs it exceeds",
+        held_card("held-peers", "Held &#183; peer comparison", "Pittsburgh against sixteen larger hubs",
                   "A ranked bar chart of what an airline pays per boarded passenger at "
                   "Pittsburgh against sixteen larger airports.",
                   "Eleven of the sixteen named airports carry no dollar value anywhere in this "
@@ -485,7 +521,7 @@ def build():
                   "most attackable figure in the story.",
                   "Pull each airport's own FAA Form 5100-127 filing. None has been pulled."),
 
-        held_card("plate-e2-capacity", "Plate E-2", "The terminal's design capacity against use",
+        held_card("held-capacity", "Held &#183; capacity", "The terminal's design capacity against use",
                   "A capacity band drawn against passengers actually boarded.",
                   "The 13-to-15 million figure appears in one local article and in no Official "
                   "Statement. The Post-Gazette of Sept. 12, 2017 reports the opposite scale, a "
@@ -493,8 +529,7 @@ def build():
                   "The master plan, by FOIA to the FAA, or a Right-to-Know answer from the "
                   "Authority. Neither has been sent."),
 
-        '<p class="src">Built ' + BUILT + '. Data CC BY 4.0, code MIT. Figures attributed to the '
-        'Authority are its own, archived and hashed, not independently audited here.</p>',
+        '<p class="src">Figures for <em>Pittsburgh built a $1.7 billion airport terminal</em>, reported by Lena Rose Williams for Newsworks Lab and the Tribune-Review. Unpublished draft, not edited or accepted by the outlet. Built ' + BUILT + ' from the CSVs in <code>02-data/</code>; rebuild with <code>python 03-harness/build_plates.py</code> and check with <code>--check</code>. Data CC BY 4.0, code MIT. Figures attributed to the Authority are its own, archived and hashed, not independently audited here.</p>',
         "</div><script>document.querySelector('.toggle').onclick=function(){"
         "var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';"
         "r.setAttribute('data-theme',d?'light':'dark')};</script></body></html>",

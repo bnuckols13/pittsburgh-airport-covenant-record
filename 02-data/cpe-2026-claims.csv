@@ -1,5 +1,5 @@
 order,label,cpe,vintage,scenario,source_id,source_page,tier,plot,note
-1,2021 statement · base case,12.92,2021,Strong recovery,os-2021ab,PDF 185 (printed B-19),A,plot,The opening-year airline charge the plan of finance projected when the first bonds were sold.
-2,2021 statement · slow growth,16.07,2021,Slow recovery,os-2021ab,PDF 185 (printed B-19),A,plot,The downside case in the same table.
+1,"2021 statement, base case",13.47,2021,Strong recovery,os-2021ab,PDF 185 (printed B-19),A,plot,The opening-year airline charge the plan of finance projected when the first bonds were sold. Corrected 2026-08-31: the earlier value was the 2025 column of the same table.
+2,"2021 statement, slow growth",16.63,2021,Slow recovery,os-2021ab,PDF 185 (printed B-19),A,plot,The downside case in the same table. Corrected 2026-08-31: the earlier value was the 2025 column of the same table.
 3,2025 statement · consultant forecast,19.13,2025,Single forecast,os-2025ab,PDF 202 (printed B-16),A,plot,"LeighFisher to Cassotis, dated April 8 2025, in the statement that sold $421.9 million of bonds."
 4,The Authority via the Post-Gazette,17.64,,,,ppg-202512220055,C,annotate,"Captured and hashed in the media sibling at pit-tier1-media-archive/01-sources-archive/raw/ppg/ppg-202512220055.html, sha256 2d96cf8afed546c4f49196ee54727112a40a3798cd38364c5d5f7a1b93752b59. The Allegheny Institute of January 14 2026 attributes the figure to the Post-Gazette in its own words. Publication date still in dispute. Media remains Tier C: an utterance, never a figure."
