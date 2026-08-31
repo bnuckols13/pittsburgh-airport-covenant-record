@@ -80,7 +80,7 @@ forecast.</p>
     <div class="tile" id="t3"><b>&#8211;</b><span>&#8211;</span></div>
   </div>
   <p class="reading" id="ifthen"></p>
-  <svg id="chart" viewBox="0 0 900 250" role="img" aria-label="Coverage ratio across the six forecast years under the settings chosen, against the Authority's own forecast shown as a dotted line."></svg>
+  <svg id="chart" viewBox="0 0 900 300" role="img" aria-label="Coverage ratio across the six forecast years under the settings chosen, against the Authority's own forecast shown as a dotted line."></svg>
 </div>
 
 <div class="scen">
@@ -192,47 +192,80 @@ function baseAlone(b){return b.net/b.ads}
 function basePrinted(b){return (b.net+b.cov)/b.ads}
 
 function draw(rows){
+  // A dumbbell, not lines. The reading the page exists for is a vertical distance —
+  // how far the pledged revenue sits below 1.25, and how much of the printed ratio is
+  // the discretionary deposit — and two lines make a reader eyeball exactly that.
+  // Here the connector IS the Coverage Account, and a dot either sits in the shaded
+  // band below 1.25 or it does not. Dots carry position, so no zero baseline is owed.
   var svg=el('chart'); while(svg.firstChild)svg.removeChild(svg.firstChild);
-  var W=900,H=250,L=46,R=196,T=14,BM=30;
+  var W=900,H=300,L=46,R=34,T=46,BM=56;
   var v=[1.25];
-  rows.forEach(function(r){v.push(r.alone,r.printed,baseAlone(r.base),basePrinted(r.base))});
+  rows.forEach(function(r){v.push(r.alone,r.printed,baseAlone(r.base))});
   var lo=Math.min.apply(null,v),hi=Math.max.apply(null,v);
-  var pad=(hi-lo)*0.16||0.1; lo-=pad; hi+=pad;
+  var pad=(hi-lo)*0.20||0.1; lo-=pad; hi+=pad;
   var X=function(i){return L+i*(W-L-R)/(rows.length-1)};
   var Y=function(t){return H-BM-(t-lo)/(hi-lo)*(H-BM-T)};
   var half=((W-L-R)/(rows.length-1))/2;
 
-  var xi=-1; rows.forEach(function(r,i){if(xi<0&&r.year>2028)xi=i});
-  if(xi>0){
-    svg.appendChild(mk('rect',{x:X(xi)-half,y:T,width:(W-R)-(X(xi)-half),height:H-BM-T,
-      fill:'var(--yellow)','fill-opacity':0.09}));
-    svg.appendChild(mk('text',{x:X(xi)-half+6,y:T+12,'class':'ax'},'no vote covers these'));
-  }
-  svg.appendChild(mk('line',{x1:L,y1:Y(1.25),x2:W-R,y2:Y(1.25),stroke:'var(--ink2)',
-    'stroke-width':1.3,'stroke-dasharray':'5 3'}));
-  svg.appendChild(mk('text',{x:W-R+8,y:Y(1.25)+4,'class':'lab2'},'1.25'));
+  // under 1.25 is a region a dot is inside or outside, not a comparison to remember
+  svg.appendChild(mk('rect',{x:L-half*0.5,y:Y(1.25),width:(W-R)-(L-half*0.5),
+    height:(H-BM)-Y(1.25),fill:'var(--orange)','fill-opacity':0.07}));
+  svg.appendChild(mk('line',{x1:L-half*0.5,y1:Y(1.25),x2:W-R,y2:Y(1.25),
+    stroke:'var(--ink2)','stroke-width':1.3,'stroke-dasharray':'5 3'}));
+  svg.appendChild(mk('text',{x:L-half*0.5+6,y:Y(1.25)-7,'class':'lab2'},'1.25, the covenant'));
 
-  [baseAlone,basePrinted].forEach(function(fn){
-    svg.appendChild(mk('path',{d:rows.map(function(r,i){
-      return (i?'L':'M')+X(i)+','+Y(fn(r.base))}).join(' '),
-      fill:'none',stroke:'var(--muted)','stroke-width':1,'stroke-dasharray':'2 3',opacity:.6}));
-  });
-  [['printed','var(--blue-lt)',2,'as printed'],
-   ['alone','var(--blue)',2.8,'pledged alone']].forEach(function(c){
-    var k=c[0];
-    svg.appendChild(mk('path',{d:rows.map(function(r,i){
-      return (i?'L':'M')+X(i)+','+Y(r[k])}).join(' '),
-      fill:'none',stroke:c[1],'stroke-width':c[2],'stroke-linejoin':'round'}));
-    rows.forEach(function(r,i){svg.appendChild(mk('circle',
-      {cx:X(i),cy:Y(r[k]),r:(i===rows.length-1?4.6:3.2),fill:c[1]}))});
-    var last=rows[rows.length-1];
-    svg.appendChild(mk('text',{x:W-R+9,y:Y(last[k])+4,'class':'lab2',fill:c[1]},
-      c[3]+'  '+last[k].toFixed(2)));
-  });
-  svg.appendChild(mk('text',{x:W-R+9,y:H-BM-1,'class':'ax'},'dotted: the forecast'));
+
+  var xi=-1; rows.forEach(function(r,i){if(xi<0&&r.year>2028)xi=i});
+  if(xi>0) svg.appendChild(mk('text',{x:X(xi)-half+6,y:T-8,'class':'ax'},
+    'no vote covers these years'));
+
+  var worst=rows.reduce(function(a,b){return b.alone<a.alone?b:a});
   rows.forEach(function(r,i){
-    svg.appendChild(mk('text',{x:X(i),y:H-BM+16,'text-anchor':'middle','class':'ax'},r.year))});
-  svg.appendChild(mk('line',{x1:L,y1:H-BM,x2:W-R,y2:H-BM,stroke:'var(--axis)'}));
+    var x=X(i), yA=Y(r.alone), yP=Y(r.printed);
+    if(r.year>2028) svg.appendChild(mk('rect',{x:x-half,y:T-4,width:half*2,height:H-BM-T+4,
+      fill:'var(--yellow)','fill-opacity':0.10}));
+    // where the Authority's own forecast put the pledged-alone reading
+    var yB=Y(baseAlone(r.base));
+    if(Math.abs(yB-yA)>1.5){
+      svg.appendChild(mk('line',{x1:x-7,y1:yB,x2:x+7,y2:yB,stroke:'var(--muted)',
+        'stroke-width':1.4,'stroke-dasharray':'3 2'}));
+    }
+    svg.appendChild(mk('line',{x1:x,y1:yA,x2:x,y2:yP,stroke:'var(--blue-lt)',
+      'stroke-width':9,'stroke-linecap':'round',opacity:.55}));
+    svg.appendChild(mk('circle',{cx:x,cy:yP,r:5,fill:'var(--plane)',
+      stroke:'var(--blue-lt)','stroke-width':2.2}));
+    svg.appendChild(mk('circle',{cx:x,cy:yA,r:5.6,
+      fill:r.alone<1.25?'var(--orange)':'var(--blue)'}));
+    svg.appendChild(mk('text',{x:x,y:yA+20,'text-anchor':'middle','class':'val',
+      fill:r.alone<1.25?'var(--orange)':'var(--ink)'},r.alone.toFixed(2)));
+    svg.appendChild(mk('text',{x:x,y:H-BM+17,'text-anchor':'middle','class':'ax'},r.year));
+  });
+
+  // name the connector once, on the year where it is doing the most work, and only
+  // when it is doing any. At a deposit of zero the two dots coincide and a label
+  // pointing at nothing reads as a broken chart rather than as an empty account.
+  var wide=rows.reduce(function(a,b){return (b.printed-b.alone)>(a.printed-a.alone)?b:a});
+  var wi=rows.indexOf(wide);
+  if(Y(wide.alone)-Y(wide.printed)>16){
+    svg.appendChild(mk('text',{x:X(wi)+14,y:(Y(wide.alone)+Y(wide.printed))/2+4,'class':'ax'},
+      'the Coverage Account'));
+  } else {
+    svg.appendChild(mk('text',{x:L-half*0.5+6,y:T-8,'class':'ax',fill:'var(--orange)'},
+      'no Coverage Account deposit: the two readings coincide'));
+  }
+
+  // one legend, at the top, drawn by the same shapes that draw the data
+  var lx=L-half*0.5;
+  svg.appendChild(mk('circle',{cx:lx+5,cy:14,r:5.6,fill:'var(--blue)'}));
+  svg.appendChild(mk('text',{x:lx+16,y:18,'class':'ax'},'pledged Net Revenues alone'));
+  svg.appendChild(mk('circle',{cx:lx+196,cy:14,r:5,fill:'var(--plane)',
+    stroke:'var(--blue-lt)','stroke-width':2.2}));
+  svg.appendChild(mk('text',{x:lx+207,y:18,'class':'ax'},'as the statement prints it'));
+  svg.appendChild(mk('line',{x1:lx+372,y1:14,x2:lx+386,y2:14,stroke:'var(--muted)',
+    'stroke-width':1.4,'stroke-dasharray':'3 2'}));
+  svg.appendChild(mk('text',{x:lx+392,y:18,'class':'ax'},
+    'where the Authority’s own forecast puts it'));
+  svg.appendChild(mk('line',{x1:L-half*0.5,y1:H-BM,x2:W-R,y2:H-BM,stroke:'var(--axis)'}));
 }
 
 function tiles(rows){
