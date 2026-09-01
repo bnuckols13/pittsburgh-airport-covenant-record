@@ -337,14 +337,6 @@ def build():
              'vote of January 2025. The forecast carries the same figure into 2029 and 2030. The '
              'Airline Operating Agreements expire Dec. 31, 2028. The bonds run to 2056.</p>')
 
-    b.append('<div class="guard"><b>What this finding does not say.</b> The covenant is not '
-             'breached and no payment is missed in any forecast year. The indenture permits the '
-             'Coverage Account to count toward the test, and on that test the forecast complies. '
-             'The finding is what the ratio is on pledged Net Revenues alone. The two mechanisms '
-             'are also distinct: the Coverage Account is fed from Revenues generally at the '
-             'Authority\'s monthly discretion, while Other Pledged Revenues are designations '
-             'counted inside Net Revenues. The Coverage Account does not hold the slot-machine '
-             'money.</div>')
 
     b.append('<div class="grid">'
              '<a class="card" href="model/index.html"><h3>Move the levers</h3>'
