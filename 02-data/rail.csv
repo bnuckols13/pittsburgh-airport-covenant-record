@@ -1,0 +1,7 @@
+year,event,weight,source_id,source_page
+2017,Program approved,normal,ppg-201709120131,
+2021,First bonds issued,normal,os-2021ab,
+2025,Debt service starts,normal,os-2025ab,39
+2028,Agreements and designation end,cliff,os-2025ab,67
+2030,Forecast ends,normal,os-2025ab,202
+2056,Bonds mature,end,os-2025ab,

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """build_front.py — the front door.
 
-Organised around the two findings rather than around the site's file structure,
+Organised around the findings rather than around the site's file structure,
 because a reader arriving cold needs the findings before the navigation.
 
 Every figure on the page is read from a CSV at build time. None is typed. A number
@@ -106,6 +106,29 @@ table.layers tr.promise td{color:var(--muted)}
 table.layers caption{caption-side:bottom;text-align:left;font-family:system-ui,sans-serif;
 font-size:.76rem;color:var(--muted);padding-top:.6rem;line-height:1.5}
 .scroll{overflow-x:auto}
+blockquote{margin:1.2rem 0;padding:1rem 1.25rem;background:var(--surface);
+border-left:3px solid var(--accent);border-radius:0 9px 9px 0;font-size:1rem;
+line-height:1.6;color:var(--ink)}
+blockquote p{margin:0}
+blockquote .loc{display:block;font-family:system-ui,sans-serif;font-size:.76rem;
+color:var(--muted);margin-top:.65rem}
+blockquote .loc a{color:var(--accent)}
+.rail{margin:1.6rem 0 .4rem}
+.rail svg{width:100%;height:auto;display:block;overflow:visible}
+.rail .ry{font-family:system-ui,sans-serif;font-size:13px;font-weight:600;
+font-variant-numeric:tabular-nums}
+.rail .re{font-family:system-ui,sans-serif;font-size:10.5px;fill:var(--muted)}
+.rail figcaption{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--muted);
+line-height:1.5;margin-top:.5rem}
+.open{border:1px solid var(--rule);border-radius:12px;background:var(--surface);
+padding:1.1rem 1.25rem;margin:1.4rem 0}
+.open h3{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.13em;
+text-transform:uppercase;color:var(--muted);margin:0 0 .7rem;font-weight:600}
+.open ol{font-family:system-ui,sans-serif;font-size:.88rem;line-height:1.6;
+margin:0;padding-left:1.35rem;color:var(--ink2)}
+.open li{margin:.45rem 0}
+.open b{color:var(--ink)}
+
 
 .defs{border:1px solid var(--rule);border-radius:11px;background:var(--surface);
 padding:.95rem 1.1rem;margin:1.2rem 0;font-family:system-ui,sans-serif;font-size:.86rem;
@@ -185,10 +208,74 @@ def _self_test(body):
     return len(linked)
 
 
-def stat(value, key, src, flag=False):
+
+DOCS = {r["id"]: r for r in rows("documents.csv")}
+
+
+def src(doc_id, page, label):
+    """A citation that opens the document at the page the finding rests on.
+
+    Only a direct PDF can honour #page=. Anything else falls back to the entry in
+    the records library, because a link that silently lands on page one is worse
+    than one that lands somewhere honest.
+    """
+    d = DOCS.get(doc_id, {})
+    url = d.get("url", "")
+    if page and url.lower().split("?")[0].endswith(".pdf"):
+        return f'<a href="{esc(url)}#page={int(page)}">{esc(label)}</a>'
+    return f'<a href="documents/index.html#{esc(doc_id)}">{esc(label)}</a>'
+
+
+def says(text, cite):
+    """The document in its own words, before any gloss."""
+    return f'<blockquote><p>{text}</p><span class="loc">{cite}</span></blockquote>'
+
+
+def stat(value, key, cite, flag=False):
     return (f'<div><div class="v{" flag" if flag else ""}">{esc(value)}</div>'
             f'<div class="k">{esc(key)}</div>'
-            f'<div class="src">{esc(src)}</div></div>')
+            f'<div class="src">{esc(cite)}</div></div>')
+
+
+
+def plate_rail():
+    """A dated rail. Years place every mark, so nothing sits where it looks best.
+
+    The scale is linear in time and stays that way: half the rail being empty is
+    the point, because the bonds run twenty-six years past the last forecast year.
+    Labels alternate above and below the line, which is what stops the four events
+    between 2017 and 2030 from colliding.
+    """
+    ev = sorted(rows("rail.csv"), key=lambda r: int(r["year"]))
+    W, H, L, R = 900, 150, 30, 30
+    y0, y1 = int(ev[0]["year"]) - 3, int(ev[-1]["year"]) + 2
+    X = lambda v: L + (v - y0) / (y1 - y0) * (W - L - R)
+    base = 84
+    out = [f'<line x1="{L}" y1="{base}" x2="{W-R}" y2="{base}" stroke="var(--rule)" '
+           f'stroke-width="2"/>']
+    for i, r in enumerate(ev):
+        yr, x = int(r["year"]), X(int(r["year"]))
+        cliff = r["weight"] == "cliff"
+        col = ("var(--flag)" if cliff else
+               "var(--muted)" if r["weight"] == "end" else "var(--accent)")
+        up = (i % 2 == 0)
+        tip = base - 30 if up else base + 30
+        out.append(f'<line x1="{x:.1f}" y1="{base}" x2="{x:.1f}" y2="{tip}" stroke="{col}" '
+                   f'stroke-width="{2.4 if cliff else 1.3}"'
+                   f'{"" if cliff else " stroke-dasharray=\"2 2\""}/>')
+        out.append(f'<circle cx="{x:.1f}" cy="{base}" r="{5 if cliff else 3.4}" fill="{col}"/>')
+        anchor = "start" if i == 0 else ("end" if i == len(ev) - 1 else "middle")
+        ylab = tip - 6 if up else tip + 12
+        yevt = tip - 18 if up else tip + 24
+        out.append(f'<text class="ry" x="{x:.1f}" y="{ylab}" text-anchor="{anchor}" '
+                   f'fill="{col}">{r["year"]}</text>')
+        out.append(f'<text class="re" x="{x:.1f}" y="{yevt}" text-anchor="{anchor}">'
+                   f'{esc(r["event"])}</text>')
+    return (f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="A dated rail. The board approves '
+            f'the terminal program in 2017, the first bonds are issued in 2021, the first terminal '
+            f'debt service is billed to airlines in 2025, the airline agreements and the '
+            f"designation commitment both end in 2028, the consultant's forecast ends in 2030, "
+            f'and the bonds mature in 2056.">{"".join(out)}</svg>')
 
 
 def build():
@@ -227,7 +314,7 @@ def build():
     b = []
     b.append('<p class="kicker">Evidence package</p>')
     b.append("<h1>The PIT Terminal Financing Record</h1>")
-    b.append('<p class="deck">Two findings from the Allegheny County Airport Authority\'s own '
+    b.append('<p class="deck">Three findings from the Allegheny County Airport Authority\'s own '
              'bond documents and audited annual reports, on how Pittsburgh International\'s '
              '$1.7 billion landside terminal was financed and who carries the risk if the '
              'revenue assumptions behind it do not hold.</p>')
@@ -280,9 +367,19 @@ def build():
         'os-2021ab PDF 37 (printed 27).</p>'
         '</div>')
     b.append('<p>The Official Statement prints one combined ratio against that requirement, and '
-             'every forecast year clears it. Footnote 1 on that table reads &#8220;Includes Other '
-             'Pledged Revenues,&#8221; and Exhibit E states those amounts by year, so the printed '
-             'figure separates into three components.</p>')
+             'every forecast year clears it. A footnote on that table is what lets the printed '
+             'figure be taken apart.</p>')
+    b.append(says("Includes Other Pledged Revenues.",
+                  "Footnote 1 to the Net Revenues row, "
+                  + src("os-2025ab", 202, "os-2025ab PDF 202 (printed B-16)")
+                  + ", the consultant&#8217;s forecast of April 8, 2025"))
+    b.append('<p>Other Pledged Revenues are money the indenture puts outside the airport&#8217;s '
+             'revenue altogether, and Exhibit E states the amount for every year, so the '
+             'separation is subtraction rather than inference.</p>')
+    b.append(says("&#8220;Other Pledged Revenues&#8221; shall mean moneys, <b>not constituting "
+                  "Revenues</b>, that are designated, for any period.",
+                  "The Master Trust Indenture&#8217;s own definition, "
+                  + src("os-2025ab", 343, "os-2025ab PDF 343")))
 
     hdr = "".join(f"<th>{y}</th>" for y in years)
     def row(cls, label, key, fmt="{:.2f}"):
@@ -333,9 +430,8 @@ def build():
                   'Exhibit E, os-2025ab PDF 316, corroborated at PDF 295.'))
     b.append('</div>')
 
-    b.append('<p>The airlines committed that money for 2026 through 2028 in a majority-in-interest '
-             'vote of January 2025. The forecast carries the same figure into 2029 and 2030. The '
-             'Airline Operating Agreements expire Dec. 31, 2028. The bonds run to 2056.</p>')
+    b.append('<p>Where that designated money comes from, and for how long anyone has '
+             'committed it, is the second finding.</p>')
 
 
     b.append('<div class="grid">'
@@ -347,10 +443,75 @@ def build():
              'indenture text that separates them.</p></a></div>')
     b.append("</section>")
 
-    # ------------------------------------------------------------- finding 2
-    a24 = aud["2024"]
+    # ------------------------------------------------------------- finding two
     b.append('<section class="finding">')
     b.append('<p class="n">Finding two</p>')
+    b.append("<h2>The forecast spends designated money for two years longer than anyone has "
+             "committed it, and the Authority says it cannot assure the source.</h2>")
+    b.append('<p class="sub">The airlines voted the designation for 2026 through 2028. The '
+             'forecast carries the same figure into 2029 and 2030. The airline agreements expire '
+             'Dec. 31, 2028. The bonds run to 2056.</p>')
+
+    b.append('<p>What the carriers actually voted, and the years it covers, is stated in the '
+             'bond document.</p>')
+    b.append(says("In connection with a January 2025 Majority In Interest (&#8220;MII&#8221;) "
+                  "vote, the Authority committed to using discretionary revenue, which may "
+                  "include Gaming Revenues or Natural Gas Revenues, of no less than $8.8 million "
+                  "for 2025 and $11.575 million per year <b>for 2026 through 2028</b> to reduce "
+                  "airline rates and charges.",
+                  src("os-2025ab", 67, "os-2025ab PDF 67")))
+    b.append('<p>Exhibit E forecasts $11,575,000 in 2029 and again in 2030, which is the '
+             'committed figure carried two years past the commitment. From 2025 the whole of the '
+             'designated block is slot-machine tax, a state appropriation. The sentence directly '
+             'above the commitment, in the Authority&#8217;s own risk disclosure to its '
+             'investors, is this.</p>')
+    b.append(says("The Authority expects to continue to receive payments of $12.4 million "
+                  "annually for so long as it continues to be a recipient under the Gaming Act. "
+                  "However, <b>there can be no assurance that the Gaming Act will not be amended "
+                  "in the future to reduce or eliminate payments of such revenues to the "
+                  "Authority.</b>",
+                  src("os-2025ab", 67, "os-2025ab PDF 67") + ", the sentence above the one "
+                  "quoted here"))
+
+    b.append('<div class="rail"><figure>' + plate_rail() +
+             '<figcaption>The dates the financing turns on. Two things end together on '
+             'Dec. 31, 2028: the agreements that make the carriers responsible for the residual, '
+             'and the designation the airlines voted. The forecast runs two years past both, and '
+             'the bonds run twenty-six years past the forecast. Source: '
+             + src("os-2025ab", 67, "os-2025ab PDF 67") + ' and '
+             + src("os-2025ab", 202, "PDF 202 (printed B-16)") +
+             '.</figcaption></figure></div>')
+
+    b.append('<div class="stats">')
+    b.append(stat("2026–28",
+                  "The years the airlines actually voted the designation for.",
+                  "os-2025ab PDF 67, the January 2025 majority-in-interest vote."))
+    b.append(stat("2029 and 2030",
+                  "The two further years the forecast fills with the same figure, which no vote "
+                  "covers.",
+                  "Exhibit E, os-2025ab PDF 316, corroborated at PDF 295.", flag=True))
+    b.append(stat("$12.4m",
+                  "Received in gaming revenue in each year from 2020 through 2024, and the sum "
+                  "the Authority says it cannot assure will continue.",
+                  "os-2025ab PDF 67."))
+    b.append("</div>")
+
+    b.append('<p>Gas royalty is designated at zero in every year from 2020 through 2030 and does '
+             'not return in the forecast. What was designated from 2020 through 2023 was federal '
+             'pandemic relief, and in 2024 nothing was designated at all.</p>')
+
+    b.append('<div class="grid">'
+             '<a class="card" href="covenant/index.html"><h3>What was designated, year by year</h3>'
+             '<p>Exhibit E itemised: federal relief, then nothing, then slot-machine tax.</p></a>'
+             '<a class="card" href="claims/index.html"><h3>The claims, one by one</h3>'
+             '<p>Each statement with the document and page behind it.</p></a></div>')
+    b.append("</section>")
+
+
+    # ----------------------------------------------------------- finding three
+    a24 = aud["2024"]
+    b.append('<section class="finding">')
+    b.append('<p class="n">Finding three</p>')
     b.append("<h2>No terminal debt entered the airline charge until 2025. The Authority's "
              "consultant forecasts that charge rising every year to 2030.</h2>")
     b.append('<p class="sub">The charge is set by a residual formula, so revenue the Authority '
@@ -408,6 +569,26 @@ def build():
     b.append("</section>")
 
     # ---------------------------------------------------------------- tools
+    # Open questions rather than a count of what is missing. The tally version of
+    # this reads as a scoreboard against the work; the questions read as the work.
+    b.append('<h2 class="sec">What this reporting has not established</h2>')
+    b.append('<div class="open"><h3>Open questions</h3><ol>'
+             '<li><b>Whether the designation continues past 2028.</b> A further '
+             'majority-in-interest vote could extend it, and the money has arrived in every year '
+             'from 2020 through 2024. Nothing in the record says either way.</li>'
+             '<li><b>What happened to the $12.4 million during Pennsylvania&#8217;s 2025 budget '
+             'impasse.</b> The gaming money is a state appropriation, so its history is a matter '
+             'of record, and that record is not yet in this file.</li>'
+             '<li><b>Whether a rising airline charge reaches a passenger.</b> The carriers say it '
+             'does not. The published research measures adjacent questions and none of it tests '
+             'Pittsburgh.</li>'
+             '<li><b>What the Authority says about any of it.</b> Right of reply has not been '
+             'sought, and no figure here reflects its answer.</li>'
+             '<li><b>What the master plan&#8217;s alternatives analysis contains.</b> Federal '
+             'rules require one. It has never been published, and it is what the claim that '
+             'renovation would have cost more was measured against.</li>'
+             '</ol></div>')
+
     b.append('<h2 class="sec">The evidence, and how to read it</h2>')
     b.append('<p>The two aggregation tools hold the material the findings are drawn from. Neither '
              'requires taking this publication\'s word for anything.</p>')
@@ -445,7 +626,7 @@ def build():
               ("S1", "How the terminal was decided")]
     b.append('<!--SRCINDEX-->')
     idx = ['<h2 class="sec">Every source, listed</h2>']
-    idx.append(f'<p>All {n_doc} records behind the two findings, grouped by the question each answers. '
+    idx.append(f'<p>All {n_doc} records behind the three findings, grouped by the question each answers. '
                f'Each title opens the '
                f'document itself; the identifier opens its entry, with what it establishes, the '
                f'pages cited and a checksum for the copy that was read.</p>')
