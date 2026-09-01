@@ -319,10 +319,14 @@ def build_model():
     # Fidelity gate. With every dial at the Authority's own forecast value, the model
     # must reproduce the Authority's own printed ratios and charge. If it does not, the
     # model is not arithmetic on the documents and has no business being published.
+    # The gate must run the quantity the page runs. This previously recomputed the
+    # baseline deposit from each year's recorded percentage while the page applied one
+    # slider value to every year, so the two disagreed for 2027 and the gate passed
+    # anyway. A gate that reimplements what it checks proves only that two
+    # implementations exist.
     for b, r in zip(base, cov):
-        pct = num(r["coverage_amount_pct_of_ADS"])
         alone = b["net"] / b["ads"]
-        printed = (b["net"] + pct * b["ads"]) / b["ads"]
+        printed = (b["net"] + min(b["cov"], 0.25 * b["ads"])) / b["ads"]
         req = (b["cpe"] + b["opr"] / b["enpl"]) * b["enpl"]
         cpe = (req - b["opr"]) / b["enpl"]
         for got, want, what, tol in (

@@ -74,9 +74,9 @@ def build():
     worst = max(precs, key=lambda x: x["promise"] - x["earned"])
     gapw = (worst["promise"] - worst["earned"]) / 1000
 
-    m = []
+    M = {}
 
-    m.append(module("m1", "Module one", "The room where everyone agreed", "",
+    M['m1'] = (module("m1", "Module one", "The room where everyone agreed", "",
         "In October the whole political spectrum turned out for the terminal. The only elected "
         "body that touches the Authority had been told, seven years earlier, that it had no "
         "standing to ask about the money.",
@@ -101,26 +101,33 @@ def build():
         + '<div class="open"><b>Not yet reported</b>This scene is assembled from the record '
           'rather than from the room. Nobody who stood on that dais has been interviewed.</div>'))
 
-    m.append(module("m2", "Module two", "How secure the covenant is", "Hypothesis 1",
+    M['m2'] = (module("m2", "Module three", "How secure the covenant is", "Hypothesis 1",
         "The Authority promised its lenders a quarter more than it owes them, every year. Its "
-        "own forecast meets that promise. Three dollars in every ten of it come from decisions "
-        "the Authority makes itself and can stop making.",
+        "own forecast meets that promise. Its own operations do not: the margin is made up with "
+        "a state gaming appropriation and a reserve already topped up to the contractual "
+        "ceiling.",
         "<p>The terminal is meant to pay for itself out of what the airport earns, with a margin "
         "on top. The bond documents call it the rate covenant and print it as 1.25. The Official "
         "Statements print one combined figure for each forecast year, and every one clears.</p>"
-        "<p>That figure is made of three things and only the first is the airport's own money. "
-        "The second the indenture calls Other Pledged Revenues, defined as moneys &#8220;not "
-        "constituting Revenues, that are designated&#8221; into the pledge for a period. The "
-        "third is the Coverage Account, funded monthly &#8220;at the discretion of the "
-        "Authority&#8221; and capped at a quarter of the debt payment. Both are annual "
-        "choices.</p>"
+        "<p>That figure is made of three things, and they are not the same kind of money. The "
+        "first is what the airport earns by running an airport. The second the indenture calls "
+        "Other Pledged Revenues, defined as moneys &#8220;not constituting Revenues, that are "
+        "designated&#8221; into the pledge for a period: from 2025 the whole of that block is "
+        "slot-machine tax, a state appropriation, and it is not operating revenue at all. The "
+        "third is the Coverage Account, which is operating money: Revenues may be deposited to "
+        "it monthly &#8220;at the discretion of the Authority,&#8221; ninth in the flow of funds "
+        "and capped at a quarter of the debt payment. What is notable about it is not that the "
+        "Authority might decline to fund it, which it has no reason to do, but that the forecast "
+        "already assumes the maximum the contract allows in five of the six years. There is no "
+        "headroom left in it.</p>"
         + fig(promise_svg,
             f"<b>What holds the promise up.</b> The solid block is what the airport earns. The "
-            f"two hatched blocks are money it chooses to add. The rule across each bar is the "
+            f"first hatched block is the designated gaming money, which is not operating revenue; "
+            f"the second is the Coverage Account deposit. The rule across each bar is the "
             f"promise, 1.25 times that year's debt payment. On its own earnings the airport "
             f"falls short in all six forecast years, by ${gapw:.1f} million at the widest, in "
             f"{worst['year']}. Across the six, <b>{share*100:.0f} percent of the promise is met "
-            f"by the two discretionary blocks.</b>",
+            f"by the two blocks above what the airport earns.</b>",
             "Data <code>02-data/coverage-table.csv</code> and "
             "<code>other-pledged-revenue.csv</code>, from os-2025ab PDF 202 and PDF 316. The "
             "decomposition is ours; the statement prints only the combined figure, and "
@@ -146,7 +153,7 @@ def build():
           'rates have risen qualifies. The finding is what the ratio is on pledged revenue '
           'alone.</div>'))
 
-    m.append(module("m3", "Module three", "What it costs to fly out of Pittsburgh", "Hypothesis 2",
+    M['m3'] = (module("m3", "Module five", "What it costs to fly out of Pittsburgh", "Hypothesis 2",
         "Airlines are billed whatever the airport does not earn, which makes the covenant and "
         "the charge to carriers the same fact seen from two sides.",
         "<p>Carriers are not charged by the head. They pay rent and landing fees, $298.36 per "
@@ -174,7 +181,7 @@ def build():
           'terminal tenant has been asked what any of this has cost them. Every source in this '
           'module is a document.</div>'))
 
-    m.append(module("m4", "Module four", "The enplanement debate", "Hypothesis 1 and 2",
+    M['m4'] = (module("m4", "Module six", "The enplanement debate", "Hypothesis 1 and 2",
         "The obvious version of this story is that a public authority inflated its passenger "
         "forecast to justify a building. The record does not support it, and what the record "
         "shows instead is harder to answer.",
@@ -204,7 +211,7 @@ def build():
         "by between 20 and 27 percent depending on the year. The forecast that was revised is "
         "not the forecast that was wrong.</p>"))
 
-    m.append(module("m5", "Module five", "The forecast, and how it has gone", "Hypothesis 1",
+    M['m5'] = (module("m5", "Module four", "The forecast, and how it has gone", "Hypothesis 1",
         "Between 2017 and 2021 three officials told the public what airlines would pay once the "
         "terminal opened. Each figure sat below what the bond documents already assumed.",
         "<p>The chief executive said in 2017 that the charge would fall to $9.73 by 2023. The "
@@ -219,7 +226,7 @@ def build():
           'figure the file holds is an estimate, so nothing about 2025 traffic runs until the '
           'audited number is in hand.</div>'))
 
-    m.append(module("m6", "Module six", "The options", "Hypothesis 1",
+    M['m6'] = (module("m6", "Coda", "The options", "Hypothesis 1",
         "The board voted to build rather than renovate. Federal guidance required the "
         "comparison. It has never been published.",
         "<p>In September 2017 the board voted to build a new landside terminal rather than "
@@ -245,22 +252,57 @@ def build():
           'analysis and a parallel FOIA to the FAA are drafted. That analysis is the document '
           'that would settle whether renovating really was more expensive.</div>'))
 
-    toc = ('<div class="toc"><b style="font-family:system-ui,sans-serif;font-size:.85rem">'
-           'Six modules</b><ol>'
-           '<li><a href="#m1">The room where everyone agreed</a></li>'
-           '<li><a href="#m2">How secure the covenant is</a></li>'
-           '<li><a href="#m3">What it costs to fly out of Pittsburgh</a></li>'
-           '<li><a href="#m4">The enplanement debate</a></li>'
-           '<li><a href="#m5">The forecast, and how it has gone</a></li>'
-           '<li><a href="#m6">The options</a></li></ol></div>')
 
-    body = ('<p class="kicker">The record</p>'
-            '<h1>Pittsburgh promised its lenders a quarter more than it owes them. Three dollars '
-            'in every ten of that promise is a choice.</h1>'
+    # Module two exists because the reporting is an aggregation rather than an access
+    # story, and a reader who does not know that cannot weigh anything below it.
+    M['m0'] = (module("m0", "Module two", "How this was reported", "",
+        "No official at the Authority has been interviewed and no records request has been "
+        "answered. Everything below is drawn from the documents the decisions were written into.",
+        '<p>Bond official statements filed with investors, eleven years of audited annual '
+        'financial reports, board records, the fee schedule the carriers are billed against, and '
+        'federal filings. Each was retrieved from a public source, hashed, and cited to a '
+        'numbered page. Thirty-six records in all, of which twenty-seven are immutable documents '
+        'whose checksum any reader can reproduce.</p>'
+        '<p>Two things follow from working this way, and they cut in opposite directions. Every '
+        'figure in the modules below can be checked against a named page in a document that can '
+        'be downloaded and hashed independently, which is a stronger guarantee than a quotation '
+        'from an official. And where the Authority\'s own filings disagree with each other, ten '
+        'places in all, the disagreement is published rather than resolved by choosing the more '
+        'convenient number.</p>'
+        '<p>What it does not buy is comment. The Authority has not been asked to explain any of '
+        'this, no records request has been answered, and every person quoted in these modules is '
+        'quoted from published reporting by somebody else and labelled that way. The claims and '
+        'the documents behind them are listed at '
+        '<a href="../claims/index.html">what the reporting says</a>; the documents themselves at '
+        '<a href="../documents/index.html">read the documents</a>; the contradictions and the '
+        'claims held back at <a href="../factcheck/index.html">the fact check</a>.</p>'))
+
+    # Brian's spine of 2026-09-01. "The options" is not part of it and follows as a coda.
+    ORDER = ['m1', 'm0', 'm2', 'm5', 'm3', 'm4']
+    m = [M[k] for k in ORDER] + [M['m6']]
+
+    toc = ('<div class="toc"><b style="font-family:system-ui,sans-serif;font-size:.85rem">'
+           'Six modules, and a coda</b><ol>'
+           '<li><a href="#m1">The room where everyone agreed</a></li>'
+           '<li><a href="#m0">How this was reported</a></li>'
+           '<li><a href="#m2">How secure the covenant is</a></li>'
+           '<li><a href="#m5">The forecast, and how it has gone</a></li>'
+           '<li><a href="#m3">What it costs to fly out of Pittsburgh</a></li>'
+           '<li><a href="#m4">The enplanement debate</a></li></ol>'
+           '<p style="font-family:system-ui,sans-serif;font-size:.85rem;margin:.5rem 0 0">'
+           'Then a coda: <a href="#m6">the options</a>.</p></div>')
+
+    body = ('<p class="back" style="font-family:system-ui,sans-serif;font-size:.82rem;'
+            'margin:0 0 1.2rem"><a href="../index.html">&#8592; the package</a></p>'
+            '<p class="kicker">The record</p>'
+            '<h1>Pittsburgh promised its lenders a quarter more than it owes them. Its own '
+            'operations do not produce it.</h1>'
             '<p class="sub">The new terminal was financed on two propositions: that the airport '
             'would pay for it out of what it earns, and that flying out of Pittsburgh would get '
-            'cheaper. Documents filed with its lenders show its own consultant expecting '
-            'neither. This is the record, in six modules, each standing on its own.</p>'
+            'cheaper. Documents filed with its lenders show its own consultant expecting neither. '
+            'The margin above the debt payment is made up with a state gaming appropriation and a '
+            'reserve already topped up to the ceiling the contract allows. This is the record, in '
+            'six modules, each standing on its own.</p>'
             + toc + "".join(m) +
             '<p class="src">Every figure on this page is drawn from a CSV in '
             '<code>02-data/</code> that names its document, page and SHA-256. No coordinate is '

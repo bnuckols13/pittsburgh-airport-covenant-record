@@ -1,83 +1,94 @@
 {
-  "built": "2026-08-31",
-  "note": "Fetch with 03-harness/fetch_sources.py. Every download is checked against the sha256 recorded here.",
+  "built": "2026-09-01",
+  "note": "Fetch with 03-harness/fetch_sources.py. capture_kind says what the digest proves. 'file' is an immutable document: re-download it and the hash reproduces, and the verifier enforces that. 'snapshot' is a live web page captured at a moment: the hash records the bytes this reporting read, and it will not reproduce on re-fetch because the page changes. 'citation' is a bibliographic record standing in for a paywalled article that is not redistributed here.",
   "sources": {
     "os-2021ab": {
       "title": "ACAA Official Statement, Series 2021A/B (dated Aug. 11, 2021)",
       "url": "https://web.archive.org/web/20251204144924id_/http://dwuconsulting.com/images/OS/PIT%202021AB%20OS.pdf",
       "sha256": "8da587b3e2ac52415632e433f2a739b5629b091105882ca0703a896880e2096d",
       "tier": "A",
-      "vault_filename": "os-2021ab.pdf"
+      "vault_filename": "os-2021ab.pdf",
+      "capture_kind": "file"
     },
     "os-2023abc": {
       "title": "ACAA Official Statement, Series 2023A/B/C (dated Oct. 12, 2023)",
       "url": "https://emma.msrb.org/P21736898-P21334055-P21768100.pdf",
       "sha256": "2fb9c2c103aea51733c015a790e5da36ace1d1e8aad689fb61718ba18624b9f4",
       "tier": "A",
-      "vault_filename": "os-2023abc.pdf"
+      "vault_filename": "os-2023abc.pdf",
+      "capture_kind": "file"
     },
     "os-2025ab": {
       "title": "ACAA Official Statement, Series 2025A/B (dated April 22, 2025)",
       "url": "https://web.archive.org/web/20251213065401id_/https://dwuconsulting.com/images/OS/PIT%202025AB%20OS.pdf",
       "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
       "tier": "A",
-      "vault_filename": "os-2025ab.pdf"
+      "vault_filename": "os-2025ab.pdf",
+      "capture_kind": "file"
     },
     "fees-rates-2026": {
       "title": "PIT fees, rates and charges (January 2026)",
       "url": "https://flypittsburgh.com/wp-content/uploads/2026/01/Fees-Rates-and-Charges-Trifold_January-2026.pdf",
       "sha256": "5234016fbf6e13df5daf4372bb8c461bfde326efd51a36fd66ebbd94274db013",
       "tier": "A",
-      "vault_filename": "fees-rates-2026.pdf"
+      "vault_filename": "fees-rates-2026.pdf",
+      "capture_kind": "file"
     },
     "pfc-amend-notice-2026": {
       "title": "ACAA public notice, amend PFC applications #4-#7 (May 2026)",
       "url": "https://flypittsburgh.com/wp-content/uploads/2026/05/PIT-PFC-4-5-6-7-Amendment-Public-Notice.pdf",
       "sha256": "4f34d43c2822901e7af6269ab21f40d6896e1a1d304d0956862d39d23cfc8ac0",
       "tier": "A",
-      "vault_filename": "pfc-amend-notice-2026.pdf"
+      "vault_filename": "pfc-amend-notice-2026.pdf",
+      "capture_kind": "file"
     },
     "board-minutes-2023-11": {
       "title": "ACAA board minutes, November 2023",
       "url": "https://flypittsburgh.com/wp-content/uploads/2023/12/November_2023_Board_Minutes_-_Signed.pdf",
       "sha256": "5d0688e14df7af745fb72a0222fef23a09dbb83ad1d0eda599a9295daac22a31",
       "tier": "A",
-      "vault_filename": "board-minutes-2023-11.pdf"
+      "vault_filename": "board-minutes-2023-11.pdf",
+      "capture_kind": "file"
     },
     "annual-report-2021": {
       "title": "ACAA 2021 annual report",
       "url": "https://flypittsburgh.com/wp-content/uploads/2022/12/2021_ACAA_Annual_Report.pdf",
       "sha256": "3535e493258d914e91212a19242219c7b3761b3b54983d512a3b6bda4e48b4d9",
       "tier": "A",
-      "vault_filename": "annual-report-2021.pdf"
+      "vault_filename": "annual-report-2021.pdf",
+      "capture_kind": "file"
     },
     "board-agenda-2021-07-16": {
       "title": "ACAA board / committee agenda, July 16, 2021",
       "url": "https://flypittsburgh.com/wp-content/uploads/2021/07/Board-Agenda-7.16.21.pdf",
       "sha256": "00a884bb4cf014761503188d565e3d211071762a45923debd25cc5cffee45e83",
       "tier": "A",
-      "vault_filename": "board-agenda-2021-07-16.pdf"
+      "vault_filename": "board-agenda-2021-07-16.pdf",
+      "capture_kind": "file"
     },
     "ppg-201709120131": {
       "title": "Post-Gazette, Sept. 12, 2017, \"$1.1B approved for reconfiguration of Pittsburgh International\"",
       "url": "http://web.archive.org/web/20260115100640/https://www.post-gazette.com/business/development/2017/09/12/Pittsburgh-International-Airport-Allegheny-County-Authority-board-vote-plan-new-landside-terminal/stories/201709120131",
       "sha256": "d0aa2320c7e0c4ef50f349366da2cbbfb64d75683a20670e8f3597754027a9f8",
       "tier": "C",
-      "vault_filename": "ppg-201709120131.html"
+      "vault_filename": "ppg-201709120131.html",
+      "capture_kind": "file"
     },
     "ppg-201802200035": {
       "title": "Post-Gazette, Feb. 20, 2018, \"Critics call for more transparency\"",
       "url": "http://web.archive.org/web/20260110165254/https://www.post-gazette.com/business/development/2018/02/20/pittsburgh-international-airport-1-1-billion-dollars-modernization-critics/stories/201802200035",
       "sha256": "8ca8a7c1911e9934042770e4929f403639939539d9129be7a03a25774445f88b",
       "tier": "C",
-      "vault_filename": "ppg-201802200035.html"
+      "vault_filename": "ppg-201802200035.html",
+      "capture_kind": "file"
     },
     "ppg-201810190132": {
       "title": "Post-Gazette, Oct. 19, 2018, \"Airlines to get a break on Pittsburgh airport fees next year\"",
       "url": "http://web.archive.org/web/20260110101853/https://www.post-gazette.com/business/development/2018/10/19/airlines-to-get-a-break-on-pittsburgh-airport-fees-next-year-onejet/stories/201810190132",
       "sha256": "d852176cdfe071db374bbd82980d46152c7fd72a1881cc32a73474f033785ebb",
       "tier": "C",
-      "vault_filename": "ppg-201810190132.html"
+      "vault_filename": "ppg-201810190132.html",
+      "capture_kind": "file"
     },
     "ppg-202106240135": {
       "title": "Post-Gazette, June 24, 2021, airlines clear $1.4 billion plan",
@@ -98,14 +109,16 @@
       "url": "http://web.archive.org/web/20260725120336/https://www.post-gazette.com/news/transportation/2026/01/11/pittsburgh-international-airport-new-terminal-budget/stories/202512220055",
       "sha256": "2d96cf8afed546c4f49196ee54727112a40a3798cd38364c5d5f7a1b93752b59",
       "tier": "C",
-      "vault_filename": "ppg-202512220055.html"
+      "vault_filename": "ppg-202512220055.html",
+      "capture_kind": "file"
     },
     "faa-ac-5070-6b": {
-      "title": "FAA Advisory Circular 150/5070-6B, Airport Master Plans (with changes 1 and 2)",
+      "title": "FAA Advisory Circular 150/5070-6B, Airport Master Plans",
       "url": "https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC_150_5070-6B_with_chg_1&2.pdf",
-      "sha256": "",
+      "sha256": "b45382fd97dbe16d3dae6835229e8c93f44bb36bfc92397e64802e7d802ac9fd",
       "tier": "A",
-      "vault_filename": ""
+      "vault_filename": "faa-ac-5070-6b.pdf",
+      "capture_kind": "file"
     },
     "faa-cats-127": {
       "title": "FAA CATS Form 5100-127, PIT, FY2025 (line 1.7)",
@@ -115,11 +128,12 @@
       "vault_filename": ""
     },
     "dwu-cpe": {
-      "title": "DWU Consulting, Cost per Enplanement by Airport (compiler over FAA CATS Form 5100-127)",
+      "title": "DWU Consulting, cost per enplanement by airport",
       "url": "https://dwuconsulting.com/info/data/cpe",
-      "sha256": "",
+      "sha256": "ff34112de8fb9faee6dc833ee857cbacd9fc3dad15b74b7bf575f3c5728ff4a7",
       "tier": "C",
-      "vault_filename": ""
+      "vault_filename": "dwu-cpe.html",
+      "capture_kind": "snapshot"
     },
     "dwu-pit": {
       "title": "DWU Consulting, PIT airport page",
@@ -136,32 +150,36 @@
       "vault_filename": ""
     },
     "ai-20171004": {
-      "title": "Allegheny Institute, Oct. 4, 2017, \"Will Airport Reconfiguration Justify the $1.1 Billion Cost?\"",
+      "title": "Allegheny Institute, Oct. 4, 2017: will airport reconfiguration justify the $1.1 billion cost",
       "url": "https://www.alleghenyinstitute.org/will-airport-reconfiguration-justify-1-1-billion-cost/",
-      "sha256": "",
+      "sha256": "5e9a32e9e19c21126078ae13ee7ceb667715ecb26f66e7e7af824fe6b53199c5",
       "tier": "D",
-      "vault_filename": ""
+      "vault_filename": "ai-20171004.html",
+      "capture_kind": "snapshot"
     },
     "koopmans-lieshout-2016": {
-      "title": "Koopmans, C.C., & Lieshout, R. (2016). Airline cost changes: To what extent are they passed through to the passenger? Journal of Air Transport Management, 53, 1-11.",
-      "url": "https://doi.org/10.1016/j.jairtraman.2015.12.013",
-      "sha256": "",
+      "title": "Koopmans and Lieshout, airline cost changes and pass-through (CrossRef citation record; the article is paywalled and not redistributed)",
+      "url": "https://api.crossref.org/works/10.1016/j.jairtraman.2015.12.013",
+      "sha256": "7d1efc4b16ffc6450d7afe9ae0b9c1f674a2a3ff45489622b91215cda53dc7e5",
       "tier": "A",
-      "vault_filename": ""
+      "vault_filename": "koopmans-lieshout-2016.json",
+      "capture_kind": "citation"
     },
     "bondbuyer-20250421": {
-      "title": "Bond Buyer, April 21, 2025, Christina Baker, “Pittsburgh airport's bonds will ease the landing of its renovation”",
+      "title": "Bond Buyer, April 21, 2025, Christina Baker",
       "url": "https://www.bondbuyer.com/news/pittsburgh-airports-bonds-will-ease-the-landing-of-its-renovation",
-      "sha256": "",
+      "sha256": "22afd8a6e89f6568151bca146bb7340a21cc805f7080eb3200fa3f57af83e974",
       "tier": "C",
-      "vault_filename": ""
+      "vault_filename": "bondbuyer-20250421.html",
+      "capture_kind": "snapshot"
     },
     "trib-20260708": {
-      "title": "TribLive, July 8, 2026, “Allegheny County Council approves 3 new members for airport authority”",
+      "title": "TribLive, July 8, 2026: county council approves three new airport authority members",
       "url": "https://community.triblive.com/news/4089712",
-      "sha256": "",
+      "sha256": "854adcc5bcfb11c7f1fea76a2cc84a30a6decba8654715d8adba03fbf841412a",
       "tier": "C",
-      "vault_filename": ""
+      "vault_filename": "trib-20260708.html",
+      "capture_kind": "snapshot"
     },
     "wpxi-20260121": {
       "title": "WPXI, Jan. 21, 2026, Cassotis contract extended through 2030",
@@ -171,11 +189,12 @@
       "vault_filename": ""
     },
     "kbra-20250401": {
-      "title": "KBRA rating release, April 1, 2025, ACAA Series 2025A/B (A+, stable)",
+      "title": "KBRA rating release, April 1, 2025, Series 2025A/B, A+ stable",
       "url": "https://www.kbra.com/publications/nCMpwPwM/",
-      "sha256": "",
+      "sha256": "8c62d6ae9728fdb35e9c74475fcede52b0167a9dbf2eedc51d35acc2c8d9db63",
       "tier": "B",
-      "vault_filename": ""
+      "vault_filename": "kbra-20250401.html",
+      "capture_kind": "snapshot"
     },
     "whg-20251011": {
       "title": "West Hills Gazette, Oct. 11, 2025, \"Pittsburgh Airport cuts ribbon on $1.75 billion terminal\"",
@@ -192,11 +211,12 @@
       "vault_filename": ""
     },
     "blueskypit-spirit": {
-      "title": "Blue Sky News, May 4, 2026, 'Spirit Ceases Operations: What It Means for Pittsburgh' (published by the Authority)",
+      "title": "Blue Sky News, May 4, 2026: Spirit ceases operations, published by the Authority",
       "url": "https://blueskypit.com/spirit-ceases-operations-what-it-means-for-pittsburgh/",
-      "sha256": "",
+      "sha256": "d1f522ffa0d4301aea8ba3f8ed4f804222495ccbea904f257a6f6a677c30aa98",
       "tier": "D",
-      "vault_filename": ""
+      "vault_filename": "blueskypit-spirit.html",
+      "capture_kind": "snapshot"
     },
     "wpxi-traffic-2026": {
       "title": "WPXI, Aug. 14, 2026, Pittsburgh International traffic slips after a carrier's exit",
@@ -213,11 +233,12 @@
       "vault_filename": ""
     },
     "dwu-ratecov": {
-      "title": "DWU Consulting, 'Rate Covenant Compliance' (a self-described DWU AI Product, published Apr. 20 2026, updated May 2 2026)",
+      "title": "DWU Consulting, rate covenant compliance",
       "url": "https://dwuconsulting.com/airport-finance/articles/rate-covenant-compliance",
-      "sha256": "",
+      "sha256": "eccb18b92bf461ac6834bcbeec053a9121aa6f534c7fcdd4aacbc2754bd50cab",
       "tier": "D",
-      "vault_filename": ""
+      "vault_filename": "dwu-ratecov.html",
+      "capture_kind": "snapshot"
     },
     "acaa-financials": {
       "title": "ACAA Reports & Financials page, annual financial reports 2015-2025 (each carrying Table IV, Rates and Cost Per Enplaned Passenger)",
@@ -229,9 +250,10 @@
     "faa-cy2024": {
       "title": "FAA CY2024 commercial service enplanements",
       "url": "https://www.faa.gov/airports/planning_capacity/passenger_allcargo_stats/passenger/arp-cy2024-commercial-service-enplanements.pdf",
-      "sha256": "",
+      "sha256": "458273de65b91eb0e7c26cc372616f812320b2dad163909edefd89c13cdff251",
       "tier": "A",
-      "vault_filename": ""
+      "vault_filename": "faa-cy2024.pdf",
+      "capture_kind": "file"
     },
     "flykc-open": {
       "title": "Kansas City Aviation Department, new 40-gate terminal opening",
@@ -239,6 +261,110 @@
       "sha256": "",
       "tier": "B",
       "vault_filename": ""
+    },
+    "acfr-2025": {
+      "title": "ACAA annual comprehensive financial report, 2025",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/Allegheny-County-Airport-Authority-2025-ACFR.pdf",
+      "sha256": "9932b0119590384abb170f3f88b53a8cdbc4bdf1ece207f7765647418273e0e8",
+      "tier": "A",
+      "vault_filename": "acfr-2025.pdf",
+      "capture_kind": "file"
+    },
+    "acfr-2024": {
+      "title": "ACAA annual comprehensive financial report, 2024",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/Allegheny_County_Airport_Authority-2024_ACFR.pdf",
+      "sha256": "89eee05fa77406e0016e38c6b2022050a9809fd18b25ffadd4b9359ca6443c59",
+      "tier": "A",
+      "vault_filename": "acfr-2024.pdf",
+      "capture_kind": "file"
+    },
+    "acfr-2023": {
+      "title": "ACAA annual comprehensive financial report, 2023",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/ACAA_-_Audited_ACFR_-_12-31-2023.pdf",
+      "sha256": "1ccb595f1f02ca0e607bad945351fb5d4b1f6b070d51ec8000acc919b3ab0d8d",
+      "tier": "A",
+      "vault_filename": "acfr-2023.pdf",
+      "capture_kind": "file"
+    },
+    "acfr-2022": {
+      "title": "ACAA annual comprehensive financial report, 2022",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/ACAA_-_Audited_ACFR_-_12-31-2022.pdf",
+      "sha256": "e4e7ee8f43c6742957ae04f80fed292244bc740e2f3f50151efb7393721d2951",
+      "tier": "A",
+      "vault_filename": "acfr-2022.pdf",
+      "capture_kind": "file"
+    },
+    "acfr-2021": {
+      "title": "ACAA annual comprehensive financial report, 2021",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/ACAA_-_Audited_ACFR_-_12-31-2021.pdf",
+      "sha256": "a86edabb0e004abd603716bdec64209bf1eecb699d0b0ed8164fd11898d421a0",
+      "tier": "A",
+      "vault_filename": "acfr-2021.pdf",
+      "capture_kind": "file"
+    },
+    "acfr-2020": {
+      "title": "ACAA annual comprehensive financial report, 2020",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/ACAA_ACFR_12-31-2020.pdf",
+      "sha256": "99477050a2d24d4e50784fe77fc4057a6b0f73d951f47300bc461e2ea33402dc",
+      "tier": "A",
+      "vault_filename": "acfr-2020.pdf",
+      "capture_kind": "file"
+    },
+    "acfr-2019": {
+      "title": "ACAA annual comprehensive financial report, 2019",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/ACAA_ACFR_12-31-2019.pdf",
+      "sha256": "4438575eed275f757eeff0750c34a396c948294a9a0170bd862c4a20907a6ca7",
+      "tier": "A",
+      "vault_filename": "acfr-2019.pdf",
+      "capture_kind": "file"
+    },
+    "cafr-2018": {
+      "title": "ACAA comprehensive annual financial report, 2018",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/ACAA_2018_CAFR_FINAL-1.pdf",
+      "sha256": "52f54105acbfe5f7e55bba55ddb6b891d7a0b9e4f5d5487d9d090c23defc4e72",
+      "tier": "A",
+      "vault_filename": "cafr-2018.pdf",
+      "capture_kind": "file"
+    },
+    "cafr-2017": {
+      "title": "ACAA comprehensive annual financial report, 2017",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/ACAA-2017-CAFR.pdf",
+      "sha256": "70926dd045ffcf10bdeea8636471ee3cc27efae66309c9a9f3841a86a46b40f0",
+      "tier": "A",
+      "vault_filename": "cafr-2017.pdf",
+      "capture_kind": "file"
+    },
+    "cafr-2016": {
+      "title": "ACAA comprehensive annual financial report, 2016",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/2016-Allegheny-County-Airport-Authoriity-CAFR.pdf",
+      "sha256": "c2b27098f96d781e531548519f7add361d3f6a92953edc69cbe37e85e9bcaf95",
+      "tier": "A",
+      "vault_filename": "cafr-2016.pdf",
+      "capture_kind": "file"
+    },
+    "cafr-2015": {
+      "title": "ACAA comprehensive annual financial report, 2015",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/annual-comprehensive-financial-reports/2015-allegheny-county-airport-authority-cafr.pdf",
+      "sha256": "f8e060f79fd12a26280aa2f348971760c001ec83c9eedd69f1d4cf821846de01",
+      "tier": "A",
+      "vault_filename": "cafr-2015.pdf",
+      "capture_kind": "file"
+    },
+    "eis-summary": {
+      "title": "Economic impact study, summary",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/economic-impact/ACA_6x9_EconomicStudy_r9_Summary.pdf",
+      "sha256": "77a7f4b94ff2a37b02aa510075f5344ffac4b03b8e2ecf9ef8ac7a466f135ffe",
+      "tier": "A",
+      "vault_filename": "eis-summary.pdf",
+      "capture_kind": "file"
+    },
+    "eis-full": {
+      "title": "Economic impact study, full report",
+      "url": "https://flypittsburgh.com/wp-content/themes/Divi-ACAA/reports-financials/economic-impact/Economic-Impact-Study-Core-Report_Final.pdf",
+      "sha256": "b33c45b320d648f25da64d697182cd4b0fb48f1c9b540832768bf1841d664fee",
+      "tier": "A",
+      "vault_filename": "eis-full.pdf",
+      "capture_kind": "file"
     }
   }
 }

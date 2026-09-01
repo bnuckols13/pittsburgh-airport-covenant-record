@@ -6,6 +6,13 @@ Downloads every source in 01-sources-archive/sources.json to
 hash does not match is deleted rather than kept, because a source that does not
 hash is not the source the claims were checked against.
 
+That rule applies to sources recorded as capture_kind "file", which are immutable
+documents. A source recorded as "snapshot" is a live web page: its bytes change
+between fetches, so its digest records what was read rather than something a reader
+can reproduce, and a difference here is reported without failing the run. A source
+recorded as "citation" stands in for a paywalled article and is checked the same way
+as a file.
+
     python 03-harness/fetch_sources.py
     python 03-harness/fetch_sources.py --only os-2025ab
 """
@@ -32,12 +39,13 @@ def main():
 
     doc = json.load(open(MAN, encoding="utf-8"))
     os.makedirs(RAW, exist_ok=True)
-    ok = bad = skip = 0
+    ok = bad = skip = drift = 0
 
     for sid, s in sorted(doc["sources"].items()):
         if a.only and sid != a.only:
             continue
         url, want, name = s.get("url"), s.get("sha256"), s.get("vault_filename")
+        kind = s.get("capture_kind", "file")
         if not (url and want and name):
             print(f"SKIP    {sid}: no url or no hash recorded")
             skip += 1
@@ -64,12 +72,20 @@ def main():
         if got == want:
             print(f"  OK    {got[:16]}...")
             ok += 1
+        elif kind == "snapshot":
+            print(f"  CHANGED since capture. recorded {want[:16]}... now {got[:16]}...")
+            print(f"          A live page, so this is expected. The recorded digest is what "
+                  f"this reporting read.")
+            drift += 1
         else:
             os.remove(dest)
             print(f"  HASH MISMATCH. expected {want[:16]}... got {got[:16]}... file discarded")
             bad += 1
 
-    print(f"\n{ok} verified, {bad} failed, {skip} skipped")
+    print(f"\n{ok} verified, {bad} failed, {drift} live pages changed since capture, "
+          f"{skip} skipped")
+    if drift:
+        print("A changed snapshot is not a failure. It is why the capture was made.")
     return 1 if bad else 0
 
 

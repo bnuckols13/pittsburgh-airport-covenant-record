@@ -88,7 +88,7 @@ def plate_promise():
     share = sum((x["desig"] + x["acct"]) / x["promise"] for x in recs) / len(recs)
     return HATCH + ch.svg(f, "What meets the promise in each forecast year, in millions of "
                           "dollars. The solid block is what the airport earns; the two hatched "
-                          "blocks are money the Authority chooses to add. The rule across each "
+                          "blocks are the designated gaming money and the Coverage Account deposit. The rule across each "
                           "bar is 1.25 times the debt payment.", "".join(out)), recs, share
 
 
@@ -244,7 +244,8 @@ def plate_spans():
                   "committed under them end in 2028.", "".join(out)), r
 
 
-HATCH = ('<svg width="0" height="0" style="position:absolute"><defs>'
+HATCH = ('<svg width="0" height="0" style="position:absolute" aria-hidden="true"'
+         ' focusable="false"><defs>'
          '<pattern id="h1" width="6" height="6" patternUnits="userSpaceOnUse" '
          'patternTransform="rotate(45)"><rect width="6" height="6" fill="var(--blue-lt)" '
          'fill-opacity=".3"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--blue)" '

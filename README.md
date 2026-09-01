@@ -8,36 +8,55 @@ Open [`index.html`](index.html) first.
 
 ## The finding
 
-Airlines are charged **$16.10** for every passenger they board at Pittsburgh,
-more than at sixteen larger hubs. The Authority's consultant forecasts **$20.53
-by 2030**.
+For four years nobody was paying for the new building. The Authority's audited
+annual reports carry a ten-year series of what it costs an airline to board a
+passenger at Pittsburgh, and the debt service line inside that calculation reads
+**zero for 2021, 2022, 2023 and 2024**, because interest on the terminal bonds was
+capitalized through early 2025. The audited charge fell with it, to **$7.34 in
+2024**, its lowest in a decade. The first payment landed in 2025, and the
+Authority's own consultant forecasts the charge climbing every year to **$20.53 by
+2030**.
 
-The terminal's bonds carry a covenant: earnings of at least 1.25 times the annual
-debt payment. The Official Statements print one combined ratio, and every forecast
-year clears it. The printed figure combines two things. Separated, the airport's
-**pledged Net Revenues alone come in under 1.25 in eleven of fourteen forecast
-years**, and the difference is made up by a Coverage Account the Authority funds at
-its own discretion, up to a ceiling of 25 percent of debt service. The forecast
-assumes that ceiling is reached in twelve of those fourteen years.
+The bonds carry a covenant: hold at least 1.25 times the annual debt payment. The
+Official Statement prints one combined ratio and every forecast year clears it.
+Separated into what it is made of, the April 2025 forecast comes apart in three
+layers:
+
+| | 2025 | 2026 | 2027 | 2028 | 2029 | 2030 |
+|---|---|---|---|---|---|---|
+| Operating revenue, after expenses | 1.20 | **0.98** | **1.00** | **0.99** | 1.06 | 1.06 |
+| Plus designated slot-machine money | 1.35 | 1.12 | 1.13 | 1.12 | 1.18 | 1.19 |
+| Plus the Coverage Account (printed) | 1.60 | 1.37 | 1.36 | 1.37 | 1.43 | 1.44 |
+| The promise | 1.25 | 1.25 | 1.25 | 1.25 | 1.25 | 1.25 |
+
+**In 2026 and 2028 the airport's own operations do not cover its debt service at
+all**, $83.0m against $84.7m and $90.2m against $90.8m. Every dollar of the promised
+25 percent cushion, in all six years, is designated slot-machine tax money plus a
+deposit the Authority elects to make. Footnote 1 on that table reads "Includes Other
+Pledged Revenues," which is what makes the subtraction arithmetic rather than
+inference.
 
 **The covenant is not breached and no payment is missed in any forecast year.** The
 indenture lets the Coverage Account count toward the test. The finding is what the
-ratio is on pledged Net Revenues alone, in those words.
+ratio is on pledged Net Revenues alone, in those words. The decomposition is ours;
+the document prints only the combined column.
 
 Two discretionary levers, not one. Keep them separate:
 
 - **The Coverage Account** is funded from the airport's own Revenues, monthly, "at the
   discretion of the Authority," ninth in the flow of funds, capped at 25 percent of
-  debt service. It is what closes the gap in the printed ratio.
+  debt service. The forecast assumes exactly that ceiling in five of the six years.
 - **Other Pledged Revenues** are something else: "moneys, not constituting Revenues,
   that are designated, for any period" into the pledge. They are counted *inside* the
   Net Revenues figure, not beside it.
 
 The second finding is what has actually been designated. On the Authority's own
 Exhibit E, the money designated from 2020 through 2023 was **federal pandemic aid in
-full**, and nothing at all was designated in 2024. **No gas royalty and no gaming
-revenue has been designated into the pledge in any year since 2019.** The forecast has
-both resume from 2025, and from 2025 they are the entire designation.
+full**, and nothing at all was designated in 2024. **Gas royalty is designated at zero
+in every year from 2020 through 2030 and does not return.** Gaming money resumes in
+2025, and from 2025 it is the entire designation, at $11,575,000 a year through 2030.
+The airlines committed that money for 2026 through 2028. The forecast carries it to
+2030 and the bonds run to 2056.
 
 ## How to check my work
 
@@ -70,13 +89,16 @@ than writing around it. This package is a working record.
 
 ```
 index.html              front door
-site/                   the article
+report/                 six modules, each with the plate that carries it
+documents/              every source, graded and searchable, with what each proves
+factcheck/              the two machine gates, the conflicts register, the held claims
+appendix-dataviz/       the plates
 covenant/               the printed ratio decomposed
-fact-check/             interactive claim ledger, filterable
+model/                  the slider model on the Authority's own forecast rows
 01-sources-archive/     sources.json + MANIFEST.md (34 documents, hashes only)
 02-data/                coverage tables, revenue itemization, cost series, benchmarks
-03-harness/             fetch_sources / verify_claims / check
-v2/                     the draft, the fact check, the conflicts record
+03-harness/             fetch_sources / verify_claims / build_tools / check
+v2/                     the conflicts record
 ```
 
 The vault PDFs are not committed. One is 47 MB, and a reader who rebuilds them from
@@ -87,4 +109,4 @@ Data is CC BY 4.0, code is MIT. Figures attributed to the Authority are its own,
 archived and hashed, not independently audited here. Media clips are Tier C: an
 utterance, never a figure.
 
-Built 2026-08-31.
+Built 2026-09-01.

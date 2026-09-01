@@ -1,0 +1,297 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>What was checked, what conflicts, and what is not printed</title><style>
+:root{--plane:#fbfaf7;--surface:#fff;--surface2:#f4f2ec;--ink:#1a1a1a;--ink2:#4a4a4a;
+--muted:#6b6b6b;--grid:#e6e2d8;--axis:#b9b3a5;--ring:#d9d4c8;--blue:#1c5cab;
+--blue-lt:#7ba7de;--aqua:#2b8a8a;--yellow:#b8860b;--orange:#c2570f;--red:#a8321e;}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--plane:#0f130f;
+--surface:#181a17;--surface2:#1f221e;--ink:#f4f2e9;--ink2:#c3c2b7;--muted:#9a988d;
+--grid:#26302a;--axis:#4a544c;--ring:#26302a;--blue:#5598e7;--blue-lt:#2f4f74;
+--aqua:#5fc0bd;--yellow:#d8ad4a;--orange:#e8843f;--red:#ff9b86;}}
+:root[data-theme=dark]{--plane:#0f130f;--surface:#181a17;--surface2:#1f221e;--ink:#f4f2e9;
+--ink2:#c3c2b7;--muted:#9a988d;--grid:#26302a;--axis:#4a544c;--ring:#26302a;--blue:#5598e7;
+--blue-lt:#2f4f74;--aqua:#5fc0bd;--yellow:#d8ad4a;--orange:#e8843f;--red:#ff9b86;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);
+font-family:Georgia,"Palatino Linotype",serif;line-height:1.68}
+.wrap{max-width:50rem;margin:0 auto;padding:2.6rem 1.3rem 5rem}
+.sans{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+h1{font-size:1.95rem;line-height:1.18;margin:0 0 .5rem;letter-spacing:-.01em}
+h2{font-size:1.28rem;margin:2.4rem 0 .7rem;line-height:1.3}
+h3{font-family:system-ui,sans-serif;font-size:1rem;margin:1.6rem 0 .4rem}
+.kicker{font-family:system-ui,sans-serif;font-size:.74rem;letter-spacing:.1em;
+text-transform:uppercase;color:var(--blue);margin:0 0 .5rem}
+.sub{color:var(--ink2);margin:0 0 1.8rem;font-size:1.03rem}
+blockquote{margin:1.1rem 0;padding:.7rem 0 .7rem 1.1rem;border-left:3px solid var(--blue);
+color:var(--ink2);font-size:.97rem}
+blockquote .cite{display:block;font-family:system-ui,sans-serif;font-size:.76rem;
+color:var(--muted);margin-top:.45rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.pot{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:1.1rem 1.2rem}
+.pot h3{margin-top:0;color:var(--blue)}
+.pot dl{margin:0;font-size:.88rem}
+.pot dt{font-family:system-ui,sans-serif;font-size:.7rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--muted);margin-top:.7rem}
+.pot dd{margin:.1rem 0 0}
+table{border-collapse:collapse;width:100%;font-family:system-ui,sans-serif;font-size:.85rem;
+margin:1rem 0}
+th,td{text-align:left;padding:.42rem .6rem;border-bottom:1px solid var(--ring)}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+code{font-family:"Cascadia Code",Consolas,monospace;background:var(--surface2);
+padding:.1rem .35rem;border-radius:4px;font-size:.86em}
+.disc{font-family:system-ui,sans-serif;font-size:.84rem;color:var(--ink);
+background:color-mix(in srgb,var(--yellow) 12%,transparent);border-left:3px solid var(--yellow);
+border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:1.3rem 0}
+.note{background:color-mix(in srgb,var(--blue) 8%,transparent);border-left:3px solid var(--blue);
+border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:1.3rem 0;font-size:.94rem}
+.src{font-size:.78rem;color:var(--muted);border-top:1px solid var(--ring);padding-top:.7rem;
+margin-top:2.4rem;font-family:system-ui,sans-serif}
+.toggle{position:fixed;top:.8rem;right:.8rem;font:inherit;font-size:.8rem;padding:.3rem .7rem;
+border-radius:99px;border:1px solid var(--ring);background:var(--surface);color:var(--ink);
+cursor:pointer;z-index:9}
+a{color:var(--blue)}
+svg{width:100%;height:auto;overflow:visible;display:block;margin:.6rem 0}
+text{font-family:system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.ax{font-size:10.5px;fill:var(--muted)}
+.lab{font-size:12.5px;fill:var(--ink);font-weight:600}
+.lab2{font-size:11.5px;fill:var(--ink2)}
+.val{font-size:11.5px;fill:var(--ink);font-weight:600}
+/* model */
+.rig{background:var(--surface);border:1px solid var(--ring);border-radius:12px;
+padding:1.2rem 1.3rem;margin:1.4rem 0}
+.lev{margin:0 0 1.1rem}
+.lev label{display:flex;justify-content:space-between;font-family:system-ui,sans-serif;
+font-size:.86rem;margin-bottom:.25rem}
+.lev label b{font-variant-numeric:tabular-nums;color:var(--blue)}
+.lev input[type=range]{width:100%;accent-color:var(--blue)}
+.lev .why{font-family:system-ui,sans-serif;font-size:.74rem;color:var(--muted);margin-top:.2rem}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;
+margin:1.2rem 0 .4rem}
+.out div{background:var(--surface2);border-radius:10px;padding:.8rem .9rem}
+.out b{display:block;font-family:system-ui,sans-serif;font-size:1.5rem;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.out span{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--muted)}
+.presets{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 1rem}
+.presets button{font:inherit;font-family:system-ui,sans-serif;font-size:.78rem;
+padding:.3rem .7rem;border-radius:99px;border:1px solid var(--ring);background:var(--surface);
+color:var(--ink);cursor:pointer}
+.presets button:hover{border-color:var(--blue);color:var(--blue)}
+.work{font-family:"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--ink2);
+background:var(--surface2);border-radius:8px;padding:.8rem .9rem;margin-top:.9rem;
+white-space:pre-wrap;line-height:1.55}
+@media print{.toggle,.presets{display:none}}
+
+.tool{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.bar{position:sticky;top:0;z-index:5;background:var(--plane);border-bottom:1px solid var(--ring);
+padding:.8rem 0 .7rem;margin-bottom:1.2rem}
+.bar input[type=search]{width:100%;padding:.6rem .8rem;font:inherit;font-family:system-ui,sans-serif;
+font-size:.94rem;border:1px solid var(--ring);border-radius:9px;background:var(--surface);
+color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem;align-items:center}
+.prow{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.7rem;align-items:center}
+.plab{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;
+text-transform:uppercase;color:var(--muted);margin-right:.3rem}
+.flab{font-family:system-ui,sans-serif;font-size:.72rem;color:var(--muted);
+margin:0 .1rem 0 .5rem}
+.chip.big{font-size:.84rem;padding:.36rem .8rem;font-weight:500;color:var(--ink)}
+.chip.big[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+details.more{margin-top:.55rem}
+details.more summary{font-family:system-ui,sans-serif;font-size:.76rem;color:var(--ink2);
+cursor:pointer;list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"+ ";color:var(--muted)}
+details.more[open] summary::before{content:"2 "}
+.countrow{display:flex;align-items:center;gap:.7rem;margin-top:.55rem}
+button.clear{font-family:system-ui,sans-serif;font-size:.74rem;padding:.16rem .55rem;
+border-radius:99px;border:1px solid var(--ring);background:var(--surface);color:var(--ink2);
+cursor:pointer}
+button.clear:hover{border-color:var(--blue);color:var(--blue)}
+.chip{font-family:system-ui,sans-serif;font-size:.76rem;padding:.24rem .62rem;border-radius:99px;
+border:1px solid var(--ring);background:var(--surface);color:var(--ink2);cursor:pointer;
+user-select:none}
+.chip[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+.count{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted);margin-top:.55rem}
+.doc{border-top:1px solid var(--ring);padding:1.05rem 0}
+.doc:last-child{border-bottom:1px solid var(--ring)}
+.doc h3{font-family:system-ui,sans-serif;font-size:1.01rem;margin:0 0 .3rem;line-height:1.34}
+.doc .meta{font-family:system-ui,sans-serif;font-size:.76rem;color:var(--muted);
+margin:0 0 .5rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.tier{display:inline-block;font-weight:600;border-radius:4px;padding:.05rem .38rem;
+border:1px solid currentColor;font-size:.72rem}
+.tA{color:var(--blue)}.tB{color:var(--aqua)}.tC{color:var(--yellow)}.tD{color:var(--orange)}
+.doc p{margin:0 0 .5rem;font-size:.96rem;line-height:1.6}
+.doc .cites{font-family:system-ui,sans-serif;font-size:.79rem;color:var(--ink2)}
+.hash{font-family:"Cascadia Code",Consolas,monospace;font-size:.72rem;color:var(--muted);
+word-break:break-all;margin-top:.4rem}
+.hash button{font:inherit;font-size:.7rem;font-family:system-ui,sans-serif;margin-left:.4rem;
+border:1px solid var(--ring);background:var(--surface);color:var(--ink2);border-radius:5px;
+padding:.06rem .38rem;cursor:pointer}
+.nohash{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--orange)}
+.gate{display:flex;gap:1rem;flex-wrap:wrap;margin:1.3rem 0 0}
+.gate div{flex:1 1 13rem;border:1px solid var(--ring);border-radius:11px;padding:.9rem 1rem;
+background:var(--surface)}
+.gate b{display:block;font-family:system-ui,sans-serif;font-size:.74rem;letter-spacing:.08em;
+text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
+.gate .v{font-family:system-ui,sans-serif;font-size:1.5rem;font-weight:600;color:var(--blue)}
+.gate p{font-family:system-ui,sans-serif;font-size:.82rem;color:var(--ink2);margin:.35rem 0 0;
+line-height:1.5}
+table.reg{width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:.84rem;
+margin:1rem 0;table-layout:fixed}
+table.reg th{text-align:left;border-bottom:1px solid var(--ink2);padding:.45rem .5rem;
+font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+table.reg td{border-bottom:1px solid var(--ring);padding:.55rem .5rem;vertical-align:top;
+line-height:1.5;overflow-wrap:break-word}
+/* Only the figure resists breaking. The locator beneath it must wrap, or a long
+   page reference forces the whole row wider than the page. */
+table.reg td.fig{font-variant-numeric:tabular-nums}
+table.reg td.fig .n{white-space:nowrap;font-weight:600}
+table.reg .loc{display:block;color:var(--muted);font-size:.75rem;line-height:1.4;margin-top:.15rem}
+table.conflicts col.c-subj{width:26%}
+table.conflicts col.c-year{width:8%}
+table.conflicts col.c-fig{width:24%}
+table.conflicts col.c-disp{width:12%}
+table.held col.h-claim{width:34%}
+table.held col.h-stat{width:12%}
+.scroll{overflow-x:auto}
+@media(min-width:60rem){.wrap{max-width:64rem}}
+.st{display:inline-block;font-size:.7rem;font-family:system-ui,sans-serif;border-radius:4px;
+padding:.05rem .4rem;border:1px solid currentColor;font-weight:600}
+.s-held{color:var(--yellow)}.s-withdrawn{color:var(--orange)}.s-never{color:var(--red)}
+.s-attributed{color:var(--aqua)}.s-disclosed{color:var(--blue)}
+.s-unresolved{color:var(--orange)}.s-not{color:var(--red)}
+.note{background:var(--surface2);border-left:3px solid var(--blue);border-radius:0 9px 9px 0;
+padding:.85rem 1.05rem;margin:1.4rem 0;font-family:system-ui,sans-serif;font-size:.87rem;
+line-height:1.56}
+.note b{display:block;margin-bottom:.2rem}
+.back{font-family:system-ui,sans-serif;font-size:.82rem;margin:0 0 1.4rem}
+.empty{font-family:system-ui,sans-serif;color:var(--muted);padding:1.6rem 0;font-size:.9rem}
+/* ---- the records library ---- */
+section.topic{margin:0 0 2.2rem}
+h2.grp{font-family:system-ui,sans-serif;font-size:1.16rem;letter-spacing:-.01em;
+margin:2.6rem 0 .25rem;padding-top:1.2rem;border-top:2px solid var(--ink);
+display:flex;flex-wrap:wrap;align-items:baseline;gap:.7rem}
+h2.grp .gn{font-size:.72rem;font-weight:400;color:var(--muted);letter-spacing:.06em;
+text-transform:uppercase;margin-left:auto}
+.grpnote{font-family:system-ui,sans-serif;font-size:.85rem;color:var(--ink2);
+margin:0 0 1.1rem;line-height:1.55;max-width:44rem}
+.rec{display:grid;grid-template-columns:4.4rem 1fr;gap:1rem;padding:1.15rem 0;
+border-top:1px solid var(--ring)}
+.rec .yr{font-family:system-ui,sans-serif;font-size:1.1rem;font-weight:600;color:var(--ink2);
+font-variant-numeric:tabular-nums;line-height:1.2}
+.rec .yr .tier{display:block;margin-top:.3rem;font-size:.68rem;width:1.35rem;text-align:center}
+.rec h3{font-family:system-ui,sans-serif;font-size:1.04rem;margin:0 0 .15rem;line-height:1.32}
+.rec .pub{font-family:system-ui,sans-serif;font-size:.73rem;letter-spacing:.06em;
+text-transform:uppercase;color:var(--muted);margin:0 0 .5rem}
+.rec .what{font-size:.94rem;line-height:1.6;margin:0 0 .8rem;color:var(--ink2);max-width:46rem}
+.keys{border-left:2px solid var(--ring);padding:.1rem 0 .1rem .85rem;margin:0 0 .9rem;
+max-width:44rem}
+.keys .kh{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.07em;
+text-transform:uppercase;color:var(--muted);margin:0 0 .45rem}
+.keys ul{list-style:none;margin:0;padding:0}
+.keys li{display:flex;gap:.6rem;align-items:baseline;padding:.2rem 0;
+font-family:system-ui,sans-serif;font-size:.83rem;line-height:1.45;color:var(--ink2)}
+a.pg,span.pg{font-family:system-ui,sans-serif;font-size:.74rem;text-decoration:none;
+padding:.12rem .48rem;border-radius:99px;border:1px solid var(--ring);color:var(--blue);
+background:var(--surface);font-variant-numeric:tabular-nums;white-space:nowrap;flex:none}
+a.pg:hover{border-color:var(--blue);background:var(--blue);color:#fff}
+span.pg.off{color:var(--muted)}
+.act{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:baseline}
+a.open{font-family:system-ui,sans-serif;font-size:.85rem;font-weight:600;text-decoration:none;
+color:#fff;background:var(--blue);padding:.42rem .85rem;border-radius:8px;white-space:nowrap}
+a.open:hover{filter:brightness(1.12)}
+details.ver{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--muted)}
+details.ver summary{cursor:pointer;color:var(--ink2);list-style:none}
+details.ver summary::-webkit-details-marker{display:none}
+details.ver summary::before{content:"✓ ";color:var(--aqua)}
+details.ver.cite summary::before{content:"◦ ";color:var(--yellow)}
+details.ver.snap summary::before{content:"◷ ";color:var(--aqua)}
+details.ver p{margin:.5rem 0 .4rem;max-width:34rem;line-height:1.5}
+details.ver code{font-family:"Cascadia Code",Consolas,monospace;font-size:.7rem;
+word-break:break-all;color:var(--muted)}
+details.ver button{font:inherit;font-size:.7rem;font-family:system-ui,sans-serif;
+margin-left:.4rem;border:1px solid var(--ring);background:var(--surface);color:var(--ink2);
+border-radius:5px;padding:.06rem .38rem;cursor:pointer}
+.rec:target{background:var(--surface2);box-shadow:0 0 0 .7rem var(--surface2);
+border-radius:4px;scroll-margin-top:8.5rem}
+.rec:target h3::after{content:" ← cited here";font-family:system-ui,sans-serif;
+font-size:.72rem;font-weight:400;color:var(--blue);letter-spacing:.04em}
+@media(max-width:34rem){.rec{grid-template-columns:1fr}
+.rec .yr{display:flex;gap:.5rem;align-items:center}
+.rec .yr .tier{display:inline-block;margin:0}
+h2.grp .gn{margin-left:0}}
+</style></head><body><button class="toggle">&#9686; theme</button><div class="wrap"><p class="back"><a href="../index.html">&larr; the record</a></p><p class="kicker">Fact check</p><h1>The fact check</h1><p class="sub">Two machine gates over the documents, a register of the places the Authority's own filings disagree with each other, and the claims this reporting does not make. Each is a property of the documents rather than of a draft.</p><div class="gate"><div><b>Hash gate</b><span class="v">12/12</span><p>Every captured document still hashes to the SHA-256 recorded for it. A document that was re-downloaded and changed would fail here rather than quietly reshaping a claim.</p></div><div><b>Anchor gate</b><span class="v">66/66</span><p>Every anchor, the literal run of text a claim rests on, is present on the page cited. Each page is extracted twice, in layout and raw modes, because financial tables survive one mode or the other. Checking a single mode produced fourteen false misses.</p></div></div><div class="note"><b>Claim-level checking of the published piece is not here yet</b>The last claim ledger checked a draft the audited record has since superseded. The ledger is rebuilt against the piece as published, by a checker who did not write it. The two gates above and the two registers below do not depend on which draft is current.</div><h2>Where the Authority's documents disagree with themselves</h2><p>Where a document contradicts itself, the contradiction is published and no figure is selected. Several of these weaken the reporting rather than support it. On the 2020 pair, either page gives a pandemic-year charge higher than the fiscal 2025 charge, which rules out any claim that the current figure is the highest the airport has billed.</p><div class="bar tool"><input id="q" type="search" placeholder="Search the conflicts and the held claims" aria-label="Search the conflicts and the held claims"><div class="prow"><span class="plab">Filter by disposition</span><button class="chip big" aria-pressed="false" data-group="res" data-value="disclosed">disclosed</button><button class="chip big" aria-pressed="false" data-group="res" data-value="attributed">attributed</button><button class="chip big" aria-pressed="false" data-group="res" data-value="unresolved">unresolved</button><button class="chip big" aria-pressed="false" data-group="res" data-value="not reproduced">locator failed</button><button class="chip big" aria-pressed="false" data-group="res" data-value="held">held</button><button class="chip big" aria-pressed="false" data-group="res" data-value="withdrawn">withdrawn</button><button class="chip big" aria-pressed="false" data-group="res" data-value="never">never written</button></div><details class="more"><summary>More filters</summary><div class="chips"></div></details><div class="countrow"><span class="count" id="count"></span><button class="clear" id="clear" hidden>Clear filters</button></div></div><div class="scroll"><table class="reg conflicts"><colgroup><col class="c-subj"><col class="c-year"><col class="c-fig"><col class="c-fig"><col class="c-disp"></colgroup><thead><tr><th>Subject</th><th>Year</th><th>One page says</th><th>Another says</th><th>Disposition</th></tr></thead><tbody><tr data-hay="cost per enplaned passenger 2023 $11.34 $11.50 pdf 62 (printed 52), airline costs per enplaned passenger 2020-2024 pdf 170 (printed 53), rate-base table two figures for one year in one statement. neither is chosen. os-2025ab" data-res="disclosed"><td><b>Cost per enplaned passenger</b><span class="loc">Two figures for one year in one statement. Neither is chosen.</span></td><td class="fig"><span class="n">2023</span></td><td class="fig"><span class="n">$11.34</span><span class="loc">PDF 62 (printed 52), airline costs per enplaned passenger 2020-2024</span></td><td class="fig"><span class="n">$11.50</span><span class="loc">PDF 170 (printed 53), rate-base table</span></td><td><span class="st s-disclosed">disclosed</span></td></tr><tr data-hay="cost per enplaned passenger 2020 $20.57 $20.50 pdf 62 (printed 52) pdf 170 (printed 53) on either page the 2020 figure is higher than $16.10, which disposes of any claim that the fiscal 2025 charge is the highest in the airport&#x27;s history. os-2025ab" data-res="disclosed"><td><b>Cost per enplaned passenger</b><span class="loc">On either page the 2020 figure is higher than $16.10, which disposes of any claim that the fiscal 2025 charge is the highest in the airport&#x27;s history.</span></td><td class="fig"><span class="n">2020</span></td><td class="fig"><span class="n">$20.57</span><span class="loc">PDF 62 (printed 52)</span></td><td class="fig"><span class="n">$20.50</span><span class="loc">PDF 170 (printed 53)</span></td><td><span class="st s-disclosed">disclosed</span></td></tr><tr data-hay="cost per enplaned passenger 2021 $12.35 $12.33 os-2025ab pdf 62 (printed 52) acaa 2021 annual report and 2024 report table iv both are the authority&#x27;s own. the gap is two cents and it is still two published figures for one year. os-2025ab / acfr-2024" data-res="disclosed"><td><b>Cost per enplaned passenger</b><span class="loc">Both are the Authority&#x27;s own. The gap is two cents and it is still two published figures for one year.</span></td><td class="fig"><span class="n">2021</span></td><td class="fig"><span class="n">$12.35</span><span class="loc">os-2025ab PDF 62 (printed 52)</span></td><td class="fig"><span class="n">$12.33</span><span class="loc">ACAA 2021 annual report and 2024 report Table IV</span></td><td><span class="st s-disclosed">disclosed</span></td></tr><tr data-hay="cost per enplaned passenger 2024 $7.34 $11.56 acfr-2024 table iv, audited os-2025ab pdf 62, management discussion the difference is close to the $21,775,159 of airline capital fund deposits the 2024 report carries. three series go by this name and a fourth measure exists in the federal filing. they are never subtracted across. acfr-2024 / os-2025ab" data-res="disclosed"><td><b>Cost per enplaned passenger</b><span class="loc">The difference is close to the $21,775,159 of airline capital fund deposits the 2024 report carries. Three series go by this name and a fourth measure exists in the federal filing. They are never subtracted across.</span></td><td class="fig"><span class="n">2024</span></td><td class="fig"><span class="n">$7.34</span><span class="loc">acfr-2024 Table IV, audited</span></td><td class="fig"><span class="n">$11.56</span><span class="loc">os-2025ab PDF 62, management discussion</span></td><td><span class="st s-disclosed">disclosed</span></td></tr><tr data-hay="other pledged revenues 2023 $3,029k $4,040k pdf 61 (printed 51), management discussion pdf 316, exhibit e a third rendering at pdf 170 gives $3,029,132 and agrees with the lower figure. the data file carries both as separate rows and chooses neither. os-2025ab" data-res="disclosed"><td><b>Other Pledged Revenues</b><span class="loc">A third rendering at PDF 170 gives $3,029,132 and agrees with the lower figure. The data file carries both as separate rows and chooses neither.</span></td><td class="fig"><span class="n">2023</span></td><td class="fig"><span class="n">$3,029k</span><span class="loc">PDF 61 (printed 51), management discussion</span></td><td class="fig"><span class="n">$4,040k</span><span class="loc">PDF 316, Exhibit E</span></td><td><span class="st s-disclosed">disclosed</span></td></tr><tr data-hay="other pledged revenues 2021 $19,146k $18,183,300 pdf 316, exhibit e pdf 170, rate base the lower figure is exactly the cares/crrsa/arpa line for the airport alone, without the two smaller components. os-2025ab" data-res="disclosed"><td><b>Other Pledged Revenues</b><span class="loc">The lower figure is exactly the CARES/CRRSA/ARPA line for the airport alone, without the two smaller components.</span></td><td class="fig"><span class="n">2021</span></td><td class="fig"><span class="n">$19,146k</span><span class="loc">PDF 316, Exhibit E</span></td><td class="fig"><span class="n">$18,183,300</span><span class="loc">PDF 170, rate base</span></td><td><span class="st s-disclosed">disclosed</span></td></tr><tr data-hay="total enplaned passengers 2024 4,964,361 4,970,599 table iv table v two counts in the same audited document, 6,238 apart. acfr-2024" data-res="disclosed"><td><b>Total enplaned passengers</b><span class="loc">Two counts in the same audited document, 6,238 apart.</span></td><td class="fig"><span class="n">2024</span></td><td class="fig"><span class="n">4,964,361</span><span class="loc">Table IV</span></td><td class="fig"><span class="n">4,970,599</span><span class="loc">Table V</span></td><td><span class="st s-disclosed">disclosed</span></td></tr><tr data-hay="signatory airline count 2025 eleven ten pdf 70 and pdf 195 as recorded aug. 30 pdf 121 as recorded aug. 30 searching all three pages on aug. 31 found the phrase and no count beside it. the locators are wrong. this conflict is not carried into print until they are corrected. os-2025ab" data-res="not reproduced"><td><b>Signatory airline count</b><span class="loc">Searching all three pages on Aug. 31 found the phrase and no count beside it. The locators are wrong. This conflict is not carried into print until they are corrected.</span></td><td class="fig"><span class="n">2025</span></td><td class="fig"><span class="n">eleven</span><span class="loc">PDF 70 and PDF 195 as recorded Aug. 30</span></td><td class="fig"><span class="n">ten</span><span class="loc">PDF 121 as recorded Aug. 30</span></td><td><span class="st s-not">not reproduced</span></td></tr><tr data-hay="parking revenue 2020-2024 narrative figure statements figure pdf 54 pdf 57 two figures for every year, disagreeing by eleven to seventeen percent. neither is published until the scope of each is known. os-2025ab" data-res="unresolved"><td><b>Parking revenue</b><span class="loc">Two figures for every year, disagreeing by eleven to seventeen percent. Neither is published until the scope of each is known.</span></td><td class="fig"><span class="n">2020-2024</span></td><td class="fig"><span class="n">narrative figure</span><span class="loc">PDF 54</span></td><td class="fig"><span class="n">statements figure</span><span class="loc">PDF 57</span></td><td><span class="st s-unresolved">unresolved</span></td></tr><tr data-hay="cost per enplaned passenger 2026 $19.13 $17.64 os-2025ab pdf 202 (printed b-16), filed with investors april 2025 told to the post-gazette, january 2026 a budget adopted later can legitimately differ from a forecast made earlier. the number given to the lenders is the higher one. this is a question for the authority. os-2025ab / ppg-202512220055" data-res="attributed"><td><b>Cost per enplaned passenger</b><span class="loc">A budget adopted later can legitimately differ from a forecast made earlier. The number given to the lenders is the higher one. This is a question for the Authority.</span></td><td class="fig"><span class="n">2026</span></td><td class="fig"><span class="n">$19.13</span><span class="loc">os-2025ab PDF 202 (printed B-16), filed with investors April 2025</span></td><td class="fig"><span class="n">$17.64</span><span class="loc">told to the Post-Gazette, January 2026</span></td><td><span class="st s-attributed">attributed</span></td></tr></tbody></table></div><h2>Claims this reporting does not make</h2><p>Several appeared in earlier drafts and were removed. <b>Withdrawn</b> means the documents stopped supporting the claim. <b>Held</b> means no primary source establishes it yet. <b>Attributed</b> means the figure belongs to a named party and is identified as theirs at every appearance. <b>Never</b> means the record does not support it and the reporting does not state it.</p><div class="scroll"><table class="reg held"><colgroup><col class="h-claim"><col class="h-stat"><col></colgroup><thead><tr><th>The claim</th><th>Status</th><th>Why</th></tr></thead><tbody><tr data-hay="pittsburgh&#x27;s charge is fifth highest of 32 medium hub airports, higher than sixteen large hubs. eleven of the sixteen carry no dollar value in this case and the rank rests on a compiler dashboard graded c. the dashboard&#x27;s actuals are federal filings and its projections are named bond-statement pages, so every peer row is verifiable, and until each is checked against its own primary the rank is not printed. held dwu-cpe" data-res="held"><td><b>Pittsburgh&#x27;s charge is fifth highest of 32 medium hub airports, higher than sixteen large hubs.</b></td><td><span class="st s-held">held</span></td><td>Eleven of the sixteen carry no dollar value in this case and the rank rests on a compiler dashboard graded C. The dashboard&#x27;s actuals are federal filings and its projections are named bond-statement pages, so every peer row is verifiable, and until each is checked against its own primary the rank is not printed.</td></tr><tr data-hay="the new terminal&#x27;s design capacity. the only figure available for it contradicts the post-gazette of sept. 12, 2017. neither is printed until a primary settles it. held ppg-201709120131" data-res="held"><td><b>The new terminal&#x27;s design capacity.</b></td><td><span class="st s-held">held</span></td><td>The only figure available for it contradicts the Post-Gazette of Sept. 12, 2017. Neither is printed until a primary settles it.</td></tr><tr data-hay="six of eight forecast years in the 2021 statement fall below the covenant on pledged revenue alone. that total adds two scenarios covering the same four calendar years, which is a reporter sum across cases inside one vintage. what the table supports is two of four in the base case and four of four in the slow-recovery case, and that is what is published. withdrawn os-2021ab" data-res="withdrawn"><td><b>Six of eight forecast years in the 2021 statement fall below the covenant on pledged revenue alone.</b></td><td><span class="st s-withdrawn">withdrawn</span></td><td>That total adds two scenarios covering the same four calendar years, which is a reporter sum across cases inside one vintage. What the table supports is two of four in the base case and four of four in the slow-recovery case, and that is what is published.</td></tr><tr data-hay="designated revenue fell 84 percent. exhibit e at pdf 316 itemises the line by component and shows the fall is a change of composition rather than a decline: gas and gaming stopped being designated after 2019, federal pandemic relief stood in through 2023, nothing was designated in 2024, and gaming resumes at $8,170k in 2025. withdrawn os-2025ab" data-res="withdrawn"><td><b>Designated revenue fell 84 percent.</b></td><td><span class="st s-withdrawn">withdrawn</span></td><td>Exhibit E at PDF 316 itemises the line by component and shows the fall is a change of composition rather than a decline: gas and gaming stopped being designated after 2019, federal pandemic relief stood in through 2023, nothing was designated in 2024, and gaming resumes at $8,170k in 2025.</td></tr><tr data-hay="the charge to airlines rose across the construction years. the authority&#x27;s own audited series shows it fell, to $7.34 in 2024. the claim was replaced by the finding that no debt service entered the rate base at all for four years because interest was capitalized, which the same documents support and which is harder to answer. withdrawn acfr-2024" data-res="withdrawn"><td><b>The charge to airlines rose across the construction years.</b></td><td><span class="st s-withdrawn">withdrawn</span></td><td>The Authority&#x27;s own audited series shows it fell, to $7.34 in 2024. The claim was replaced by the finding that no debt service entered the rate base at all for four years because interest was capitalized, which the same documents support and which is harder to answer.</td></tr><tr data-hay="eleven signatory airlines at two pages against ten at a third. searching all three pages found the phrase and no count beside it. the locators are wrong and the conflict is not carried into print until they are corrected. this is the one item in the aug. 30 repair list that did not survive a re-check. held os-2025ab" data-res="held"><td><b>Eleven signatory airlines at two pages against ten at a third.</b></td><td><span class="st s-held">held</span></td><td>Searching all three pages found the phrase and no count beside it. The locators are wrong and the conflict is not carried into print until they are corrected. This is the one item in the Aug. 30 repair list that did not survive a re-check.</td></tr><tr data-hay="1.25 is the ordinary coverage standard in the airport bond market. the piece leans on this being unremarkable and has no primary for it. a rating methodology or a bond-market reference would settle it. a dashboard will not. held dwu-ratecov" data-res="held"><td><b>1.25 is the ordinary coverage standard in the airport bond market.</b></td><td><span class="st s-held">held</span></td><td>The piece leans on this being unremarkable and has no primary for it. A rating methodology or a bond-market reference would settle it. A dashboard will not.</td></tr><tr data-hay="59 percent of 57 airport bond documents carry a soft covenant review. the only source is a compiler that describes itself as an ai product. named empty cell. held dwu-ratecov" data-res="held"><td><b>59 percent of 57 airport bond documents carry a soft covenant review.</b></td><td><span class="st s-held">held</span></td><td>The only source is a compiler that describes itself as an AI product. Named empty cell.</td></tr><tr data-hay="the authority&#x27;s cost per enplanement for 2026 is $17.64. there is no 2026 budget page in the vault, so this stays a lead and is attributed every time it appears. the authority filed $19.13 for the same year with investors in april 2025. a budget adopted later can legitimately differ from a forecast made earlier. this is a question for the authority, not a finding. attributed ppg-202512220055" data-res="attributed"><td><b>The Authority&#x27;s cost per enplanement for 2026 is $17.64.</b></td><td><span class="st s-attributed">attributed</span></td><td>There is no 2026 budget page in the vault, so this stays a lead and is attributed every time it appears. The Authority filed $19.13 for the same year with investors in April 2025. A budget adopted later can legitimately differ from a forecast made earlier. This is a question for the Authority, not a finding.</td></tr><tr data-hay="parking revenue by year. the 2025 statement prints two different figures for every year, the narrative at pdf 54 against the statements at pdf 57, disagreeing by eleven to seventeen percent in each. neither is publishable until the scope of each is known. held os-2025ab" data-res="held"><td><b>Parking revenue by year.</b></td><td><span class="st s-held">held</span></td><td>The 2025 statement prints two different figures for every year, the narrative at PDF 54 against the statements at PDF 57, disagreeing by eleven to seventeen percent in each. Neither is publishable until the scope of each is known.</td></tr><tr data-hay="$832.7 million of construction cost. available as a clip figure from the post-gazette and attributed as one. media is tier c in this case: a clip may be an utterance and never a figure. attributed ppg-202512220055" data-res="attributed"><td><b>$832.7 million of construction cost.</b></td><td><span class="st s-attributed">attributed</span></td><td>Available as a clip figure from the Post-Gazette and attributed as one. Media is tier C in this case: a clip may be an utterance and never a figure.</td></tr><tr data-hay="the authority&#x27;s current chief financial officer. the 2021 statement names a cfo who is still listed at the authority on linkedin, and the authority&#x27;s own leadership page names no cfo at all. no current cfo is printed until a primary confirms one. held os-2025ab" data-res="held"><td><b>The Authority&#x27;s current chief financial officer.</b></td><td><span class="st s-held">held</span></td><td>The 2021 statement names a CFO who is still listed at the Authority on LinkedIn, and the Authority&#x27;s own leadership page names no CFO at all. No current CFO is printed until a primary confirms one.</td></tr><tr data-hay="the authority will default, breach or violate its covenant. none of it is true and none of it is written. the indenture lets the coverage account count toward the 1.25 test, and on that test the forecasts comply. the published finding is what the ratio is on pledged net revenues alone, in those words, and the rule governs headings and image descriptions as well as sentences. never os-2025ab" data-res="never"><td><b>The Authority will default, breach or violate its covenant.</b></td><td><span class="st s-never">never</span></td><td>None of it is true and none of it is written. The indenture lets the Coverage Account count toward the 1.25 test, and on that test the forecasts comply. The published finding is what the ratio is on pledged Net Revenues alone, in those words, and the rule governs headings and image descriptions as well as sentences.</td></tr><tr data-hay="taxpayers are liable for the debt. not assumed and not asserted. the actual chain of financial responsibility is established from the indenture rather than presumed, and where it has not been established the piece says so. never os-2025ab" data-res="never"><td><b>Taxpayers are liable for the debt.</b></td><td><span class="st s-never">never</span></td><td>Not assumed and not asserted. The actual chain of financial responsibility is established from the indenture rather than presumed, and where it has not been established the piece says so.</td></tr></tbody></table></div><p class="empty" id="empty" hidden>Nothing matches that.</p><div class="note"><b>What the reporting has not done</b>Nobody has been interviewed. Right of reply has not been sought from the Authority or from any named individual. No records request has been answered. Every person quoted is quoted from published reporting by others and is labelled as such.</div><p class="count">Built 2026-09-01. Generated from <code>02-data/conflicts.csv</code> and <code>02-data/held-claims.csv</code>. Gate results from <code>03-harness/verify_claims.py</code>.</p></div><script>document.querySelector('.toggle').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')};</script><script>
+(function(){
+  var q=document.getElementById('q'),
+      items=[].slice.call(document.querySelectorAll('[data-hay]')),
+      chips=[].slice.call(document.querySelectorAll('.chip[data-group]')),
+      secs=[].slice.call(document.querySelectorAll('section.topic')),
+      out=document.getElementById('count'),
+      empty=document.getElementById('empty'),
+      clear=document.getElementById('clear');
+  var on={};
+
+  function apply(){
+    var t=(q?q.value:'').toLowerCase().trim(), n=0, active=!!t;
+    for(var k in on){ if(on[k]&&on[k].length){active=true;} }
+
+    items.forEach(function(el){
+      var ok=!t||el.dataset.hay.indexOf(t)>-1;
+      if(ok){
+        for(var g in on){
+          if(on[g]&&on[g].length&&on[g].indexOf(el.dataset[g])<0){ok=false;break;}
+        }
+      }
+      el.hidden=!ok; if(ok)n++;
+    });
+
+    // A section whose records are all filtered out must go too. Leaving five
+    // headings on screen, each still announcing its original count, is why the
+    // filter looked broken: the records changed and the page did not.
+    secs.forEach(function(sec){
+      var recs=[].slice.call(sec.querySelectorAll('[data-hay]')),
+          vis=recs.filter(function(r){return !r.hidden;}).length,
+          badge=sec.querySelector('.gn');
+      sec.hidden = vis===0;
+      if(badge){
+        badge.textContent = (active && vis!==recs.length)
+          ? vis+' of '+recs.length+' records'
+          : recs.length+' records';
+      }
+    });
+
+    if(out){
+      out.textContent = active
+        ? 'Showing '+n+' of '+items.length+' records'
+        : items.length+' records, grouped by question';
+    }
+    if(clear) clear.hidden = !active;
+    if(empty) empty.hidden = n>0;
+  }
+
+  chips.forEach(function(c){
+    c.onclick=function(){
+      var g=c.dataset.group, v=c.dataset.value, p=c.getAttribute('aria-pressed')==='true';
+      c.setAttribute('aria-pressed',p?'false':'true');
+      on[g]=on[g]||[];
+      if(p){on[g]=on[g].filter(function(x){return x!==v});}else{on[g].push(v);}
+      apply();
+      // Land the reader on the first surviving section rather than leaving them
+      // looking at a filter bar with the result somewhere below the fold.
+      var first=secs.filter(function(x){return !x.hidden;})[0];
+      if(first && !p){ first.scrollIntoView({block:'start', behavior:'smooth'}); }
+    };
+  });
+
+  if(clear){
+    clear.onclick=function(){
+      chips.forEach(function(c){c.setAttribute('aria-pressed','false');});
+      on={}; if(q)q.value='';
+      apply();
+      window.scrollTo({top:0, behavior:'smooth'});
+    };
+  }
+  if(q)q.addEventListener('input',apply);
+  apply();
+})();
+</script></body></html>
