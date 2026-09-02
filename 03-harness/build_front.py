@@ -106,6 +106,27 @@ table.layers tr.promise td{color:var(--muted)}
 table.layers caption{caption-side:bottom;text-align:left;font-family:system-ui,sans-serif;
 font-size:.76rem;color:var(--muted);padding-top:.6rem;line-height:1.5}
 .scroll{overflow-x:auto}
+.costbox{border:1px solid var(--rule);border-radius:12px;background:var(--surface);
+padding:1.1rem 1.25rem;margin:1.5rem 0}
+.costbox h3{font-family:system-ui,sans-serif;font-size:1rem;margin:0 0 .5rem}
+.costbox p{font-family:system-ui,sans-serif;font-size:.87rem;color:var(--ink2);
+line-height:1.55;margin:0 0 .8rem;max-width:none}
+table.cost{width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;
+font-size:.83rem;font-variant-numeric:tabular-nums;margin:.2rem 0 .6rem}
+table.cost th{text-align:right;padding:.35rem .5rem;border-bottom:1px solid var(--ink2);
+font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+font-weight:600}
+table.cost th:first-child{text-align:left}
+table.cost td{text-align:right;padding:.4rem .5rem;border-bottom:1px solid var(--rule);
+color:var(--ink2)}
+table.cost td:first-child{text-align:left}
+table.cost tr.hi td{color:var(--accent);font-weight:600}
+.csrc{font-size:.76rem!important;color:var(--muted)!important}
+ul.costnotes{font-family:system-ui,sans-serif;font-size:.86rem;line-height:1.55;
+margin:.6rem 0 0;padding-left:1.15rem;color:var(--ink2)}
+ul.costnotes li{margin:.5rem 0}
+ul.costnotes b{color:var(--ink)}
+
 blockquote{margin:1.2rem 0;padding:1rem 1.25rem;background:var(--surface);
 border-left:3px solid var(--accent);border-radius:0 9px 9px 0;font-size:1rem;
 line-height:1.6;color:var(--ink)}
@@ -566,6 +587,55 @@ def build():
              '<a class="card" href="appendix-dataviz/index.html"><h3>The figures</h3>'
              '<p>Eight plates and two held cards. Every coordinate recomputes from a CSV naming '
              'its document, page and hash.</p></a></div>')
+
+    # ---- what the charge is forecast to do, year by year --------------------
+    fc = {r["year"]: r for r in rows("coverage-table.csv") if r["vintage"] == "2025"}
+    dsr = {r["year"]: r for r in rows("debt-service-arrives.csv")
+           if r["series"].startswith("aggregate")}
+    yrs = sorted(fc)
+    first, last = fc[yrs[0]], fc[yrs[-1]]
+    rise = (num(last["cpe"]) / num(first["cpe"]) - 1) * 100
+
+    hdr = "".join(f"<th>{y}</th>" for y in yrs)
+    row_cpe = "".join(f'<td>${num(fc[y]["cpe"]):.2f}</td>' for y in yrs)
+    row_ds = "".join(f'<td>${num(dsr[y]["amount"])/1e6:.1f}m</td>' for y in yrs)
+    row_en = "".join(f'<td>{num(fc[y]["enplanements_k"]):,.0f}k</td>' for y in yrs)
+
+    b.append('<div class="costbox">')
+    b.append("<h3>What the charge is forecast to do</h3>")
+    b.append('<p>The consultant&#8217;s April 2025 forecast, on one basis, beside the debt '
+             'service driving it. Boardings rise in every year of it, so the charge is not '
+             'rising because fewer people are flying.</p>')
+    b.append('<div class="scroll"><table class="cost"><thead><tr><th>Year</th>' + hdr +
+             "</tr></thead><tbody>"
+             '<tr class="hi"><td>Charge per boarded passenger</td>' + row_cpe + "</tr>"
+             '<tr><td>Aggregate annual debt service</td>' + row_ds + "</tr>"
+             '<tr><td>Forecast boardings</td>' + row_en + "</tr>"
+             "</tbody></table></div>")
+    b.append(f'<p class="csrc">Source: {src("os-2025ab", 202, "os-2025ab PDF 202 (printed B-16)")}. '
+             f'The charge reproduces in every year as airline payments divided by boardings, '
+             f'which is the check that the table is being read correctly.</p>')
+
+    b.append("<ul class=\"costnotes\">"
+             f"<li><b>A rise of {rise:.0f} percent across the forecast</b>, from "
+             f"${num(first['cpe']):.2f} in {yrs[0]} to ${num(last['cpe']):.2f} in {yrs[-1]}, on "
+             f"the consultant&#8217;s own basis. Debt service climbs from "
+             f"${num(dsr[yrs[0]]['amount'])/1e6:.1f}m to a plateau near "
+             f"${num(dsr[yrs[2]]['amount'])/1e6:.1f}m and stays there.</li>"
+             "<li><b>The Authority has published two figures for 2026 and they do not match.</b> "
+             "It filed $19.13 with investors in April 2025 and told the Post-Gazette $17.64 in "
+             "January 2026. A budget adopted later can legitimately differ from a forecast made "
+             "earlier. The higher number is the one that went to the lenders.</li>"
+             "<li><b>The forecast stops in 2030. The bonds run to 2056.</b> What the charge does "
+             "across the twenty-six years after the last forecast year has not been published by "
+             "anyone, and the agreements that make the carriers responsible for it expire in "
+             "2028.</li>"
+             "<li><b>Whether any of this reaches a passenger is contested.</b> The carriers say "
+             "it does not. No study in the record tests Pittsburgh, and no passenger, taxpayer or "
+             "airport-dependent business has been interviewed for this reporting.</li>"
+             "</ul>")
+    b.append("</div>")
+
     b.append("</section>")
 
     # ---------------------------------------------------------------- tools
