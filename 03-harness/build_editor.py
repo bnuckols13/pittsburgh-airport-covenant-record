@@ -79,7 +79,8 @@ def build():
 <p class="kicker">For the editor</p>
 <h1>Where this stands</h1>
 <p class="sub">A records-based investigation into how Pittsburgh International's $1.7 billion
-terminal was financed, and who carries the risk if the revenue behind it does not hold. Reported
+terminal was financed, and what it means for the people who use the airport if the revenue
+behind it does not hold. Reported
 by Lena Rose Williams for Newsworks Lab and the Tribune-Review. This page is generated from the
 case files, so it cannot drift from them.</p>
 

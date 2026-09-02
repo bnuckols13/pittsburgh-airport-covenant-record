@@ -337,8 +337,8 @@ def build():
     b.append("<h1>The PIT Terminal Financing Record</h1>")
     b.append('<p class="deck">Three findings from the Allegheny County Airport Authority\'s own '
              'bond documents and audited annual reports, on how Pittsburgh International\'s '
-             '$1.7 billion landside terminal was financed and who carries the risk if the '
-             'revenue assumptions behind it do not hold.</p>')
+             '$1.7 billion landside terminal was financed, and what it means for the people '
+             'who use the airport if the revenue assumptions behind it do not hold.</p>')
 
     # ---------------------------------------------------------------- method
     b.append(
