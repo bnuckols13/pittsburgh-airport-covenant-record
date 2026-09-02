@@ -569,26 +569,6 @@ def build():
     b.append("</section>")
 
     # ---------------------------------------------------------------- tools
-    # Open questions rather than a count of what is missing. The tally version of
-    # this reads as a scoreboard against the work; the questions read as the work.
-    b.append('<h2 class="sec">What this reporting has not established</h2>')
-    b.append('<div class="open"><h3>Open questions</h3><ol>'
-             '<li><b>Whether the designation continues past 2028.</b> A further '
-             'majority-in-interest vote could extend it, and the money has arrived in every year '
-             'from 2020 through 2024. Nothing in the record says either way.</li>'
-             '<li><b>What happened to the $12.4 million during Pennsylvania&#8217;s 2025 budget '
-             'impasse.</b> The gaming money is a state appropriation, so its history is a matter '
-             'of record, and that record is not yet in this file.</li>'
-             '<li><b>Whether a rising airline charge reaches a passenger.</b> The carriers say it '
-             'does not. The published research measures adjacent questions and none of it tests '
-             'Pittsburgh.</li>'
-             '<li><b>What the Authority says about any of it.</b> Right of reply has not been '
-             'sought, and no figure here reflects its answer.</li>'
-             '<li><b>What the master plan&#8217;s alternatives analysis contains.</b> Federal '
-             'rules require one. It has never been published, and it is what the claim that '
-             'renovation would have cost more was measured against.</li>'
-             '</ol></div>')
-
     b.append('<h2 class="sec">The evidence, and how to read it</h2>')
     b.append('<p>The two aggregation tools hold the material the findings are drawn from. Neither '
              'requires taking this publication\'s word for anything.</p>')
