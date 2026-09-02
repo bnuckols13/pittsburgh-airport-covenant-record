@@ -589,7 +589,7 @@ def build():
              '<a class="card" href="01-sources-archive/MANIFEST.md"><h3>Source manifest</h3>'
              '<p>Every document with its SHA-256, and a script that rebuilds the vault from the '
              'public record and rejects any file whose hash does not match.</p></a>'
-             '<a class="card" href="02-data/"><h3>The data</h3>'
+             '<a class="card" href="02-data/index.html"><h3>The data</h3>'
              '<p>The coverage decomposition, the revenue itemisation, the audited cost series and '
              'the forecast tables, as CSVs.</p></a>'
              '</div>')

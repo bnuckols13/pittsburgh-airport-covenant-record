@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Every table behind the findings</title><style>
+:root{--plane:#fbfaf7;--surface:#fff;--surface2:#f4f2ec;--ink:#1a1a1a;--ink2:#4a4a4a;
+--muted:#6b6b6b;--grid:#e6e2d8;--axis:#b9b3a5;--ring:#d9d4c8;--blue:#1c5cab;
+--blue-lt:#7ba7de;--aqua:#2b8a8a;--yellow:#b8860b;--orange:#c2570f;--red:#a8321e;}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--plane:#0f130f;
+--surface:#181a17;--surface2:#1f221e;--ink:#f4f2e9;--ink2:#c3c2b7;--muted:#9a988d;
+--grid:#26302a;--axis:#4a544c;--ring:#26302a;--blue:#5598e7;--blue-lt:#2f4f74;
+--aqua:#5fc0bd;--yellow:#d8ad4a;--orange:#e8843f;--red:#ff9b86;}}
+:root[data-theme=dark]{--plane:#0f130f;--surface:#181a17;--surface2:#1f221e;--ink:#f4f2e9;
+--ink2:#c3c2b7;--muted:#9a988d;--grid:#26302a;--axis:#4a544c;--ring:#26302a;--blue:#5598e7;
+--blue-lt:#2f4f74;--aqua:#5fc0bd;--yellow:#d8ad4a;--orange:#e8843f;--red:#ff9b86;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);
+font-family:Georgia,"Palatino Linotype",serif;line-height:1.68}
+.wrap{max-width:50rem;margin:0 auto;padding:2.6rem 1.3rem 5rem}
+.sans{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+h1{font-size:1.95rem;line-height:1.18;margin:0 0 .5rem;letter-spacing:-.01em}
+h2{font-size:1.28rem;margin:2.4rem 0 .7rem;line-height:1.3}
+h3{font-family:system-ui,sans-serif;font-size:1rem;margin:1.6rem 0 .4rem}
+.kicker{font-family:system-ui,sans-serif;font-size:.74rem;letter-spacing:.1em;
+text-transform:uppercase;color:var(--blue);margin:0 0 .5rem}
+.sub{color:var(--ink2);margin:0 0 1.8rem;font-size:1.03rem}
+blockquote{margin:1.1rem 0;padding:.7rem 0 .7rem 1.1rem;border-left:3px solid var(--blue);
+color:var(--ink2);font-size:.97rem}
+blockquote .cite{display:block;font-family:system-ui,sans-serif;font-size:.76rem;
+color:var(--muted);margin-top:.45rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.4rem 0}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.pot{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:1.1rem 1.2rem}
+.pot h3{margin-top:0;color:var(--blue)}
+.pot dl{margin:0;font-size:.88rem}
+.pot dt{font-family:system-ui,sans-serif;font-size:.7rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--muted);margin-top:.7rem}
+.pot dd{margin:.1rem 0 0}
+table{border-collapse:collapse;width:100%;font-family:system-ui,sans-serif;font-size:.85rem;
+margin:1rem 0}
+th,td{text-align:left;padding:.42rem .6rem;border-bottom:1px solid var(--ring)}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+code{font-family:"Cascadia Code",Consolas,monospace;background:var(--surface2);
+padding:.1rem .35rem;border-radius:4px;font-size:.86em}
+.disc{font-family:system-ui,sans-serif;font-size:.84rem;color:var(--ink);
+background:color-mix(in srgb,var(--yellow) 12%,transparent);border-left:3px solid var(--yellow);
+border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:1.3rem 0}
+.note{background:color-mix(in srgb,var(--blue) 8%,transparent);border-left:3px solid var(--blue);
+border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:1.3rem 0;font-size:.94rem}
+.src{font-size:.78rem;color:var(--muted);border-top:1px solid var(--ring);padding-top:.7rem;
+margin-top:2.4rem;font-family:system-ui,sans-serif}
+.toggle{position:fixed;top:.8rem;right:.8rem;font:inherit;font-size:.8rem;padding:.3rem .7rem;
+border-radius:99px;border:1px solid var(--ring);background:var(--surface);color:var(--ink);
+cursor:pointer;z-index:9}
+a{color:var(--blue)}
+svg{width:100%;height:auto;overflow:visible;display:block;margin:.6rem 0}
+text{font-family:system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.ax{font-size:10.5px;fill:var(--muted)}
+.lab{font-size:12.5px;fill:var(--ink);font-weight:600}
+.lab2{font-size:11.5px;fill:var(--ink2)}
+.val{font-size:11.5px;fill:var(--ink);font-weight:600}
+/* model */
+.rig{background:var(--surface);border:1px solid var(--ring);border-radius:12px;
+padding:1.2rem 1.3rem;margin:1.4rem 0}
+.lev{margin:0 0 1.1rem}
+.lev label{display:flex;justify-content:space-between;font-family:system-ui,sans-serif;
+font-size:.86rem;margin-bottom:.25rem}
+.lev label b{font-variant-numeric:tabular-nums;color:var(--blue)}
+.lev input[type=range]{width:100%;accent-color:var(--blue)}
+.lev .why{font-family:system-ui,sans-serif;font-size:.74rem;color:var(--muted);margin-top:.2rem}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;
+margin:1.2rem 0 .4rem}
+.out div{background:var(--surface2);border-radius:10px;padding:.8rem .9rem}
+.out b{display:block;font-family:system-ui,sans-serif;font-size:1.5rem;letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.out span{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--muted)}
+.presets{display:flex;flex-wrap:wrap;gap:.4rem;margin:.2rem 0 1rem}
+.presets button{font:inherit;font-family:system-ui,sans-serif;font-size:.78rem;
+padding:.3rem .7rem;border-radius:99px;border:1px solid var(--ring);background:var(--surface);
+color:var(--ink);cursor:pointer}
+.presets button:hover{border-color:var(--blue);color:var(--blue)}
+.work{font-family:"Cascadia Code",Consolas,monospace;font-size:.78rem;color:var(--ink2);
+background:var(--surface2);border-radius:8px;padding:.8rem .9rem;margin-top:.9rem;
+white-space:pre-wrap;line-height:1.55}
+@media print{.toggle,.presets{display:none}}
+
+.back{font-family:system-ui,sans-serif;font-size:.82rem;margin:0 0 1.4rem}
+h2.grp{font-family:system-ui,sans-serif;font-size:1.02rem;margin:2.3rem 0 .5rem;
+padding-top:1.1rem;border-top:2px solid var(--ink)}
+table{width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:.86rem;
+margin:.6rem 0}
+th{text-align:left;border-bottom:1px solid var(--ink2);padding:.45rem .55rem;font-size:.72rem;
+letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td{border-bottom:1px solid var(--ring);padding:.6rem .55rem;vertical-align:top;line-height:1.5}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td a{text-decoration:none}
+td a:hover{text-decoration:underline}
+.fn{display:block;font-family:"Cascadia Code",Consolas,monospace;font-size:.72rem;
+color:var(--muted);margin-top:.15rem}
+.cols{display:block;font-size:.71rem;color:var(--muted);margin-top:.25rem;line-height:1.4}
+.note{background:var(--surface2);border-left:3px solid var(--blue);border-radius:0 9px 9px 0;
+padding:.85rem 1.05rem;margin:1.6rem 0;font-family:system-ui,sans-serif;font-size:.87rem;
+line-height:1.56}
+.note b{display:block;margin-bottom:.2rem}
+.count{font-family:system-ui,sans-serif;font-size:.8rem;color:var(--muted)}
+.scroll{overflow-x:auto}
+@media(min-width:60rem){.wrap{max-width:62rem}}
+</style></head><body><button class="toggle">&#9686; theme</button><div class="wrap"><p class="back"><a href="../index.html">&larr; the record</a></p><p class="kicker">The data</p><h1>Every table behind the findings</h1><p class="sub">29 files, 482 rows. Every figure published on this site is computed from one of these at build time, and each table names the document, the page and the checksum its numbers came from. Download any of them.</p><h2 class="grp">The covenant, and what secures it</h2><div class="scroll"><table><thead><tr><th>Table</th><th>What it holds</th><th class="n">Rows</th></tr></thead><tbody><tr><td><a href="coverage-decomposition.csv"><b>Printed against recomputed</b></a><span class="fn">coverage-decomposition.csv</span><span class="cols">vintage, year, ads_k, net_rev_k, cov_amt_k, printed_coverage, recomputed_coverage&#8230;</span></td><td>Each printed coverage ratio beside the ratio recomputed from the document&#x27;s own rows. This is the check that the table is being read correctly.</td><td class="n">20</td></tr><tr><td><a href="coverage-table.csv"><b>The coverage forecasts</b></a><span class="fn">coverage-table.csv</span><span class="cols">vintage, source_page, scenario, year, net_revenues_incl_OPR_k, coverage_amount_k, senior_bond_debt_service_k&#8230;</span></td><td>Both vintages of the consultant&#x27;s coverage table, 2021 and 2025, kept as separate series and never summed.</td><td class="n">14</td></tr><tr><td><a href="coverage-three-layers.csv"><b>The covenant decomposed</b></a><span class="fn">coverage-three-layers.csv</span><span class="cols">year, net_revenues_k, designated_opr_k, operating_net_k, coverage_amount_k, aggregate_annual_debt_service_k, ratio_operating&#8230;</span></td><td>The consultant&#x27;s six forecast years separated into operating revenue, designated revenue and the Coverage Account. Carries the ratio at each layer and the reserve as a share of debt service.</td><td class="n">6</td></tr><tr><td><a href="flow-of-funds-edges.csv"><b>Where the money moves</b></a><span class="fn">flow-of-funds-edges.csv</span><span class="cols">from_node, to_node, kind, label, source_id, pdf_page</span></td><td>The edges between funds, used to draw the flow diagram.</td><td class="n">6</td></tr><tr><td><a href="flow-of-funds.csv"><b>The indenture&#x27;s order of payment</b></a><span class="fn">flow-of-funds.csv</span><span class="cols">node_id, label, kind, priority_order, discretion, cap_rule, source_id&#8230;</span></td><td>Each fund in priority order, whether the deposit is mandatory or discretionary, and any cap on it.</td><td class="n">15</td></tr><tr><td><a href="other-pledged-revenue-itemized.csv"><b>What the designation was made of</b></a><span class="fn">other-pledged-revenue-itemized.csv</span><span class="cols">line_item, category, 2019, 2020, 2021, 2022, 2023&#8230;</span></td><td>Exhibit E by component: federal pandemic aid, gas royalty, slot-machine tax. Shows gas at zero in every year from 2020.</td><td class="n">11</td></tr><tr><td><a href="other-pledged-revenue.csv"><b>What was designated, by year</b></a><span class="fn">other-pledged-revenue.csv</span><span class="cols">year, designated_k, source_id, source_page, tier, conflict, note</span></td><td>Other Pledged Revenues 2019 through 2030, with the 2023 conflict carried as two rows and neither chosen.</td><td class="n">13</td></tr><tr><td><a href="who-pays-opr.csv"><b>What withdrawal would cost</b></a><span class="fn">who-pays-opr.csv</span><span class="cols">year, cpe_as_forecast, opr_k, enpl_k, cpe_if_opr_withdrawn</span></td><td>The charge per boarded passenger as forecast, against the charge if the designation were withdrawn.</td><td class="n">6</td></tr></tbody></table></div><h2 class="grp">The forecasts, and what ends when</h2><div class="scroll"><table><thead><tr><th>Table</th><th>What it holds</th><th class="n">Rows</th></tr></thead><tbody><tr><td><a href="cpe-forecast-accuracy.csv"><b>Forecast against actual, cost</b></a><span class="fn">cpe-forecast-accuracy.csv</span><span class="cols">vintage, year, forecast_cpe, actual_cpe, fcst_over_actual</span></td><td>What each vintage forecast for the charge, against what the charge turned out to be.</td><td class="n">6</td></tr><tr><td><a href="enplanement-forecast-accuracy.csv"><b>Forecast against actual, passengers</b></a><span class="fn">enplanement-forecast-accuracy.csv</span><span class="cols">vintage, year, forecast_k, actual_k, fcst_over_actual, basis</span></td><td>What each vintage forecast for boardings, against the actual. Passengers beat the base case; the cost forecast is the one that missed.</td><td class="n">14</td></tr><tr><td><a href="rail.csv"><b>The dated rail</b></a><span class="fn">rail.csv</span><span class="cols">year, event, weight, source_id, source_page</span></td><td>Six dates the financing turns on, from board approval to bond maturity.</td><td class="n">6</td></tr><tr><td><a href="term-structure.csv"><b>What ends when</b></a><span class="fn">term-structure.csv</span><span class="cols">item, start_year, end_year, amount_k_per_year, amount_qualifier, source_id, source_page&#8230;</span></td><td>The airline agreements, the designation commitment, the capital deposit waiver and the bonds, with the year each begins and ends.</td><td class="n">4</td></tr></tbody></table></div><h2 class="grp">What it costs to fly here</h2><div class="scroll"><table><thead><tr><th>Table</th><th>What it holds</th><th class="n">Rows</th></tr></thead><tbody><tr><td><a href="cpe-2026-claims.csv"><b>The two 2026 figures</b></a><span class="fn">cpe-2026-claims.csv</span><span class="cols">order, label, cpe, vintage, scenario, source_id, source_page&#8230;</span></td><td>$19.13 filed with investors against $17.64 given to a newspaper, both the Authority&#x27;s.</td><td class="n">4</td></tr><tr><td><a href="cpe-audited-acfr.csv"><b>The audited charge</b></a><span class="fn">cpe-audited-acfr.csv</span><span class="cols">year, cpe_audited, rate_base_costs, enplanements, debt_service_in_rate_base, source_id, source_page&#8230;</span></td><td>Ten years of cost per enplaned passenger from the audited annual reports, with rate base costs, enplanements and the debt service component shown separately.</td><td class="n">10</td></tr><tr><td><a href="cpe-record.csv"><b>Every published charge</b></a><span class="fn">cpe-record.csv</span><span class="cols">year, cpe, series, label, source_id, source_page, credibility&#8230;</span></td><td>Each figure published as cost per enplaned passenger, with its series, its basis and its source, so that no two are subtracted across bases.</td><td class="n">22</td></tr><tr><td><a href="cpe-series.csv"><b>The charge by series</b></a><span class="fn">cpe-series.csv</span><span class="cols">series, year, cpe, kind, source</span></td><td>The same figures grouped by which of the four measures they belong to.</td><td class="n">42</td></tr><tr><td><a href="debt-service-arrives.csv"><b>When the debt service starts</b></a><span class="fn">debt-service-arrives.csv</span><span class="cols">year, series, amount, source_id, source_page, tier, note</span></td><td>Debt service inside the airline rate base through 2024, and the forecast aggregate after it. Two different measures, drawn adjacent and never joined.</td><td class="n">15</td></tr><tr><td><a href="peer-cpe-benchmark.csv"><b>The peer benchmark</b></a><span class="fn">peer-cpe-benchmark.csv</span><span class="cols">group, airport, hub, cpe, year, basis, source</span></td><td>The sixteen-airport comparison, held for the same reason.</td><td class="n">16</td></tr><tr><td><a href="peer-cpe.csv"><b>Peer airports</b></a><span class="fn">peer-cpe.csv</span><span class="cols">airport, year, cpe, series, source_id, source_page, credibility&#8230;</span></td><td>Comparable airports&#x27; charges. Held rather than published: most rows carry no dollar value in this case.</td><td class="n">9</td></tr></tbody></table></div><h2 class="grp">Passengers</h2><div class="scroll"><table><thead><tr><th>Table</th><th>What it holds</th><th class="n">Rows</th></tr></thead><tbody><tr><td><a href="airline-mix.csv"><b>Carrier share</b></a><span class="fn">airline-mix.csv</span><span class="cols">year, airline, share</span></td><td>Share of traffic by airline, by year.</td><td class="n">57</td></tr></tbody></table></div><h2 class="grp">How the terminal was decided</h2><div class="scroll"><table><thead><tr><th>Table</th><th>What it holds</th><th class="n">Rows</th></tr></thead><tbody><tr><td><a href="budget-revisions.csv"><b>What the budget became</b></a><span class="fn">budget-revisions.csv</span><span class="cols">order, year, label, amount_usd, basis, source_id, pdf_page&#8230;</span></td><td>Each published cost figure for the program and the revision that followed it.</td><td class="n">4</td></tr><tr><td><a href="plan-of-finance.csv"><b>How the terminal was paid for</b></a><span class="fn">plan-of-finance.csv</span><span class="cols">side, item, k_usd, share</span></td><td>The plan of finance by source: bonds, federal and state grants, and the rest.</td><td class="n">13</td></tr></tbody></table></div><h2 class="grp">The apparatus</h2><div class="scroll"><table><thead><tr><th>Table</th><th>What it holds</th><th class="n">Rows</th></tr></thead><tbody><tr><td><a href="claims.csv"><b>The claims</b></a><span class="fn">claims.csv</span><span class="cols">id, topic, claim, status, whose, evidence, note</span></td><td>Each statement the reporting makes, its status, and the document behind it.</td><td class="n">21</td></tr><tr><td><a href="conflicts.csv"><b>Where the filings disagree</b></a><span class="fn">conflicts.csv</span><span class="cols">id, subject, year, figure_a, locator_a, figure_b, locator_b&#8230;</span></td><td>Ten places the Authority&#x27;s own documents contradict each other, with both figures and neither chosen.</td><td class="n">10</td></tr><tr><td><a href="documents.csv"><b>The source registry</b></a><span class="fn">documents.csv</span><span class="cols">id, tier, kind, year, title, proves, cites&#8230;</span></td><td>Every record the reporting stands on: grade, what it establishes, the pages cited, the checksum and where to download it. This table drives the records library.</td><td class="n">36</td></tr><tr><td><a href="factcheck-v16-disposition.csv"><b>An earlier fact check</b></a><span class="fn">factcheck-v16-disposition.csv</span><span class="cols">claim_id, section, disposition, how_determined, evidence, claim_text</span></td><td>The disposition of each claim in the Aug. 30 draft. Kept for the trail; the draft it checked has been superseded.</td><td class="n">21</td></tr><tr><td><a href="held-claims.csv"><b>What is not published</b></a><span class="fn">held-claims.csv</span><span class="cols">id, claim, status, why, source_id, serves</span></td><td>Claims held, withdrawn, attributed or never written, each with the reason.</td><td class="n">14</td></tr><tr><td><a href="source-grades.csv"><b>How sources are graded</b></a><span class="fn">source-grades.csv</span><span class="cols">source_id, reliability, vault, publisher, basis</span></td><td>The reliability grade for each source and whether it is in the vault.</td><td class="n">12</td></tr><tr><td><a href="statements.csv"><b>What people said, and when</b></a><span class="fn">statements.csv</span><span class="cols">clip_id, published, date_source, title, speaker, statement, paragraph&#8230;</span></td><td>Statements from published reporting, with speaker, date and archive link. Graded C: a source of utterances, never of figures.</td><td class="n">55</td></tr></tbody></table></div><div class="note"><b>How to check any of it.</b> Every table names its source in a <code>source_id</code> and a page. Run <code>python 03-harness/fetch_sources.py</code> to rebuild the document vault from the public record; any file whose checksum does not match is rejected rather than kept. Then <code>python 03-harness/check.py</code> re-renders every page from these tables and fails if one has drifted.</div><p class="count">Built 2026-09-01. Row counts and column names are read from the files themselves.</p></div><script>document.querySelector('.toggle').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')};</script></body></html>
