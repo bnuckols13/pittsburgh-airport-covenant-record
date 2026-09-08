@@ -82,136 +82,190 @@ background:var(--surface2);border-radius:8px;padding:.8rem .9rem;margin-top:.9re
 white-space:pre-wrap;line-height:1.55}
 @media print{.toggle,.presets{display:none}}
 
+/* --ok, --warn, --flag and --accent-soft are referenced by this page but defined
+   in none of build_explainer.CSS's three token blocks, where they resolved to
+   nothing. Defined here rather than there because extra_css is per-page and the
+   other eight pages that share build_explainer.CSS each carry their own byte-exact
+   --check. The values are the ones build_front.py already ships, so failure reads
+   the same colour here as on the front door. */
+:root{--flag:#a8321e;--ok:#1d6b3f;--warn:#b8600b;
+--accent-soft:rgba(28,92,171,.08)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+--flag:#ff9b86;--ok:#7fd3a1;--warn:#e8973f;--accent-soft:rgba(85,152,231,.14)}}
+:root[data-theme=dark]{--flag:#ff9b86;--ok:#7fd3a1;--warn:#e8973f;
+--accent-soft:rgba(85,152,231,.14)}
+
 .wrap{max-width:64rem}
+/* The shared sheet fixes the theme button to the top right, which on this page sits
+   permanently on top of a sticky scoreboard. Moved to the bottom on the model page
+   only, where nothing is pinned. */
+.toggle{top:auto;bottom:.9rem;opacity:.85;font-size:.72rem;padding:.25rem .55rem}
+.toggle:hover{opacity:1}
 .kicker{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.14em;
 text-transform:uppercase;color:var(--blue);font-weight:600;margin:0 0 .4rem}
-h1{font-size:2.5rem;line-height:1.06;letter-spacing:-.025em;margin:0 0 .6rem}
-.sub{font-size:1.08rem;color:var(--ink2);max-width:44rem;margin:0 0 1.8rem}
+h1{font-size:2.4rem;line-height:1.06;letter-spacing:-.025em;margin:0 0 .5rem}
+.sub{font-size:1.05rem;color:var(--ink2);max-width:42rem;margin:0 0 1.1rem}
 
-/* ---- scenarios: the way in ---- */
-.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(11.5rem,1fr));gap:.6rem;
-margin:0 0 1.6rem}
-.scen button{text-align:left;font:inherit;font-family:system-ui,sans-serif;cursor:pointer;
-background:var(--surface);border:1px solid var(--ring);border-radius:11px;padding:.7rem .85rem;
-color:var(--ink);transition:border-color .12s,box-shadow .12s,transform .12s}
-.scen button:hover{border-color:var(--blue);transform:translateY(-1px)}
-.scen button strong{display:block;font-size:.87rem;line-height:1.3;margin-bottom:.15rem}
-.scen button span{display:block;font-size:.76rem;color:var(--muted);line-height:1.4}
-.scen button.on{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);
-background:var(--accent-soft)}
-.scen button.on strong{color:var(--blue)}
+/* ---- the instrument: sticky, and its parent contains the controls ---- */
+.instrument{position:sticky;top:0;z-index:3;background:var(--plane);
+padding:.5rem 0 .7rem}
 
-/* ---- the verdict ---- */
-.verdict{border-top:2px solid var(--ink);padding-top:1rem;margin:0 0 1rem}
-.verdict .big{font-family:system-ui,sans-serif;font-size:1.72rem;line-height:1.22;
-font-weight:600;letter-spacing:-.02em;margin:0 0 .35rem;max-width:38rem}
-.verdict .big em{font-style:normal;color:var(--blue)}
-.verdict .big em.warn{color:var(--red)}
-.reading{font-family:system-ui,sans-serif;font-size:.92rem;color:var(--ink2);line-height:1.55;
-margin:0;max-width:44rem}
-.reading em{font-style:normal;font-weight:600;color:var(--ink);
-font-variant-numeric:tabular-nums}
-.reading em.warn{color:var(--red)}
+/* ---- scoreboard ---- */
+.score{border-top:2px solid var(--ink);padding-top:.7rem}
+.counts{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem;font-family:system-ui,sans-serif;
+font-size:.95rem;line-height:1.35;margin:0 0 .6rem}
+.counts div{display:flex;align-items:baseline;gap:.4rem}
+/* nowrap, because "5 of 6" broke across two lines as "5 of" and "6". */
+.counts b{font-size:1.25rem;font-weight:600;letter-spacing:-.02em;white-space:nowrap;
+font-variant-numeric:tabular-nums;color:var(--ok)}
+.counts b.bad{color:var(--flag)}
+.counts span{color:var(--ink2);font-size:.83rem;max-width:22rem}
+.chips{display:flex;gap:1px;background:var(--ring);border:1px solid var(--ring);
+border-radius:9px;overflow:hidden}
+.chip{flex:1 1 0;min-width:0;background:var(--surface);padding:.4rem .3rem .45rem;
+font-family:system-ui,sans-serif;text-align:center;cursor:pointer;border:0;
+color:var(--ink);transition:background .12s}
+.chip:hover{background:var(--accent-soft)}
+.chip .yr{display:block;font-size:.7rem;color:var(--muted);letter-spacing:.03em}
+.chip .vl{display:block;font-size:1rem;font-weight:600;font-variant-numeric:tabular-nums;
+letter-spacing:-.01em;line-height:1.2;color:var(--ok)}
+.chip .st{display:block;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;
+color:var(--ok);font-weight:600}
+.chip.bad .vl,.chip.bad .st{color:var(--flag)}
+.chip.on{background:var(--accent-soft);box-shadow:inset 0 -2px 0 var(--blue)}
+.chip.on .yr{color:var(--ink);font-weight:600}
 
-/* Flex rather than grid, for the same reason as the front door's stat row: the
-   hairlines here are the container's background showing through a 1px gap, so any
-   cell the children do not fill renders as a slab of that colour instead of as
-   nothing. Flex items grow to fill the last row and leave no such cell. */
-.tiles{display:flex;flex-wrap:wrap;gap:1px;
-background:var(--ring);border:1px solid var(--ring);border-radius:11px;overflow:hidden;
-margin:1.1rem 0 0}
-.tile{flex:1 1 11rem;background:var(--surface);padding:.8rem .95rem;
-font-family:system-ui,sans-serif}
-.tile b{display:block;font-size:1.45rem;font-weight:600;letter-spacing:-.02em;
-font-variant-numeric:tabular-nums;color:var(--blue);line-height:1.15}
-.tile.warn b{color:var(--red)}
-.tile span{display:block;font-size:.77rem;color:var(--muted);margin-top:.25rem;line-height:1.4}
-
+/* ---- chart ---- */
+.chead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+gap:.5rem;margin:.8rem 0 .1rem}
+.chead .ct{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--muted);
+letter-spacing:.03em}
+.seg{display:inline-flex;border:1px solid var(--ring);border-radius:8px;overflow:hidden;
+background:var(--surface)}
+.seg button{font:inherit;font-family:system-ui,sans-serif;font-size:.78rem;
+padding:.3rem .7rem;border:0;background:transparent;color:var(--ink2);cursor:pointer;
+transition:background .12s,color .12s}
+.seg button+button{border-left:1px solid var(--ring)}
+.seg button[aria-pressed=true]{background:var(--blue);color:#fff;font-weight:600}
+/* The viewBox is measured, not fixed. A fixed 640-unit box inside a 333px phone
+   column scaled every 11.5px label down to about 6px, which the ratio view cannot
+   survive: six two-decimal numbers is the whole readout. One user unit is now one
+   CSS pixel at every width, so the stated sizes are the delivered sizes. */
+.chartwrap{margin:0}
 #chart{width:100%;height:auto;display:block;overflow:visible}
 #chart text{font-family:system-ui,sans-serif}
-/* The viewBox now sits near the rendered width, so these are close to the sizes a
-   reader actually gets. */
 #chart .ax{font-size:11.5px;fill:var(--muted)}
 #chart .val{font-size:12px;font-weight:600}
 #chart .lg{font-size:11.5px;fill:var(--ink2)}
 #chart .yrlab{font-size:12px;fill:var(--ink2)}
+#chart .yrlab.bad{fill:var(--flag);font-weight:600}
 #chart .refl{font-size:10.5px;fill:var(--muted)}
-.chartwrap{margin:1.2rem 0 .4rem}
-/* Geometry attributes on SVG are animatable in CSS, so the bars can keep their
-   identity across a state change and move to the new value instead of being
-   destroyed and rebuilt. Seeing what moved is most of the comprehension. */
-#chart rect.seg,#chart line.ref,#chart line.gap,#chart text.val{
+/* Geometry attributes on SVG are animatable in CSS, so marks keep their identity
+   across a state change and move to the new value instead of being destroyed and
+   rebuilt. Seeing what moved is most of the comprehension. */
+#chart rect.seg,#chart line.ref,#chart line.gap,#chart text.val,#chart circle.pt,
+#chart line.spine{
 transition:x .38s cubic-bezier(.4,0,.2,1),y .38s cubic-bezier(.4,0,.2,1),
 height .38s cubic-bezier(.4,0,.2,1),y1 .38s cubic-bezier(.4,0,.2,1),
-y2 .38s cubic-bezier(.4,0,.2,1),opacity .25s}
+y2 .38s cubic-bezier(.4,0,.2,1),cy .38s cubic-bezier(.4,0,.2,1),
+fill .25s,stroke .25s,opacity .25s}
 @media (prefers-reduced-motion:reduce){#chart *{transition:none!important}}
 #chart .hit{cursor:pointer;fill:transparent}
-#chart .hit:hover~.yrlab,#chart g.on .yrlab{font-weight:700;fill:var(--ink)}
 #chart g.on .focusbox{opacity:1}
 #chart .focusbox{opacity:0;fill:none;stroke:var(--blue);stroke-width:1.4;
 stroke-dasharray:3 2;transition:opacity .2s}
-
-.chargebar{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;align-items:baseline;
-margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--ring)}
-.charge{font-family:system-ui,sans-serif;display:flex;align-items:baseline;gap:.5rem}
-.charge .cl{font-size:.78rem;color:var(--muted)}
-.charge .cl b{color:var(--ink2);font-weight:600}
-.charge > b{font-size:1.32rem;font-weight:600;color:var(--blue);letter-spacing:-.02em;
+.reading{font-family:system-ui,sans-serif;font-size:.88rem;color:var(--ink2);
+line-height:1.5;margin:.45rem 0 0;max-width:46rem}
+.reading em{font-style:normal;font-weight:600;color:var(--ink);
 font-variant-numeric:tabular-nums}
-.charge .cd{font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--muted)}
-.charge .cd.up{color:var(--red)}
-.charge .cd.down{color:var(--ok)}
-.breakeven{font-family:system-ui,sans-serif;font-size:.79rem;color:var(--ink2);
-line-height:1.45;max-width:26rem}
-.breakeven b{color:var(--ink)}
-.hint{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--muted);
-margin:.2rem 0 1rem}
+.reading em.bad{color:var(--flag)}
 
-/* Two columns, and the result column is the one that stays put. Pinning the
-   controls instead would have kept the levers in view and let the chart they move
-   scroll away, which is the bug rather than the fix. */
+/* ---- layout. .instrument and .panel are siblings under .layout, which is what
+   lets the sticky instrument travel the length of the controls.
+
+   Written mobile-first with exactly one query. The previous version paired
+   min-width:64rem with max-width:64rem, and because both are inclusive both fired
+   at exactly 1024px, giving the page two nested sticky contexts at that width. One
+   query cannot overlap itself. ---- */
+.layout{display:block}
+.instrument{box-shadow:0 6px 14px -12px rgba(0,0,0,.5)}
+.counts b{font-size:1.1rem}
+.chip .vl{font-size:.92rem}
 @media(min-width:64rem){
   .layout{display:grid;grid-template-columns:minmax(0,1fr) 21.5rem;gap:1.8rem;
   align-items:start}
-  .results{position:sticky;top:1rem}
+  .instrument{top:1rem;box-shadow:none}
   .panel{margin-top:0}
   .levs{grid-template-columns:1fr;gap:1.05rem}
   .switches{grid-template-columns:1fr;gap:.55rem}
-}
-/* Stacked, the chart pins to the top of the viewport so a dragged slider still
-   shows its effect. */
-@media(max-width:64rem){
-  .chartwrap{position:sticky;top:0;z-index:3;background:var(--plane);
-  padding:.5rem 0 .6rem;box-shadow:0 6px 12px -10px rgba(0,0,0,.45)}
+  .scen{grid-template-columns:1fr;gap:.4rem}
+  .counts b{font-size:1.25rem}
+  .chip .vl{font-size:1rem}
 }
 
-/* ---- controls, visible ---- */
+/* ---- controls ---- */
 .panel{border:1px solid var(--ring);border-radius:13px;background:var(--surface);
-padding:1.1rem 1.2rem;margin:1.4rem 0 1.2rem}
+padding:1.1rem 1.2rem;margin:1.2rem 0}
 .panel h2{font-family:system-ui,sans-serif;font-size:.72rem;letter-spacing:.14em;
-text-transform:uppercase;color:var(--muted);margin:0 0 .9rem;font-weight:600}
-.switches{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:.7rem;
-margin:0 0 1.1rem}
+text-transform:uppercase;color:var(--muted);margin:1.3rem 0 .7rem;font-weight:600}
+.panel h2:first-child{margin-top:0}
+.scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.4rem;
+margin:0}
+.scen button{text-align:left;font:inherit;font-family:system-ui,sans-serif;cursor:pointer;
+background:var(--plane);border:1px solid var(--ring);border-radius:9px;
+padding:.5rem .65rem;color:var(--ink);transition:border-color .12s,background .12s}
+.scen button:hover{border-color:var(--blue)}
+.scen button strong{display:block;font-size:.84rem;font-weight:600;line-height:1.3}
+.scen button span{display:block;font-size:.73rem;color:var(--muted);line-height:1.35;
+margin-top:.1rem}
+.scen button.on{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);
+background:var(--accent-soft)}
+.scen button.on strong{color:var(--blue)}
+
+.switches{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.55rem}
 .sw{display:flex;gap:.6rem;align-items:flex-start;font-family:system-ui,sans-serif;
-font-size:.83rem;line-height:1.45;cursor:pointer;padding:.6rem .7rem;border-radius:9px;
+font-size:.83rem;line-height:1.45;cursor:pointer;padding:.55rem .7rem;border-radius:9px;
 border:1px solid var(--ring);background:var(--plane);transition:opacity .12s,border-color .12s}
 .sw input{margin-top:.18rem;accent-color:var(--blue);width:1rem;height:1rem;flex:none}
-.sw strong{display:block;font-size:.87rem;margin-bottom:.1rem}
-.sw span span{color:var(--muted);font-size:.78rem}
-.sw.off{opacity:.5;border-style:dashed}
+.sw strong{display:block;font-size:.86rem;margin-bottom:.05rem}
+.sw span span{color:var(--muted);font-size:.77rem}
+.sw.off{opacity:.55;border-style:dashed}
+.why{font-size:.75rem;color:var(--muted);line-height:1.45;margin-top:.5rem}
+.why a{color:var(--blue)}
 
-.levs{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:1rem 1.5rem}
+.levs{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1.1rem 1.5rem}
 .lev{font-family:system-ui,sans-serif}
 .lev label{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;
-font-size:.85rem;margin-bottom:.3rem}
+font-size:.85rem;margin-bottom:.25rem}
 .lev label b{font-weight:600;color:var(--blue);font-variant-numeric:tabular-nums;
 white-space:nowrap}
-.lev input[type=range]{width:100%;accent-color:var(--blue);cursor:pointer;margin:0}
-.lev .why{font-size:.75rem;color:var(--muted);line-height:1.45;margin-top:.3rem}
-.lev.inert{opacity:.45}
-.lev.inert input{cursor:not-allowed}
-.inertnote{display:none;color:var(--warn);font-weight:500}
-.lev.inert .inertnote{display:block;margin-top:.25rem}
+/* The baseline tick marks where the Authority's own value sits on the track, so a
+   reader can see at a glance how far from the document they have moved. */
+.track{position:relative;padding-bottom:.55rem}
+.track input[type=range]{width:100%;accent-color:var(--blue);cursor:pointer;margin:0;
+display:block}
+.track .tick{position:absolute;bottom:.1rem;transform:translateX(-50%);font-size:.6rem;
+color:var(--muted);letter-spacing:.04em;white-space:nowrap;pointer-events:none}
+.track .tick::before{content:"";position:absolute;left:50%;bottom:100%;width:1px;
+height:.3rem;background:var(--axis)}
+.readout{font-size:.76rem;color:var(--ink2);font-variant-numeric:tabular-nums;
+margin-top:.15rem}
+.readout b{color:var(--ink);font-weight:600}
+.charge{font-family:system-ui,sans-serif;display:flex;flex-wrap:wrap;align-items:baseline;
+gap:.15rem .5rem;margin-top:.6rem;padding-top:.55rem;border-top:1px solid var(--ring)}
+.charge .cl{font-size:.78rem;color:var(--muted)}
+.charge .cl b{color:var(--ink2);font-weight:600}
+.charge > b{font-size:1.3rem;font-weight:600;color:var(--blue);letter-spacing:-.02em;
+font-variant-numeric:tabular-nums}
+.charge .cd{font-size:.76rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.charge .cd.up{color:var(--flag)}
+.charge .cd.down{color:var(--ok)}
+
+.breakeven{font-family:system-ui,sans-serif;font-size:.79rem;color:var(--ink2);
+line-height:1.5;margin:1rem 0 0}
+.breakeven b{color:var(--ink)}
+.hint{font-family:system-ui,sans-serif;font-size:.78rem;color:var(--muted);
+margin:.2rem 0 1.2rem}
 
 .caveat{font-family:system-ui,sans-serif;font-size:.79rem;color:var(--muted);line-height:1.55;
 max-width:46rem}
@@ -228,123 +282,134 @@ th,td{padding:.4rem .5rem;border-bottom:1px solid var(--ring);text-align:left}
 th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);
 font-weight:600}
 td.num,th.num{text-align:right}
-td.under{color:var(--red)}
+td.under{color:var(--flag)}
+tr.bad td{background:color-mix(in srgb,var(--flag) 7%,transparent)}
 .nv{font-size:.68rem;color:var(--warn);margin-left:.35rem}
 .scroll{overflow-x:auto}
 .work{font-family:"Cascadia Code",Consolas,monospace;font-size:.76rem;white-space:pre-wrap;
 color:var(--ink2);line-height:1.6;background:var(--plane);border:1px solid var(--ring);
 border-radius:9px;padding:.9rem 1rem;overflow-x:auto}
 .src{font-family:system-ui,sans-serif;font-size:.76rem;color:var(--muted);margin-top:1.6rem}
-@media(max-width:40rem){h1{font-size:1.9rem}.verdict .big{font-size:1.3rem}}
+@media(max-width:40rem){h1{font-size:1.85rem}.counts{font-size:.88rem}}
+/* The old print block in build_explainer.CSS hides .presets, a selector this page
+   does not use, so the whole control panel printed. */
+@media print{
+  .panel,.hint{display:none}
+  .instrument{position:static;box-shadow:none}
+  #chart{max-height:none}
+  details.more > *:not(summary){display:block!important}
+}
 </style></head><body><button class="toggle">&#9686; theme</button><div class="wrap">
 <p class="kicker">Model</p>
-<h1>What holds the promise up</h1>
-<p class="sub">The Authority told its lenders it would hold a quarter more than it owes them every
-year. That promise is a number of dollars, and three things stack up to meet it. Only the first is
-money the airport earns by running an airport. The second is a state gaming appropriation, which
-the indenture defines as money &#8220;not constituting Revenues.&#8221; The third is operating
-money moved into a reserve, which the forecast already tops up to the contractual maximum in five
-of the six years.</p>
-
-<div class="scen">
-  <button data-p="base" class="on"><strong>As the Authority forecasts it</strong>
-    <span>Both decisions made, at the values in the statement.</span></button>
-  <button data-p="after28"><strong>After the vote runs out</strong>
-    <span>Nothing designated in 2029 and 2030, which no vote covers.</span></button>
-  <button data-p="short"><strong>Traffic ten percent short</strong>
-    <span>Watch what this moves, and what it leaves alone.</span></button>
-  <button data-p="stack"><strong>Neither decision</strong>
-    <span>The airport on its own earnings.</span></button>
-</div>
+<h1>Can the airport keep its promise?</h1>
+<p class="sub">It owes its lenders 1.25 times its debt payment every year. Switch off the two
+things it chooses to add, and see what is left.</p>
 
 <div class="layout">
-<div class="results">
-<div class="verdict">
-  <p class="big" id="verdict"></p>
-  <p class="reading" id="ifthen"></p>
-  <div class="chargebar">
-    <div class="charge"><span class="cl">Charge to airlines, <b id="cy">2026</b></span>
-      <b id="cv">&#8211;</b><span class="cd" id="cd"></span></div>
-    <div class="breakeven" id="be"></div>
+<section class="instrument" aria-label="The coverage test">
+  <div class="score">
+    <div class="counts">
+      <div><b id="k1">&#8211;</b><span id="k1l">&#8211;</span></div>
+      <div><b id="k2">&#8211;</b><span id="k2l">&#8211;</span></div>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Each forecast year against the covenant"></div>
   </div>
-</div>
 
-<div class="chartwrap"><svg id="chart" viewBox="0 0 640 300" role="img" aria-label="What meets the promise in each forecast year, in millions of dollars: what the airport earns, money designated into the pledge, and the Coverage Account, stacked against a line at 1.25 times annual debt service."></svg></div>
+  <div class="chead">
+    <span class="ct" id="ctitle">&#8211;</span>
+    <div class="seg" role="group" aria-label="Show the test in">
+      <button type="button" data-u="0" aria-pressed="true">dollars</button>
+      <button type="button" data-u="1" aria-pressed="false">ratios</button>
+    </div>
+  </div>
+  <div class="chartwrap"><svg id="chart" viewBox="0 0 640 300" role="img" aria-label=""></svg></div>
+  <p class="reading" id="ifthen"></p>
+</section>
 
-<div class="tiles">
-  <div class="tile" id="t1"><b>&#8211;</b><span>&#8211;</span></div>
-  <div class="tile" id="t2"><b>&#8211;</b><span>&#8211;</span></div>
-  <div class="tile" id="t3"><b>&#8211;</b><span>&#8211;</span></div>
-</div>
-</div>
+<aside class="panel">
+  <h2>Start somewhere</h2>
+  <div class="scen">
+    <button type="button" data-p="base" class="on"><strong>As the Authority forecasts it</strong>
+      <span>Both decisions made, at the values in the statement.</span></button>
+    <button type="button" data-p="alone"><strong>The airport on its own</strong>
+      <span>Neither decision. What its operations carry unaided.</span></button>
+    <button type="button" data-p="after28"><strong>After the commitment runs out</strong>
+      <span>Nothing designated in 2029 and 2030, which nothing covers.</span></button>
+    <button type="button" data-p="short"><strong>Boardings ten percent short</strong>
+      <span>Watch what this moves, and what it leaves alone.</span></button>
+  </div>
 
-<div class="panel">
   <h2>The two decisions</h2>
   <div class="switches">
     <label class="sw"><input type="checkbox" id="c0" checked>
       <span><strong>Count the designated revenue</strong>
-      <span>Not operating revenue: the indenture defines it as money &#8220;not constituting
-      Revenues.&#8221; From 2025 the whole block is slot-machine tax, a state appropriation. None
-      was designated at all in 2024, and gas royalty is zero in every year from 2020
-      through 2030.</span></span></label>
+      <span>State gaming money, which the indenture defines as
+      &#8220;not constituting Revenues.&#8221;</span></span></label>
     <label class="sw"><input type="checkbox" id="c1" checked>
       <span><strong>Count the Coverage Account</strong>
-      <span>This one is operating money: Revenues may be deposited to it monthly &#8220;at the
-      discretion of the Authority,&#8221; ninth in the flow of funds, capped at a quarter of the
-      debt payment. The forecast already assumes that maximum in five of the six years, so there
-      is no headroom left in it.</span></span></label>
+      <span>Operating money moved to a reserve monthly, at the Authority&#8217;s
+      discretion.</span></span></label>
   </div>
+  <p class="why">Two pots, funded from different money and governed by different sentences.
+  <a href="../covenant/index.html">What each one is, and why they are not the same thing.</a></p>
 
   <h2>Move the levers</h2>
   <div class="levs">
     <div class="lev">
       <label for="s0">How much is designated <b id="v0">as forecast</b></label>
-      <input type="range" id="s0" min="0" max="110" value="100" step="5">
-      <div class="why">A share of what the Authority assumes, because it assumes $8.8m for 2025 and
-        $11.575m after, so no single sum could mean &#8220;as forecast&#8221; in every year.</div>
-    </div>
-    <div class="lev" id="lev3">
-      <label for="s3">Apply that <b id="v3">to every year</b></label>
-      <input type="range" id="s3" min="0" max="1" value="0" step="1">
-      <div class="why">The airlines voted the designation for 2026 through 2028 only, so 2029 and
-        2030 rest on nothing anyone has committed to.
-        <span class="inertnote">Nothing to apply while the slider above sits at
-        &#8220;as forecast.&#8221; Lower it and this takes effect.</span></div>
+      <div class="track"><input type="range" id="s0" min="0" max="110" value="100" step="5"
+        aria-describedby="r0"><span class="tick" style="left:90.9%">as forecast</span></div>
+      <div class="readout" id="r0">&#8211;</div>
     </div>
     <div class="lev">
       <label for="s1">Coverage Account deposit <b id="v1">as forecast</b></label>
-      <input type="range" id="s1" min="0" max="120" value="100" step="5">
-      <div class="why">A share of the deposit the Authority itself assumes. That deposit already
-        sits at 25.00 percent of the debt payment in five of the six forecast years, which is the
-        ceiling the contract sets. Raising this stops there, because the contract does.</div>
+      <div class="track"><input type="range" id="s1" min="0" max="120" value="100" step="5"
+        aria-describedby="r1"><span class="tick" style="left:83.3%">as forecast</span></div>
+      <div class="readout" id="r1">&#8211;</div>
     </div>
     <div class="lev">
-      <label for="s2">Boardings against forecast <b id="v2">as forecast</b></label>
-      <input type="range" id="s2" min="-25" max="10" value="0" step="1">
-      <div class="why">Holds the airline requirement constant, which is what a residual agreement
-        does with fixed costs and debt service. It moves the charge to airlines and leaves the
-        promise almost exactly where it was.</div>
+      <label for="scope">Apply the designation change</label>
+      <div class="seg" id="scope" role="group" aria-label="Apply the designation change to">
+        <button type="button" data-l="0" aria-pressed="true">every year</button>
+        <button type="button" data-l="1" aria-pressed="false">only 2029 and 2030</button>
+      </div>
+      <div class="readout">The Authority committed the designation for 2026 through 2028 only.</div>
     </div>
   </div>
-</div>
+  <p class="breakeven" id="be"></p>
+
+  <h2>What the airlines pay</h2>
+  <div class="levs">
+    <div class="lev">
+      <label for="s2">Boardings against forecast <b id="v2">as forecast</b></label>
+      <div class="track"><input type="range" id="s2" min="-25" max="10" value="0" step="1"
+        aria-describedby="r2"><span class="tick" style="left:71.4%">as forecast</span></div>
+      <div class="readout" id="r2">&#8211;</div>
+      <div class="charge"><span class="cl">Charge to airlines, <b id="cy">&#8211;</b></span>
+        <b id="cv">&#8211;</b><span class="cd" id="cd"></span></div>
+      <div class="why">A residual agreement holds the airline requirement constant, so fewer
+      boardings divide the same bill among fewer passengers. It moves the charge and leaves the
+      covenant test almost exactly where it was, which is why it sits here rather than with the
+      levers above.</div>
+    </div>
+  </div>
+</aside>
 </div>
 
-<p class="hint">Select a year on the chart to read its arithmetic. The link in your address bar
-carries whatever you set, so a scenario can be sent to someone.</p>
-
-<p class="caveat">Arithmetic on the Authority&#8217;s own rows. Not a forecast and not a prediction.
-At the baseline this model reproduces its printed ratios and its charge to the cent, and the build
-refuses to publish the page if it does not.</p>
+<p class="hint">Select a year on the chart or a chip above it to read its arithmetic. The link in
+your address bar carries whatever you set, so a scenario can be sent to someone.</p>
 
 <details class="more"><summary>Every year, in numbers</summary>
   <div class="scroll"><table id="tbl"><thead><tr>
     <th>year</th><th class="num">the promise $m</th><th class="num">earned $m</th>
     <th class="num">designated $m</th><th class="num">reserve $m</th>
-    <th class="num">short before the decisions $m</th><th class="num">charge</th>
+    <th class="num">operating</th><th class="num">pledged</th><th class="num">tested</th>
+    <th class="num">charge</th>
   </tr></thead><tbody></tbody></table></div>
   <p class="caveat">The promise is 1.25 times aggregate annual debt service. Earned is Net Revenues
   less anything designated in: the indenture defines designated money as &#8220;not constituting
-  Revenues,&#8221; so it is not part of what the airport earns.</p>
+  Revenues,&#8221; so it is not part of what the airport earns. The three ratio columns are the
+  same three layers the chart draws, each divided by annual debt service.</p>
 </details>
 
 <details class="more"><summary>Show the arithmetic</summary>
@@ -355,15 +420,18 @@ refuses to publish the page if it does not.</p>
   <p>Every baseline is the Authority&#8217;s own figure from the April 2025 Official Statement at
   os-2025ab PDF 202 (printed B-16), carried in <code>02-data/coverage-table.csv</code>.
   Designations come from Exhibit E at PDF 316 by way of
-  <code>02-data/other-pledged-revenue.csv</code>. The window the airlines actually voted is at
+  <code>02-data/other-pledged-revenue.csv</code>. The window the Authority committed to is at
   PDF 67. The flow of funds and the 25 percent cap are at PDF 31, 32 and 34.</p>
   <p>The one figure not printed as such is the first block, what the airport earns. It is Net
   Revenues less the designated money, which is a subtraction of two published rows. The indenture
   makes the distinction itself: Other Pledged Revenues are defined as &#8220;moneys, not
   constituting Revenues, that are designated.&#8221;</p>
+  <p>This is arithmetic on the Authority&#8217;s own rows, not a forecast and not a prediction.
+  At the baseline the model reproduces all three of its printed ratio series and its charge to the
+  cent, and the build refuses to write this page if it does not. Moving a control states a
+  consequence, not a probability.</p>
   <p>What this cannot tell you: what the Authority will decide, what Harrisburg will do to the
-  gaming appropriation, or what traffic will be. It is arithmetic on published rows, and moving a
-  control states a consequence rather than a probability.</p>
+  gaming appropriation, or what traffic will be.</p>
   <p>This page never says default, breach or violation. The indenture lets the Coverage Account
   count toward the 1.25 test, and on that test the Authority&#8217;s forecasts comply in every
   year. Missing the covenant once would not be an event of default either: the indenture requires
@@ -379,58 +447,106 @@ refuses to publish the page if it does not.</p>
 <code>python 03-harness/build_explainer.py</code>, check with <code>--check</code>.</p>
 </div><script>document.querySelector('.toggle').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')};</script><script>var B=[{"year":2025,"net":79417.0,"cov":14745.0,"ads":58980.0,"cpe":15.71,"enpl":5064.0,"opr":8800.0},{"year":2026,"net":94616.0,"cov":21168.0,"ads":84670.0,"cpe":19.13,"enpl":5140.0,"opr":11575.0},{"year":2027,"net":102774.0,"cov":21168.0,"ads":91112.0,"cpe":19.44,"enpl":5217.0,"opr":11575.0},{"year":2028,"net":101815.0,"cov":22707.0,"ads":90827.0,"cpe":19.06,"enpl":5295.0,"opr":11575.0},{"year":2029,"net":107144.0,"cov":22639.0,"ads":90556.0,"cpe":20.25,"enpl":5374.0,"opr":11575.0},{"year":2030,"net":107243.0,"cov":22566.0,"ads":90264.0,"cpe":20.53,"enpl":5455.0,"opr":11575.0}];
 var el=function(i){return document.getElementById(i)};
-var s0=el('s0'),s1=el('s1'),s2=el('s2'),s3=el('s3'),c0=el('c0'),c1=el('c1');
+var s0=el('s0'),s1=el('s1'),s2=el('s2'),c0=el('c0'),c1=el('c1');
+var COV=1.25;
 function m(k){return '$'+(k/1000).toFixed(1)+'m'}
+function r2(v){return v.toFixed(2)}
 var NS='http://www.w3.org/2000/svg';
 function mk(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);
   if(t!==undefined)e.textContent=t;return e}
 
-function compute(){
-  var share=+s0.value/100, cshare=+s1.value/100, dpax=+s2.value/100, lateOnly=(+s3.value===1);
-  var useD=c0.checked, useA=c1.checked;
+/* State lives in one object rather than in the DOM inputs. The previous version read
+   the live inputs inside compute(), which meant breakeven() had to write to s0.value a
+   hundred times per render and put it back. */
+var S={d:100,a:100,p:0,l:0,D:1,C:1,y:1,u:0};
+
+function compute(st){
+  var share=st.d/100, cshare=st.a/100, dpax=st.p/100, lateOnly=(st.l===1);
   return B.map(function(b){
     var d=(lateOnly && b.year<=2028)?b.opr:b.opr*share;
-    if(!useD) d=0;
+    if(!st.D) d=0;
     // A share of the Authority's own deposit, not a flat percentage of debt service:
     // its deposit is 25.00% of debt service in five years and 23.23% in 2027, so a flat
     // rate would not reproduce the document. Raising it stops at the contractual cap.
-    var acct=useA?Math.min(b.cov*cshare, 0.25*b.ads):0;
+    var cap=0.25*b.ads;
+    var acct=st.C?Math.min(b.cov*cshare, cap):0;
     var earned=b.net-b.opr;               // Net Revenues before anything designated in
-    var promise=1.25*b.ads;
+    var promise=COV*b.ads;
     var enpl=b.enpl*(1+dpax);
     var req=(b.cpe+b.opr/b.enpl)*b.enpl;  // the airline requirement before any designation
     return {year:b.year, earned:earned, desig:d, acct:acct, promise:promise,
-            total:earned+d+acct, net:earned+d,
-            alone:(earned+d)/b.ads, printed:(earned+d+acct)/b.ads,
+            total:earned+d+acct,
+            // The three layers the chart draws, as ratios: what operations carry, what
+            // the pledge carries once designated money is counted, and what the covenant
+            // is actually tested on given the reader's switches.
+            operating:earned/b.ads,
+            pledged:(earned+d)/b.ads,
+            tested:(earned+d+acct)/b.ads,
+            atCap:(st.C && b.cov*cshare>=cap-1e-9),
             gapBefore:promise-earned, cpe:(req-d)/enpl, base:b};
   });
 }
 
-var FOCUS=1, CH=null;
+var CH=null, UNIT=null;
 
-// A fixed vertical scale across every scenario. Recomputing it per state would make
-// a smaller stack redraw at the same height as a larger one, so two scenarios could
-// not be compared by eye, which is the whole point of being able to switch between
-// them.
+// A fixed vertical scale in both units. Recomputing per state would make a smaller
+// stack redraw at the same height as a larger one, so two scenarios could not be
+// compared by eye, which is the whole point of being able to switch between them.
 function domain(){
   var hi=0;
   B.forEach(function(b){
     var earned=b.net-b.opr;
-    hi=Math.max(hi, earned+1.1*b.opr+0.25*b.ads, 1.25*b.ads);
+    hi=Math.max(hi, earned+1.1*b.opr+0.25*b.ads, COV*b.ads);
   });
   return hi*1.10;
 }
+// Every reachable ratio across every control position falls between 0.98 and 1.61.
+var RLO=0.90, RHI=1.70;
 
-// Near the rendered width on purpose: at 900 units in a 610px box every label
-// was scaled to two thirds of its stated size.
-var GEO={W:640,H:300,L:46,R:52,T:56,BM:34};
+/* Measured rather than fixed. A 640-unit viewBox inside a 333px phone column scaled
+   every label to about half its stated size, which the ratio view cannot survive.
+   Measuring makes one user unit one CSS pixel at every width. The height is budgeted
+   against the viewport as well as the width, because a sticky instrument taller than
+   the screen pins its top and hangs its bottom off the bottom edge forever. */
+var GEO=null;
+function geo(){
+  var W=Math.max(300,Math.round(el('chart').parentNode.clientWidth));
+  var wide=window.matchMedia('(min-width:64rem)').matches;
+  var H=wide?300:Math.round(Math.max(170,Math.min(W*0.62,window.innerHeight*0.32)));
+  var narrow=W<420;
+  return {W:W,H:H,L:narrow?36:46,R:narrow?12:56,T:narrow?42:44,BM:narrow?26:34,
+          narrow:narrow};
+}
 
-function build(rows){
+function xcentre(i){return GEO.L+(i+0.5)*(GEO.W-GEO.L-GEO.R)/B.length}
+
+function frame(svg){
+  // The 2028 boundary as a dated event rather than a wash of colour.
+  var g=GEO, xi=-1;
+  B.forEach(function(b,i){if(xi<0&&b.year>2028)xi=i});
+  if(xi>0){
+    var bx=g.L+xi*(g.W-g.L-g.R)/B.length-3;
+    svg.appendChild(mk('rect',{x:bx,y:g.T,width:(g.W-g.R)-bx,height:(g.H-g.BM)-g.T,
+      fill:'var(--yellow)','fill-opacity':.07}));
+    svg.appendChild(mk('line',{x1:bx,y1:g.T,x2:bx,y2:g.H-g.BM,stroke:'var(--warn)',
+      'stroke-width':1.4,'stroke-dasharray':'4 3'}));
+    // The full label runs off the right edge of a phone-width box, so on narrow it
+    // shortens and hangs to the left of the rule, where there is room.
+    svg.appendChild(g.narrow
+      ? mk('text',{x:bx-4,y:g.T-6,'text-anchor':'end','class':'refl',fill:'var(--warn)'},
+          'agreements end 2028')
+      : mk('text',{x:bx+5,y:g.T-6,'class':'refl',fill:'var(--warn)'},
+          'the airline agreement ends Dec. 31, 2028'));
+  }
+}
+
+/* ---------- the dollar view ---------- */
+function buildDollars(rows){
   var svg=el('chart'); while(svg.firstChild)svg.removeChild(svg.firstChild);
-  var g=GEO, hi=domain();
-  var X=function(i){return g.L+i*(g.W-g.L-g.R)/rows.length};
+  GEO=geo(); var g=GEO, hi=domain();
+  svg.setAttribute('viewBox','0 0 '+g.W+' '+g.H);
   var Y=function(v){return g.H-g.BM-(v/hi)*(g.H-g.BM-g.T)};
-  var bw=Math.min((g.W-g.L-g.R)/rows.length*0.56,58);
+  var bw=Math.min((g.W-g.L-g.R)/B.length*0.56,58);
 
   var defs=mk('defs');
   [['hz','var(--blue-lt)','var(--blue)',45,.30,.55],
@@ -450,25 +566,12 @@ function build(rows){
     svg.appendChild(mk('text',{x:g.L-7,y:Y(v)+4,'text-anchor':'end','class':'ax'},
       '$'+(v/1000)+'m'));
   }
+  frame(svg);
 
-  // 2028 as a dated event rather than a wash of colour: a rule on the boundary and a
-  // label that says what ends.
-  var xi=-1; rows.forEach(function(r,i){if(xi<0&&r.year>2028)xi=i});
-  if(xi>0){
-    var bx=X(xi)-3;
-    svg.appendChild(mk('rect',{x:bx,y:g.T,width:(g.W-g.R)-bx,height:(g.H-g.BM)-g.T,
-      fill:'var(--yellow)','fill-opacity':.07}));
-    svg.appendChild(mk('line',{x1:bx,y1:g.T,x2:bx,y2:g.H-g.BM,stroke:'var(--warn)',
-      'stroke-width':1.4,'stroke-dasharray':'4 3'}));
-    svg.appendChild(mk('text',{x:bx+5,y:g.T-6,'class':'refl',fill:'var(--warn)'},
-      'the airline agreement ends Dec. 31, 2028'));
-  }
-
-  CH={svg:svg,X:X,Y:Y,bw:bw,groups:[]};
+  CH={kind:'d',svg:svg,Y:Y,groups:[]};
   rows.forEach(function(r,i){
     var grp=mk('g',{'class':'yr'});
-    var cx=X(i)+((g.W-g.L-g.R)/rows.length)/2, x=cx-bw/2;
-    var o={};
+    var cx=xcentre(i), x=cx-bw/2, o={};
     o.focusbox=mk('rect',{'class':'focusbox',x:x-9,y:g.T+2,width:bw+18,
       height:(g.H-g.BM)-g.T-2+20,rx:5});
     grp.appendChild(o.focusbox);
@@ -483,38 +586,47 @@ function build(rows){
     o.debt=mk('line',{'class':'ref',x1:x-7,x2:x+bw+7,stroke:'var(--ink2)','stroke-width':1.3,
       'stroke-dasharray':'2 2'});
     o.promise=mk('line',{'class':'ref',x1:x-7,x2:x+bw+7,stroke:'var(--ink)','stroke-width':2.4});
-    o.gap=mk('line',{'class':'gap',x1:cx,x2:cx,stroke:'var(--orange)','stroke-width':1.6,
+    o.gap=mk('line',{'class':'gap',x1:cx,x2:cx,stroke:'var(--flag)','stroke-width':1.8,
       'stroke-dasharray':'3 2'});
-    o.gaplab=mk('text',{'class':'val',x:cx,'text-anchor':'middle',fill:'var(--orange)'});
+    o.gaplab=mk('text',{'class':'val',x:cx,'text-anchor':'middle',fill:'var(--flag)'});
     o.yrlab=mk('text',{'class':'yrlab',x:cx,y:g.H-g.BM+17,'text-anchor':'middle'},r.year);
     [o.debt,o.promise,o.gap,o.gaplab,o.yrlab].forEach(function(n){grp.appendChild(n)});
     o.hit=mk('rect',{'class':'hit',x:x-9,y:g.T+2,width:bw+18,height:(g.H-g.BM)-g.T-2+20});
-    o.hit.addEventListener('click',function(){FOCUS=i;render();});
+    o.hit.addEventListener('click',function(){S.y=i;render()});
     grp.appendChild(o.hit);
     svg.appendChild(grp);
     CH.groups.push({grp:grp,o:o});
   });
 
-  // Three entries, for the three stacked blocks. The two reference lines are labelled
-  // where they sit instead, at the right edge, which is where the eye already is.
-  var lx=g.L, ly=16;
-  [['var(--blue)','what the airport earns',0],
-   ['url(#hz)','designated',182],
-   ['url(#hz2)','Coverage Account',268]].forEach(function(c){
-    svg.appendChild(mk('rect',{x:lx+c[2],y:ly-9,width:11,height:11,fill:c[0],
-      stroke:c[0].indexOf('url')===0?'var(--ink2)':'none','stroke-opacity':.35}));
-    svg.appendChild(mk('text',{x:lx+c[2]+16,y:ly+1,'class':'lg'},c[1]));
-  });
-  CH.reflab={
-    promise:mk('text',{'class':'refl',x:g.W-g.R+5,fill:'var(--ink)'},'promise'),
-    debt:mk('text',{'class':'refl',x:g.W-g.R+5,fill:'var(--muted)'},'debt')
-  };
-  svg.appendChild(CH.reflab.promise); svg.appendChild(CH.reflab.debt);
+  legend(svg,[['var(--blue)',g.narrow?'earns':'what the airport earns'],
+              ['url(#hz)','designated'],
+              ['url(#hz2)',g.narrow?'reserve':'Coverage Account']]);
+  // The two reference lines are labelled where they sit, at the right edge, which is
+  // where the eye already is. On a phone there is no right edge to spare, and the
+  // dashed and solid strokes carry it with the legend.
+  if(!g.narrow){
+    CH.reflab={
+      promise:mk('text',{'class':'refl',x:g.W-g.R+5,fill:'var(--ink)'},'promise'),
+      debt:mk('text',{'class':'refl',x:g.W-g.R+5,fill:'var(--muted)'},'debt')
+    };
+    svg.appendChild(CH.reflab.promise); svg.appendChild(CH.reflab.debt);
+  }
   svg.appendChild(mk('line',{x1:g.L,y1:g.H-g.BM,x2:g.W-g.R,y2:g.H-g.BM,stroke:'var(--axis)'}));
 }
 
-function draw(rows){
-  if(!CH) build(rows);
+// Laid out by measured advance rather than by hard-coded offsets, because the offsets
+// were tuned for a 640-unit box and overflowed the moment the box became 333.
+function legend(svg,items){
+  var g=GEO, x=g.L, y=16;
+  items.forEach(function(c){
+    svg.appendChild(mk('rect',{x:x,y:y-9,width:10,height:10,fill:c[0],
+      stroke:c[0].indexOf('url')===0?'var(--ink2)':'none','stroke-opacity':.35}));
+    svg.appendChild(mk('text',{x:x+14,y:y,'class':'lg'},c[1]));
+    x+=14+c[1].length*(g.narrow?5.6:6.0)+16;
+  });
+}
+
+function drawDollars(rows){
   var g=GEO, Y=CH.Y, base=g.H-g.BM;
   rows.forEach(function(r,i){
     var G=CH.groups[i], o=G.o, y=base;
@@ -527,203 +639,324 @@ function draw(rows){
     });
     o.promise.setAttribute('y1',Y(r.promise)); o.promise.setAttribute('y2',Y(r.promise));
     o.debt.setAttribute('y1',Y(r.base.ads));   o.debt.setAttribute('y2',Y(r.base.ads));
-    var eTop=Y(r.earned), focused=(i===FOCUS);
-    // Six shortfall figures at once was the bulk of the noise. Only the selected year
-    // carries its own; the rest are in the table and in the sentence.
-    o.gap.setAttribute('y1',eTop); o.gap.setAttribute('y2',Y(r.promise));
-    o.gap.style.opacity=focused?1:0;
-    o.gaplab.setAttribute('y',Math.min(eTop,Y(r.total),Y(r.promise))-7);
-    o.gaplab.textContent=focused?('−'+(r.gapBefore/1000).toFixed(1)+'m short'):'';
-    G.grp.setAttribute('class','yr'+(focused?' on':''));
+    // The shortfall stem is drawn for every year that does not reach the promise, not
+    // only the selected one. A year falling short is the signal; hiding five of them
+    // behind a click was the old page telling the reader what to look at instead of
+    // showing them.
+    var bad=r.total<r.promise-1e-6;
+    o.gap.setAttribute('y1',Y(r.total)); o.gap.setAttribute('y2',Y(r.promise));
+    o.gap.style.opacity=bad?1:0;
+    o.gaplab.setAttribute('y',Math.min(Y(r.total),Y(r.promise))-7);
+    o.gaplab.textContent=bad?('−'+((r.promise-r.total)/1000).toFixed(1)+'m'):'';
+    o.earned.setAttribute('fill',bad?'var(--flag)':'var(--blue)');
+    o.yrlab.setAttribute('class','yrlab'+(bad?' bad':''));
+    G.grp.setAttribute('class','yr'+(i===S.y?' on':''));
   });
-  var last=rows[rows.length-1];
-  CH.reflab.promise.setAttribute('y',Y(last.promise)+4);
-  CH.reflab.debt.setAttribute('y',Y(last.base.ads)+4);
-}
-
-function tiles(rows){
-  var shortY=rows.filter(function(r){return r.earned<r.promise});
-  var discShare=rows.map(function(r){return (r.desig+r.acct)/r.promise});
-  var avg=discShare.reduce(function(a,b){return a+b},0)/discShare.length;
-  var nonop=rows.map(function(r){return r.desig/r.promise});
-  var navg=nonop.reduce(function(a,b){return a+b},0)/nonop.length;
-  var missing=rows.filter(function(r){return r.total<r.promise});
-  function set(id,val,lab,warn){var t=el(id);t.querySelector('b').textContent=val;
-    t.querySelector('span').textContent=lab;t.classList.toggle('warn',!!warn)}
-  set('t1',(Math.round(navg*100)+Math.round((avg-navg)*100))+'%',
-      'of the promise met by designated revenue and the discretionary reserve rather than '
-      +'by pledged Net Revenues',false);
-  set('t2',Math.round(navg*100)+'%',
-      'of it is revenue the airport does not earn at all: a state gaming appropriation',false);
-  if(missing.length){
-    set('t3',missing.length+' of '+rows.length,
-        'years the stack no longer reaches the promise',true);
-  } else {
-    set('t3',shortY.length+' of '+rows.length,
-        'years the airport’s own earnings fall short of the promise on their own',false);
+  if(CH.reflab){
+    var last=rows[rows.length-1];
+    CH.reflab.promise.setAttribute('y',Y(last.promise)+4);
+    CH.reflab.debt.setAttribute('y',Y(last.base.ads)+4);
   }
 }
 
-// How far the designation can fall, holding everything else where the reader has put
-// it, before some year stops reaching the promise. Scanned rather than solved because
-// the switches can zero a whole term and there is then no root to find.
+/* ---------- the ratio view ---------- */
+function buildRatios(rows){
+  var svg=el('chart'); while(svg.firstChild)svg.removeChild(svg.firstChild);
+  GEO=geo(); var g=GEO;
+  svg.setAttribute('viewBox','0 0 '+g.W+' '+g.H);
+  var Y=function(v){var c=Math.max(RLO,Math.min(RHI,v));
+    return g.H-g.BM-(c-RLO)/(RHI-RLO)*(g.H-g.BM-g.T)};
+
+  // Everything under the covenant line is failure, and it is drawn as a place on the
+  // chart rather than as a colour on a number.
+  svg.appendChild(mk('rect',{x:g.L,y:Y(COV),width:(g.W-g.R)-g.L,height:(g.H-g.BM)-Y(COV),
+    fill:'var(--flag)','fill-opacity':.07}));
+  // Every 0.1 is too many lines in a 170px-tall phone chart; every 0.2 keeps 1.00,
+  // 1.20, 1.40 and 1.60 and drops the rest.
+  var stepv=g.narrow?0.2:0.1;
+  for(var v=1.0;v<=RHI+1e-9;v+=stepv){
+    var vv=Math.round(v*100)/100;
+    svg.appendChild(mk('line',{x1:g.L,y1:Y(vv),x2:g.W-g.R,y2:Y(vv),stroke:'var(--grid)'}));
+    svg.appendChild(mk('text',{x:g.L-7,y:Y(vv)+4,'text-anchor':'end','class':'ax'},
+      vv.toFixed(2)));
+  }
+  frame(svg);
+  svg.appendChild(mk('line',{x1:g.L,y1:Y(COV),x2:g.W-g.R,y2:Y(COV),stroke:'var(--ink)',
+    'stroke-width':2.4}));
+  // On a phone there is no margin to hang these in and no horizontal position that
+  // does not sit on a column of data, so the header carries the sentence instead and
+  // the rule, the tinted zone and the axis do the rest.
+  if(!g.narrow){
+    svg.appendChild(mk('text',{x:g.W-g.R+5,y:Y(COV)+4,'class':'refl',fill:'var(--ink)'},
+      'covenant ' + COV.toFixed(2)));
+    svg.appendChild(mk('text',{x:g.W-g.R+5,y:Y(COV)+16,'class':'refl',fill:'var(--flag)'},
+      'below is short'));
+  }
+
+  CH={kind:'r',svg:svg,Y:Y,groups:[]};
+  rows.forEach(function(r,i){
+    var grp=mk('g',{'class':'yr'}), cx=xcentre(i), o={};
+    o.focusbox=mk('rect',{'class':'focusbox',x:cx-24,y:g.T+2,width:48,
+      height:(g.H-g.BM)-g.T-2+20,rx:5});
+    grp.appendChild(o.focusbox);
+    o.spine=mk('line',{'class':'spine',x1:cx,x2:cx,stroke:'var(--ring)','stroke-width':2.5,
+      'stroke-linecap':'round'});
+    grp.appendChild(o.spine);
+    // Hollow to solid, bottom to top: what operations carry, what the pledge carries,
+    // what the covenant is tested on. The same three layers the dollar stack draws.
+    o.op =mk('circle',{'class':'pt',cx:cx,r:4,fill:'var(--plane)','stroke-width':1.8});
+    o.pl =mk('circle',{'class':'pt',cx:cx,r:4.6,'fill-opacity':.45,'stroke-width':1.8});
+    o.te =mk('circle',{'class':'pt',cx:cx,r:6.2,'stroke-width':1.8,stroke:'var(--plane)'});
+    [o.op,o.pl,o.te].forEach(function(n){grp.appendChild(n)});
+    o.val=mk('text',{'class':'val',x:cx,'text-anchor':'middle'});
+    o.yrlab=mk('text',{'class':'yrlab',x:cx,y:g.H-g.BM+17,'text-anchor':'middle'},r.year);
+    [o.val,o.yrlab].forEach(function(n){grp.appendChild(n)});
+    o.hit=mk('rect',{'class':'hit',x:cx-24,y:g.T+2,width:48,height:(g.H-g.BM)-g.T-2+20});
+    o.hit.addEventListener('click',function(){S.y=i;render()});
+    grp.appendChild(o.hit);
+    svg.appendChild(grp);
+    CH.groups.push({grp:grp,o:o});
+  });
+
+  var lx=g.L, ly=16;
+  ['operating','pledged','as tested'].forEach(function(lab,k){
+    svg.appendChild(mk('circle',{cx:lx+5,cy:ly-4,r:[4,4.6,6.2][k],
+      fill:k===0?'var(--plane)':'var(--blue)','fill-opacity':k===1?.45:1,
+      stroke:'var(--blue)','stroke-width':1.8}));
+    svg.appendChild(mk('text',{x:lx+16,y:ly,'class':'lg'},lab));
+    lx+=16+lab.length*(g.narrow?5.6:6.0)+16;
+  });
+  svg.appendChild(mk('line',{x1:g.L,y1:g.H-g.BM,x2:g.W-g.R,y2:g.H-g.BM,stroke:'var(--axis)'}));
+}
+
+function drawRatios(rows){
+  var Y=CH.Y;
+  rows.forEach(function(r,i){
+    var o=CH.groups[i].o;
+    function paint(n,v){
+      var bad=v<COV-1e-9, col=bad?'var(--flag)':'var(--blue)';
+      n.setAttribute('cy',Y(v)); n.setAttribute('stroke',col);
+      if(n!==o.op) n.setAttribute('fill',col);
+    }
+    paint(o.op,r.operating); paint(o.pl,r.pledged); paint(o.te,r.tested);
+    o.op.setAttribute('fill','var(--plane)');
+    o.te.setAttribute('stroke','var(--plane)');
+    o.spine.setAttribute('y1',Y(r.operating)); o.spine.setAttribute('y2',Y(r.tested));
+    var bad=r.tested<COV-1e-9;
+    // A value sitting just under the covenant put its label straight on the rule, so
+    // when the two are within a label's height the label goes below the mark instead.
+    var ty=Y(r.tested);
+    o.val.setAttribute('y',Math.abs(ty-Y(COV))<14?ty+18:ty-11);
+    o.val.setAttribute('fill',bad?'var(--flag)':'var(--ink)');
+    o.val.textContent=r2(r.tested);
+    o.yrlab.setAttribute('class','yrlab'+(bad?' bad':''));
+    CH.groups[i].grp.setAttribute('class','yr'+(i===S.y?' on':''));
+  });
+}
+
+function chart(rows){
+  // Rebuilt when the unit changes, and when the measured width or the breakpoint
+  // does, because the viewBox and the label sizes are derived from both.
+  var w=Math.round(el('chart').parentNode.clientWidth);
+  var wide=window.matchMedia('(min-width:64rem)').matches;
+  if(CH===null || UNIT!==S.u || CH.w!==w || CH.wide!==wide){
+    (S.u===1?buildRatios:buildDollars)(rows); UNIT=S.u; CH.w=w; CH.wide=wide;
+  }
+  (S.u===1?drawRatios:drawDollars)(rows);
+  var fails=rows.filter(function(r){return r.tested<COV-1e-9});
+  el('chart').setAttribute('aria-label',
+    (S.u===1
+      ? 'Coverage ratio for each forecast year, on three cumulative layers: operating revenue, '
+        +'plus designated revenue, and as tested. Against a covenant of 1.25. '
+      : 'What meets the promise in each forecast year, in millions of dollars: what the airport '
+        +'earns, money designated into the pledge, and the Coverage Account, stacked against a '
+        +'line at 1.25 times annual debt service. ')
+    + (fails.length
+        ? fails.length+' of '+rows.length+' years fall below the covenant, in '
+          +fails.map(function(r){return r.year}).join(', ')+'.'
+        : 'Every year clears the covenant.'));
+}
+
+/* ---------- scoreboard ---------- */
+function scoreboard(rows){
+  var clear=rows.filter(function(r){return r.tested>=COV-1e-9}).length;
+  var short=rows.filter(function(r){return r.pledged<COV-1e-9}).length;
+  var n=rows.length;
+  var k1=el('k1'), k2=el('k2');
+  k1.textContent=clear+' of '+n;
+  k1.className=(clear<n?'bad':'');
+  el('k1l').textContent='clear the covenant as the test is set here';
+  k2.textContent=short+' of '+n;
+  k2.className=(short>0?'bad':'');
+  el('k2l').textContent='fall below on pledged revenue alone';
+
+  var box=el('chips'); box.innerHTML='';
+  rows.forEach(function(r,i){
+    var bad=r.tested<COV-1e-9;
+    var b=document.createElement('button');
+    b.type='button';
+    b.className='chip'+(bad?' bad':'')+(i===S.y?' on':'');
+    b.setAttribute('aria-pressed',String(i===S.y));
+    b.innerHTML='<span class="yr">'+r.year+'</span><span class="vl">'+r2(r.tested)+
+      '</span><span class="st">'+(bad?'short':'clears')+'</span>';
+    b.addEventListener('click',function(){S.y=i;render()});
+    box.appendChild(b);
+  });
+}
+
+/* How far the designation can fall, holding everything else where the reader has put
+   it, before some year stops reaching the promise. Scanned rather than solved because
+   the switches can zero a whole term and there is then no root to find. Runs over a
+   copy of the state, so it no longer writes to the live input a hundred times. */
 function breakeven(){
-  var keep=s0.value, found=null;
   for(var v=100;v>=0;v-=1){
-    s0.value=v;
-    var ok=compute().every(function(r){return r.total>=r.promise});
-    if(!ok){ found=v+1; break; }
+    var t={}; for(var k in S) t[k]=S[k]; t.d=v;
+    var ok=compute(t).every(function(r){return r.tested>=COV-1e-9});
+    if(!ok) return v+1;
   }
-  s0.value=keep;
-  return found;
+  return null;
 }
 
 function sentence(rows){
   var f=document.createDocumentFragment();
   function t(x){f.appendChild(document.createTextNode(x))}
-  function e(x,w){var n=document.createElement('em');n.textContent=x;if(w)n.className='warn';
+  function e(x,w){var n=document.createElement('em');n.textContent=x;if(w)n.className='bad';
     f.appendChild(n)}
-  var y=rows[FOCUS];
-  t('In '+y.year+' the promise is '); e(m(y.promise));
-  t(' and the airport earns '); e(m(y.earned));
-  t('. It is '); e(m(y.gapBefore),true); t(' short before either decision. ');
+  // Verdict first. The old sentence spent forty words getting to the number, which on
+  // a phone pushed the sticky instrument past two thirds of the viewport.
+  var y=rows[S.y];
+  t(y.year+' comes out at '); e(r2(y.tested),y.tested<COV);
+  t(y.tested<COV?', under the covenant. ':', which clears. ');
+  t('It earns '); e(m(y.earned)); t(' against a promise of '); e(m(y.promise));
+  t(', '); e(m(y.gapBefore),true); t(' short before either decision.');
   if(y.earned<y.base.ads){
-    t('Its own operations do not cover the debt payment of '); e(m(y.base.ads),true);
-    t(' either. ');
+    t(' Operations do not cover the '); e(m(y.base.ads),true); t(' debt payment.');
   }
-  var missing=rows.filter(function(r){return r.total<r.promise});
-  if(missing.length){
-    t('On these settings the stack no longer reaches the promise in ');
-    e(missing.length+' of '+rows.length,true); t(' years.');
-  } else {
-    t('The two additions together close it.');
-  }
-  if(+s3.value===1) t(' The change applies only to 2029 and 2030, which the January 2025 vote does not cover.');
+  if(S.l===1) t(' The designation change applies only to 2029 and 2030.');
   return f;
 }
 
-// Composition first. "It clears the promise in every year" is the Authority's sentence;
-// what it clears the promise with is the finding.
-function verdict(rows){
-  var v=el('verdict'); v.innerHTML='';
-  function t(x){v.appendChild(document.createTextNode(x))}
-  function e(x,w){var n=document.createElement('em');n.textContent=x;
-    if(w)n.className='warn';v.appendChild(n)}
-  var missing=rows.filter(function(r){return r.total<r.promise});
-  var share=rows.map(function(r){return (r.desig+r.acct)/r.promise});
-  var avg=share.reduce(function(a,b){return a+b},0)/share.length;
-  var alone=rows.filter(function(r){return r.alone<1.25});
-  if(missing.length){
-    t('On these settings the promise goes unmet in ');
-    e(missing.length+' of '+rows.length+' years',true); t('.');
-  } else if(avg<=0.005){
-    t('The airport meets the promise out of its own earnings in every year.');
-  } else {
-    // Two numbers, because the two blocks are soft for different reasons and only one
-    // of them is money the airport does not earn. The Coverage Account is fed from
-    // Revenues; what is soft about it is the election, not the source.
-    var nonop=rows.map(function(r){return r.desig/r.promise});
-    var navg=nonop.reduce(function(a,b){return a+b},0)/nonop.length;
-    e(Math.round(navg*100)+'%');
-    t(' of the promise is met with revenue the airport does not earn at all, a state gaming '
-      +'appropriation. Another ');
-    e(Math.round((avg-navg)*100)+'%');
-    var atCap=rows.filter(function(r){return r.acct>=0.25*r.base.ads-1}).length;
-    t(' comes from a reserve the forecast already tops up to the maximum the contract allows, '
-      +'in '+atCap+' of the '+rows.length+' years. On pledged revenue alone the forecast falls '
-      +'short in ');
-    e(alone.length+' of '+rows.length,alone.length>0); t(' years.');
-  }
-}
-
 function render(){
-  var rows=compute();
-  el('v0').textContent=(+s0.value===100?'as forecast':(+s0.value===0?'nothing':(+s0.value)+'%'));
-  el('v1').textContent=(+s1.value===100?'as forecast':(+s1.value===0?'nothing':(+s1.value)+'%'));
-  var dp=+s2.value; el('v2').textContent=(dp===0?'as forecast':(dp>0?'+':'')+dp+'%');
-  el('v3').textContent=(+s3.value===1?'only to 2029 and 2030':'to every year');
-  // Scaling by one changes nothing, so at full designation this control cannot move
-  // the model. Say so rather than letting it read as broken.
-  var dead=(+s0.value===100);
-  el('lev3').classList.toggle('inert',dead);
-  s3.disabled=dead;
-  c0.closest('.sw').classList.toggle('off',!c0.checked);
-  c1.closest('.sw').classList.toggle('off',!c1.checked);
-  tiles(rows); draw(rows);
-  var p=el('ifthen'); p.innerHTML=''; p.appendChild(sentence(rows));
-  verdict(rows);
+  var rows=compute(S);
 
-  var fy=rows[FOCUS];
+  el('v0').textContent=(S.d===100?'as forecast':(S.d===0?'nothing':S.d+'%'));
+  el('v1').textContent=(S.a===100?'as forecast':(S.a===0?'nothing':S.a+'%'));
+  el('v2').textContent=(S.p===0?'as forecast':(S.p>0?'+':'')+S.p+'%');
+  var fy=rows[S.y];
+  // At the baseline the readout would otherwise say a figure "against" itself.
+  el('r0').innerHTML=!S.D ? 'Not counted. Switch the decision back on to move this.'
+    : '<b>'+m(fy.desig)+'</b> designated in '+fy.year
+      +(S.d===100?', the figure in the statement':', against '+m(fy.base.opr)+' in the statement');
+  el('r1').innerHTML=!S.C ? 'Not counted. Switch the decision back on to move this.'
+    : '<b>'+m(fy.acct)+'</b> in '+fy.year+(fy.atCap
+        ? ', at the 25 percent cap the contract sets'
+        : (S.a===100?', the figure in the statement'
+                    :', against '+m(fy.base.cov)+' in the statement'));
+  el('r2').innerHTML='<b>'+(fy.base.enpl*(1+S.p/100)/1000).toFixed(2)+'m</b> boardings in '
+    +fy.year+', against '+(fy.base.enpl/1000).toFixed(2)+'m forecast';
   el('cy').textContent=fy.year;
   el('cv').textContent='$'+fy.cpe.toFixed(2);
-  var d=fy.cpe-fy.base.cpe, cd=el('cd');
-  cd.textContent=(Math.abs(d)<0.005)?'as the Authority forecasts it'
-    :((d>0?'+':'−')+'$'+Math.abs(d).toFixed(2)+' against its forecast of $'
+  var dc=fy.cpe-fy.base.cpe, cd=el('cd');
+  cd.textContent=(Math.abs(dc)<0.005)?'as the Authority forecasts it'
+    :((dc>0?'+':'−')+'$'+Math.abs(dc).toFixed(2)+' against its forecast of $'
       +fy.base.cpe.toFixed(2));
-  cd.className='cd'+(Math.abs(d)<0.005?'':(d>0?' up':' down'));
+  cd.className='cd'+(Math.abs(dc)<0.005?'':(dc>0?' up':' down'));
+
+  c0.closest('.sw').classList.toggle('off',!S.D);
+  c1.closest('.sw').classList.toggle('off',!S.C);
+  [].forEach.call(document.querySelectorAll('#scope button'),function(b){
+    b.setAttribute('aria-pressed',String(+b.dataset.l===S.l))});
+  [].forEach.call(document.querySelectorAll('.chead .seg button'),function(b){
+    b.setAttribute('aria-pressed',String(+b.dataset.u===S.u))});
+  el('ctitle').textContent=(S.u===1
+    ? 'Coverage ratio in three layers. Below the 1.25 line is short.'
+    : 'What meets the promise, in millions of dollars');
+
+  scoreboard(rows);
+  chart(rows);
+  var p=el('ifthen'); p.innerHTML=''; p.appendChild(sentence(rows));
 
   var be=breakeven(), bx=el('be');
-  if(!c1.checked||!c0.checked||be===null){
-    bx.innerHTML=(compute().every(function(r){return r.total>=r.promise}))
+  if(!S.C||!S.D||be===null){
+    bx.innerHTML=(rows.every(function(r){return r.tested>=COV-1e-9}))
       ? 'The promise is met at every level of designation on these settings.'
       : 'The promise is already unmet on these settings.';
   } else {
     bx.innerHTML='Designation could fall to <b>'+be+'%</b> of what the Authority assumes '
       +'before a year stops reaching the promise.';
   }
-  writeURL();
+
   var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
   rows.forEach(function(r){
+    var bad=r.tested<COV-1e-9;
     var tr=document.createElement('tr');
-    tr.innerHTML='<td>'+r.year+(r.year>2028?'<span class="nv">no vote</span>':'')+'</td>'+
+    if(bad) tr.className='bad';
+    tr.innerHTML='<td>'+r.year+(r.year>2028?'<span class="nv">not committed</span>':'')+'</td>'+
       '<td class="num">'+(r.promise/1000).toFixed(1)+'</td>'+
       '<td class="num">'+(r.earned/1000).toFixed(1)+'</td>'+
       '<td class="num">'+(r.desig/1000).toFixed(1)+'</td>'+
       '<td class="num">'+(r.acct/1000).toFixed(1)+'</td>'+
-      '<td class="num under">'+(r.gapBefore/1000).toFixed(1)+'</td>'+
+      '<td class="num'+(r.operating<COV?' under':'')+'">'+r2(r.operating)+'</td>'+
+      '<td class="num'+(r.pledged<COV?' under':'')+'">'+r2(r.pledged)+'</td>'+
+      '<td class="num'+(bad?' under':'')+'">'+r2(r.tested)+'</td>'+
       '<td class="num">$'+r.cpe.toFixed(2)+'</td>';
     tb.appendChild(tr);
   });
-  var b=rows[1];
+
+  // Follows the selected year. It used to be pinned to rows[1], so clicking 2029 and
+  // opening the arithmetic showed 2026.
+  var b=fy;
   el('work').textContent=
-    'worked for '+b.year+'. The Authority\u2019s own rows: Net Revenues '+m(b.base.net)+
+    'worked for '+b.year+'. The Authority’s own rows: Net Revenues '+m(b.base.net)+
     ' (including '+m(b.base.opr)+' designated), Coverage Account '+m(b.base.cov)+
     ', debt service '+m(b.base.ads)+', boardings '+b.base.enpl.toLocaleString()+
     'k, charge $'+b.base.cpe.toFixed(2)+
     '\n\nours:'+
-    '\n  the promise       1.25 \u00d7 '+m(b.base.ads)+' = '+m(b.promise)+
-    '\n  what it earns     '+m(b.base.net)+' \u2212 '+m(b.base.opr)+' designated = '+m(b.earned)+
-    '\n  short before      '+m(b.promise)+' \u2212 '+m(b.earned)+' = '+m(b.gapBefore)+
+    '\n  the promise       1.25 × '+m(b.base.ads)+' = '+m(b.promise)+
+    '\n  what it earns     '+m(b.base.net)+' − '+m(b.base.opr)+' designated = '+m(b.earned)+
+    '\n  short before      '+m(b.promise)+' − '+m(b.earned)+' = '+m(b.gapBefore)+
     '\n  designated        '+m(b.desig)+
     '\n  coverage account  '+m(b.acct)+
-    '\n  stack             '+m(b.total)+(b.total>=b.promise?', over the promise':' , under the promise')+
-    '\n\nthe same thing as a ratio, which is how the statement prints it:'+
-    '\n  on pledged alone  '+b.alone.toFixed(3)+'      with the account  '+b.printed.toFixed(3);
+    '\n  stack             '+m(b.total)+(b.total>=b.promise?', over the promise':', under the promise')+
+    '\n\nthe same three layers as ratios, which is how the statement prints them:'+
+    '\n  operating         '+b.operating.toFixed(3)+
+    '\n  plus designated   '+b.pledged.toFixed(3)+
+    '\n  as tested         '+b.tested.toFixed(3)+'   against a covenant of 1.25';
+
+  writeURL();
 }
 
-// The control state lives in the address bar, so a scenario is a link.
+/* The control state lives in the address bar, so a scenario is a link. replaceState
+   rather than pushState: one history entry per slider tick would bury the reader's
+   back button under a hundred of them. The cost is that Back does not step through
+   scenarios; hashchange still restores a link someone pastes or follows. */
 function writeURL(){
-  var q='d='+s0.value+'&a='+s1.value+'&p='+s2.value+'&l='+s3.value
-       +'&D='+(c0.checked?1:0)+'&C='+(c1.checked?1:0)+'&y='+FOCUS;
+  var q='d='+S.d+'&a='+S.a+'&p='+S.p+'&l='+S.l+'&D='+S.D+'&C='+S.C+'&y='+S.y+'&u='+S.u;
   try{history.replaceState(null,'','#'+q)}catch(e){}
 }
+function clamp(v,lo,hi,dflt){v=parseInt(v,10);
+  return (isNaN(v)||v<lo||v>hi)?dflt:v}
 function readURL(){
   var h=(location.hash||'').replace(/^#/,''); if(!h) return false;
   var q={}; h.split('&').forEach(function(kv){var p=kv.split('=');q[p[0]]=p[1]});
   if(q.d===undefined) return false;
-  s0.value=q.d; s1.value=q.a; s2.value=q.p; s3.value=q.l;
-  c0.checked=q.D==='1'; c1.checked=q.C==='1';
-  var f=parseInt(q.y,10); if(!isNaN(f)&&f>=0&&f<B.length) FOCUS=f;
+  S.d=clamp(q.d,0,110,100); S.a=clamp(q.a,0,120,100); S.p=clamp(q.p,-25,10,0);
+  S.l=clamp(q.l,0,1,0); S.D=clamp(q.D,0,1,1); S.C=clamp(q.C,0,1,1);
+  S.y=clamp(q.y,0,B.length-1,1); S.u=clamp(q.u,0,1,0);
   return true;
 }
+function toInputs(){
+  s0.value=S.d; s1.value=S.a; s2.value=S.p; c0.checked=!!S.D; c1.checked=!!S.C;
+}
 
-var P={base:[100,100,0,0,1,1],after28:[0,100,0,1,1,1],short:[100,100,-10,0,1,1],
-       stack:[0,0,-10,0,0,0]};
+var P={base:{d:100,a:100,p:0,l:0,D:1,C:1},
+       alone:{d:100,a:100,p:0,l:0,D:0,C:0},
+       after28:{d:0,a:100,p:0,l:1,D:1,C:1},
+       short:{d:100,a:100,p:-10,l:0,D:1,C:1}};
 [].forEach.call(document.querySelectorAll('.scen button'),function(btn){
   btn.addEventListener('click',function(){
-    var p=P[btn.dataset.p];
-    s0.value=p[0];s1.value=p[1];s2.value=p[2];s3.value=p[3];
-    c0.checked=!!p[4];c1.checked=!!p[5];render();
+    var p=P[btn.dataset.p]; for(var k in p) S[k]=p[k];
+    toInputs(); render();
     [].forEach.call(document.querySelectorAll('.scen button'),function(o){
       o.classList.toggle('on',o===btn)});
   });
@@ -732,22 +965,46 @@ function manual(){
   [].forEach.call(document.querySelectorAll('.scen button'),function(o){o.classList.remove('on')});
   render();
 }
-[c0,c1].forEach(function(x){x.addEventListener('change',manual)});
-el('chart').addEventListener('keydown',function(ev){
-  if(ev.key==='ArrowRight'&&FOCUS<B.length-1){FOCUS++;render();ev.preventDefault()}
-  if(ev.key==='ArrowLeft'&&FOCUS>0){FOCUS--;render();ev.preventDefault()}
+c0.addEventListener('change',function(){S.D=c0.checked?1:0;manual()});
+c1.addEventListener('change',function(){S.C=c1.checked?1:0;manual()});
+[].forEach.call(document.querySelectorAll('#scope button'),function(b){
+  b.addEventListener('click',function(){S.l=+b.dataset.l;manual()});
 });
-el('chart').setAttribute('tabindex','0');
-
-[s0,s1,s2,s3].forEach(function(x){
-  x.addEventListener('input',manual);
+[].forEach.call(document.querySelectorAll('.chead .seg button'),function(b){
+  // The unit switch is not a scenario change, so it does not clear the preset.
+  b.addEventListener('click',function(){S.u=+b.dataset.u;render()});
+});
+[[s0,'d'],[s1,'a'],[s2,'p']].forEach(function(pair){
+  var x=pair[0], k=pair[1];
+  x.addEventListener('input',function(){S[k]=+x.value;manual()});
   // A range input under the cursor swallows the wheel and rewrites itself, so simply
   // scrolling past the dials silently changed the scenario and left the reader looking
   // at numbers that did not match what was on the screen. Take the wheel, scroll by hand.
   x.addEventListener('wheel',function(ev){ev.preventDefault();window.scrollBy(0,ev.deltaY)},
     {passive:false});
 });
+el('chart').addEventListener('keydown',function(ev){
+  if(ev.key==='ArrowRight'&&S.y<B.length-1){S.y++;render();ev.preventDefault()}
+  if(ev.key==='ArrowLeft'&&S.y>0){S.y--;render();ev.preventDefault()}
+});
+el('chart').setAttribute('tabindex','0');
+// The viewBox is measured, so a width change has to redraw. Debounced, and chart()
+// no-ops unless the rounded width or the breakpoint actually moved.
+var rt=null;
+window.addEventListener('resize',function(){
+  clearTimeout(rt); rt=setTimeout(render,120);
+});
+window.addEventListener('hashchange',function(){
+  if(readURL()){
+    toInputs();
+    [].forEach.call(document.querySelectorAll('.scen button'),function(o){
+      o.classList.remove('on')});
+    render();
+  }
+});
+
 if(readURL()){
+  toInputs();
   [].forEach.call(document.querySelectorAll('.scen button'),function(o){o.classList.remove('on')});
 }
 render();

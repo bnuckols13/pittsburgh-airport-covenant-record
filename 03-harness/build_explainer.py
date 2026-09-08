@@ -246,8 +246,8 @@ drafts.</b> The fall from $19.1 million in 2021 to $3.0 million in 2023 is a fal
 money had already been designated at zero for four years by then.</div>
 
 <h2>Two things the forecast assumes that nobody has committed to</h2>
-<p>In January 2025 the signatory airlines took a majority-in-interest vote. The statement records
-what it covered:</p>
+<p>In connection with a January 2025 majority-in-interest vote, the Authority made a commitment
+of its own. The statement records it:</p>
 <blockquote>the Authority committed to using discretionary revenue, which may include Gaming
 Revenues or Natural Gas Revenues, of no less than $8.8 million for 2025 and $11.575 million per
 year for <b>2026 through 2028</b> to reduce airline rates and charges.
@@ -297,6 +297,7 @@ def build_model():
     opr = {r["year"]: num(r["designated_k"]) for r in rows("other-pledged-revenue.csv")
            if not r["conflict"]}
     wp = {r["year"]: r for r in rows("who-pays-opr.csv")}
+    lay = {int(r["year"]): r for r in rows("coverage-three-layers.csv")}
 
     base = []
     for r in cov:
@@ -338,7 +339,31 @@ def build_model():
                     f"model fidelity: {b['year']} {what} comes out {got:.4f} against the "
                     f"Authority's {want:.4f}. The model does not reproduce the document at "
                     f"baseline and must not ship.")
-    print(f"  model fidelity OK: all {len(base)} forecast years reproduce at baseline")
+
+    # The page now draws a third series, what operations carry unaided, and prints all
+    # three as ratios. Gate them against coverage-three-layers.csv, which is the file
+    # the front page's four-row table renders from, because a reader will hold the two
+    # side by side and any disagreement between them is ours to catch here.
+    if [b["year"] for b in base] != sorted(lay):
+        raise SystemExit("model: coverage-table.csv and coverage-three-layers.csv "
+                         "disagree on which years the forecast covers")
+    for b in base:
+        L = lay[b["year"]]
+        for got, want, what in (
+                ((b["net"] - b["opr"]) / b["ads"], num(L["ratio_operating"]),
+                 "operating ratio"),
+                (b["net"] / b["ads"], num(L["ratio_pledged"]), "pledged ratio"),
+                ((b["net"] + min(b["cov"], 0.25 * b["ads"])) / b["ads"],
+                 num(L["ratio_printed"]), "printed ratio")):
+            # The column is printed to two decimals, so the tolerance is half a unit
+            # in the last place it states.
+            if abs(got - want) > 0.005:
+                raise SystemExit(
+                    f"model fidelity: {b['year']} {what} comes out {got:.4f} against the "
+                    f"{want:.2f} in coverage-three-layers.csv, which the front page's "
+                    f"table prints. The two would contradict each other in public.")
+    print(f"  model fidelity OK: all {len(base)} forecast years reproduce at baseline, "
+          f"on all three ratio layers")
 
     js = json.dumps(base, separators=(",", ":"))
     body = model_page.BODY.replace("__BUILT__", BUILT)

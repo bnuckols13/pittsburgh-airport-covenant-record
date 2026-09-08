@@ -13,6 +13,8 @@ STEPS = [("fetch_sources.py", []),
          ("build_claims.py", ["--check"]),
          ("build_press.py", ["--check"]),
          ("build_data.py", ["--check"]),
+         ("build_explainer.py", ["--check"]),
+         ("report_page.py", ["--check"]),
          ("prose_gate.py", []),
          ("verify_claims.py", [])]
 for step, args in STEPS:
