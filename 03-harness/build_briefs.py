@@ -275,7 +275,7 @@ def finding_three():
     return sheet(
         "III",
         "the forecast spends money nobody has committed",
-        "The airlines voted the designation for 2026 through 2028. The forecast carries the same "
+        "The Authority committed the designation for 2026 through 2028. The forecast carries the same "
         "figure into 2029 and 2030. The airline agreement expires Dec. 31, 2028. The bonds run "
         "to 2056.",
         "This is the sharpest version of Hypothesis 1. The Authority says the revenue is secure. "

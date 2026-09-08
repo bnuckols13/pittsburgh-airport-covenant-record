@@ -143,7 +143,7 @@ def build():
             "Data <code>02-data/other-pledged-revenue-itemized.csv</code>, from os-2025ab PDF "
             "316. The 2023 total conflicts inside the same statement, $3,029k at PDF 61 against "
             "$4,040k at PDF 316. Both are recorded and neither is chosen.")
-        + "<p>The airlines voted that money for 2026 through 2028. The forecast designates it in "
+        + "<p>The Authority committed that money for 2026 through 2028. The forecast designates it in "
         "2029 and 2030 as well, two years past the vote. The statement's own word for what "
         "happens then is that the Authority &#8220;expects to continue to designate.&#8221;</p>"
         + '<div class="open"><b>What this is not</b>None of it is a breach. The indenture lets '

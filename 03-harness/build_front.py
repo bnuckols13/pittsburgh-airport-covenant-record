@@ -469,11 +469,11 @@ def build():
     b.append('<p class="n">Finding two</p>')
     b.append("<h2>The forecast spends designated money for two years longer than anyone has "
              "committed it, and the Authority says it cannot assure the source.</h2>")
-    b.append('<p class="sub">The airlines voted the designation for 2026 through 2028. The '
+    b.append('<p class="sub">The Authority committed the designation for 2026 through 2028. The '
              'forecast carries the same figure into 2029 and 2030. The airline agreements expire '
              'Dec. 31, 2028. The bonds run to 2056.</p>')
 
-    b.append('<p>What the carriers actually voted, and the years it covers, is stated in the '
+    b.append('<p>What was committed, and the years it covers, is stated in the '
              'bond document.</p>')
     b.append(says("In connection with a January 2025 Majority In Interest (&#8220;MII&#8221;) "
                   "vote, the Authority committed to using discretionary revenue, which may "
@@ -497,7 +497,7 @@ def build():
     b.append('<div class="rail"><figure>' + plate_rail() +
              '<figcaption>The dates the financing turns on. Two things end together on '
              'Dec. 31, 2028: the agreements that make the carriers responsible for the residual, '
-             'and the designation the airlines voted. The forecast runs two years past both, and '
+             'and the designation the Authority committed. The forecast runs two years past both, and '
              'the bonds run twenty-six years past the forecast. Source: '
              + src("os-2025ab", 67, "os-2025ab PDF 67") + ' and '
              + src("os-2025ab", 202, "PDF 202 (printed B-16)") +
@@ -505,7 +505,7 @@ def build():
 
     b.append('<div class="stats">')
     b.append(stat("2026–28",
-                  "The years the airlines actually voted the designation for.",
+                  "The years the Authority committed the designation for.",
                   "os-2025ab PDF 67, the January 2025 majority-in-interest vote."))
     b.append(stat("2029 and 2030",
                   "The two further years the forecast fills with the same figure, which no vote "
