@@ -298,6 +298,7 @@ def build_model():
            if not r["conflict"]}
     wp = {r["year"]: r for r in rows("who-pays-opr.csv")}
     lay = {int(r["year"]): r for r in rows("coverage-three-layers.csv")}
+    sav = {int(r["year"]): r for r in rows("tmp-savings.csv")}
 
     base = []
     for r in cov:
@@ -307,7 +308,18 @@ def build_model():
             "year": int(y), "net": num(r["net_revenues_incl_OPR_k"]),
             "cov": num(r["coverage_amount_k"]), "ads": num(r["aggregate_annual_debt_service_k"]),
             "cpe": num(r["cpe"]), "enpl": num(r["enplanements_k"]), "opr": d,
+            # What operating expense would be without the Terminal Modernization Program
+            # savings the forecast credits. Positive means the assumption is saving money.
+            "sav": num(sav[int(y)]["om_higher_without_savings_k"]),
         })
+        # The cost lever is exact for the same reason the designation lever is: under a
+        # residual formula the carriers are billed the difference, so operating expense
+        # the programme does not save is divided by boardings and lands on the charge.
+        want = num(sav[int(y)]["cpe_if_savings_not_realised"])
+        got = num(r["cpe"]) + num(sav[int(y)]["om_higher_without_savings_k"]) / num(r["enplanements_k"])
+        if abs(want - got) > 0.02:
+            raise SystemExit(f"model: savings relation does not reproduce for {y}: "
+                             f"{got:.2f} against the case's {want:.2f}")
         # The CPE lever is exact and the case already proves it: withdrawing the
         # designation raises CPE by the designation divided by enplanements.
         if y in wp:
@@ -391,6 +403,9 @@ def build_model():
             # base-case boardings and the document's own stress charge is shown beside it.
             "cpe": b["cpe"], "enpl": b["enpl"], "opr": num(r["designated_k"]),
             "scpe": num(r["cpe_stress"]) if r["cpe_stress"].strip() else None,
+            # The savings assumption is a programme assumption rather than a traffic one,
+            # so the same figure carries into the stress scenario.
+            "sav": b["sav"],
         })
     print(f"  stress scenario OK: all {len(stress)} years reproduce the printed stress column")
 
