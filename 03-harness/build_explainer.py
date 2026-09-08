@@ -365,9 +365,40 @@ def build_model():
     print(f"  model fidelity OK: all {len(base)} forecast years reproduce at baseline, "
           f"on all three ratio layers")
 
+    # The statement's own stress scenario, as a second row set the page can swap to.
+    # It is the document's demonstration of who carries traffic risk: coverage moves a
+    # hundredth while the charge moves four dollars, because the residual agreement
+    # bills the carriers the difference. The stress column prints no enplanement series
+    # and no 2025 charge, so the page carries the base-case boardings and says so.
+    stress = []
+    for r in rows("stress-case.csv"):
+        y = int(r["year"])
+        b = next(x for x in base if x["year"] == y)
+        got = (num(r["net_revenues_incl_OPR_k"])
+               + min(num(r["coverage_amount_k"]), 0.25 * num(r["aggregate_annual_debt_service_k"]))
+               ) / num(r["aggregate_annual_debt_service_k"])
+        want = num(r["coverage_printed"])
+        if abs(got - want) > 0.005:
+            raise SystemExit(
+                f"model fidelity: {y} stress coverage comes out {got:.4f} against the "
+                f"{want:.2f} the stress column prints. The stress scenario does not "
+                f"reproduce the document and must not ship.")
+        stress.append({
+            "year": y, "net": num(r["net_revenues_incl_OPR_k"]),
+            "cov": num(r["coverage_amount_k"]),
+            "ads": num(r["aggregate_annual_debt_service_k"]),
+            # No stress enplanement series is printed, so the charge is computed off the
+            # base-case boardings and the document's own stress charge is shown beside it.
+            "cpe": b["cpe"], "enpl": b["enpl"], "opr": num(r["designated_k"]),
+            "scpe": num(r["cpe_stress"]) if r["cpe_stress"].strip() else None,
+        })
+    print(f"  stress scenario OK: all {len(stress)} years reproduce the printed stress column")
+
     js = json.dumps(base, separators=(",", ":"))
     body = model_page.BODY.replace("__BUILT__", BUILT)
-    js_block = "<script>var B=" + js + ";" + model_page.JS + "</script>"
+    js_block = ("<script>var B=" + js
+                + ",BS=" + json.dumps(stress, separators=(",", ":")) + ";"
+                + model_page.JS + "</script>")
     return page("The model &#183; Pittsburgh Airport Covenant Record", body,
                 js_block, model_page.CSS)
 

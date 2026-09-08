@@ -335,8 +335,8 @@ things it chooses to add, and see what is left.</p>
       <span>Neither decision. What its operations carry unaided.</span></button>
     <button type="button" data-p="after28"><strong>After the commitment runs out</strong>
       <span>Nothing designated in 2029 and 2030, which nothing covers.</span></button>
-    <button type="button" data-p="short"><strong>Boardings ten percent short</strong>
-      <span>Watch what this moves, and what it leaves alone.</span></button>
+    <button type="button" data-p="stress"><strong>The statement&#8217;s stress case</strong>
+      <span>Traffic underperforms. Watch what moves, and what does not.</span></button>
   </div>
 
   <h2>The two decisions</h2>
@@ -378,19 +378,36 @@ things it chooses to add, and see what is left.</p>
   </div>
   <p class="breakeven" id="be"></p>
 
-  <h2>What the airlines pay</h2>
+  <h2>Traffic</h2>
   <div class="levs">
     <div class="lev">
-      <label for="s2">Boardings against forecast <b id="v2">as forecast</b></label>
+      <label for="vint">Which forecast</label>
+      <div class="seg" id="vint" role="group" aria-label="Which forecast">
+        <button type="button" data-t="0" aria-pressed="true">as forecast</button>
+        <button type="button" data-t="1" aria-pressed="false">the statement&#8217;s stress case</button>
+      </div>
+      <div class="readout" id="rt">&#8211;</div>
+    </div>
+    <div class="lev">
+      <label for="s2">Boardings against that <b id="v2">as forecast</b></label>
       <div class="track"><input type="range" id="s2" min="-25" max="10" value="0" step="1"
         aria-describedby="r2"><span class="tick" style="left:71.4%">as forecast</span></div>
       <div class="readout" id="r2">&#8211;</div>
+    </div>
+    <div class="lev">
+      <label for="s4">Share of earnings that moves with them <b id="v4">none</b></label>
+      <div class="track"><input type="range" id="s4" min="0" max="60" value="0" step="5"
+        aria-describedby="r4"><span class="tick" style="left:0%">the statement</span></div>
+      <div class="readout" id="r4">&#8211;</div>
+      <div class="why">Parking, concessions and rental cars fall with passengers and sit inside
+      Net Revenues. The statement prints no split, so this starts at none, which reproduces its
+      forecast exactly. Above none the figure is ours, and it is the only number on this page
+      that is.</div>
+    </div>
+    <div class="lev">
       <div class="charge"><span class="cl">Charge to airlines, <b id="cy">&#8211;</b></span>
         <b id="cv">&#8211;</b><span class="cd" id="cd"></span></div>
-      <div class="why">A residual agreement holds the airline requirement constant, so fewer
-      boardings divide the same bill among fewer passengers. It moves the charge and leaves the
-      covenant test almost exactly where it was, which is why it sits here rather than with the
-      levers above.</div>
+      <div class="why" id="rs"></div>
     </div>
   </div>
 </aside>
@@ -426,6 +443,17 @@ your address bar carries whatever you set, so a scenario can be sent to someone.
   Revenues less the designated money, which is a subtraction of two published rows. The indenture
   makes the distinction itself: Other Pledged Revenues are defined as &#8220;moneys, not
   constituting Revenues, that are designated.&#8221;</p>
+  <p>The stress scenario is the statement&#8217;s own second forecast, from the same table, in
+  <code>02-data/stress-case.csv</code>. It is worth sitting with: traffic underperforms, coverage
+  falls about a hundredth, and the charge to airlines rises more than four dollars. That is the
+  residual agreement doing what it was written to do. Because the stress column prints no
+  enplanement series, the charge this page computes under that scenario runs on base-case
+  boardings and comes out low; the figure the column itself prints is shown beside it.</p>
+  <p>One number here is not the Authority&#8217;s. The share of earnings that moves with
+  passengers has no printed split behind it, so it starts at none, and at none this page
+  reproduces the statement exactly. Raise it and the covenant test starts to move with traffic,
+  which is almost certainly closer to the truth and is our assumption rather than a document&#8217;s
+  figure. It is labelled that way on the control.</p>
   <p>This is arithmetic on the Authority&#8217;s own rows, not a forecast and not a prediction.
   At the baseline the model reproduces all three of its printed ratio series and its charge to the
   cent, and the build refuses to write this page if it does not. Moving a control states a
@@ -445,9 +473,9 @@ your address bar carries whatever you set, so a scenario can be sent to someone.
 
 <p class="src">Built 2026-08-31 from the CSVs in <code>02-data/</code>. Rebuild with
 <code>python 03-harness/build_explainer.py</code>, check with <code>--check</code>.</p>
-</div><script>document.querySelector('.toggle').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')};</script><script>var B=[{"year":2025,"net":79417.0,"cov":14745.0,"ads":58980.0,"cpe":15.71,"enpl":5064.0,"opr":8800.0},{"year":2026,"net":94616.0,"cov":21168.0,"ads":84670.0,"cpe":19.13,"enpl":5140.0,"opr":11575.0},{"year":2027,"net":102774.0,"cov":21168.0,"ads":91112.0,"cpe":19.44,"enpl":5217.0,"opr":11575.0},{"year":2028,"net":101815.0,"cov":22707.0,"ads":90827.0,"cpe":19.06,"enpl":5295.0,"opr":11575.0},{"year":2029,"net":107144.0,"cov":22639.0,"ads":90556.0,"cpe":20.25,"enpl":5374.0,"opr":11575.0},{"year":2030,"net":107243.0,"cov":22566.0,"ads":90264.0,"cpe":20.53,"enpl":5455.0,"opr":11575.0}];
+</div><script>document.querySelector('.toggle').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')};</script><script>var B=[{"year":2025,"net":79417.0,"cov":14745.0,"ads":58980.0,"cpe":15.71,"enpl":5064.0,"opr":8800.0},{"year":2026,"net":94616.0,"cov":21168.0,"ads":84670.0,"cpe":19.13,"enpl":5140.0,"opr":11575.0},{"year":2027,"net":102774.0,"cov":21168.0,"ads":91112.0,"cpe":19.44,"enpl":5217.0,"opr":11575.0},{"year":2028,"net":101815.0,"cov":22707.0,"ads":90827.0,"cpe":19.06,"enpl":5295.0,"opr":11575.0},{"year":2029,"net":107144.0,"cov":22639.0,"ads":90556.0,"cpe":20.25,"enpl":5374.0,"opr":11575.0},{"year":2030,"net":107243.0,"cov":22566.0,"ads":90264.0,"cpe":20.53,"enpl":5455.0,"opr":11575.0}],BS=[{"year":2025,"net":80837.0,"cov":15228.0,"ads":60911.0,"cpe":15.71,"enpl":5064.0,"opr":8800.0,"scpe":null},{"year":2026,"net":95839.0,"cov":21612.0,"ads":86449.0,"cpe":19.13,"enpl":5140.0,"opr":11575.0,"scpe":23.29},{"year":2027,"net":104021.0,"cov":21612.0,"ads":92917.0,"cpe":19.44,"enpl":5217.0,"opr":11575.0,"scpe":23.64},{"year":2028,"net":103071.0,"cov":23165.0,"ads":92659.0,"cpe":19.06,"enpl":5295.0,"opr":11575.0,"scpe":23.23},{"year":2029,"net":108417.0,"cov":23104.0,"ads":92415.0,"cpe":20.25,"enpl":5374.0,"opr":11575.0,"scpe":24.54},{"year":2030,"net":108532.0,"cov":23038.0,"ads":92151.0,"cpe":20.53,"enpl":5455.0,"opr":11575.0,"scpe":24.86}];
 var el=function(i){return document.getElementById(i)};
-var s0=el('s0'),s1=el('s1'),s2=el('s2'),c0=el('c0'),c1=el('c1');
+var s0=el('s0'),s1=el('s1'),s2=el('s2'),s4=el('s4'),c0=el('c0'),c1=el('c1');
 var COV=1.25;
 function m(k){return '$'+(k/1000).toFixed(1)+'m'}
 function r2(v){return v.toFixed(2)}
@@ -458,11 +486,17 @@ function mk(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttr
 /* State lives in one object rather than in the DOM inputs. The previous version read
    the live inputs inside compute(), which meant breakeven() had to write to s0.value a
    hundred times per render and put it back. */
-var S={d:100,a:100,p:0,l:0,D:1,C:1,y:1,u:0};
+var S={d:100,a:100,p:0,l:0,D:1,C:1,y:1,u:0,t:0,e:0};
+function vintage(st){return st.t===1?BS:B}
 
 function compute(st){
   var share=st.d/100, cshare=st.a/100, dpax=st.p/100, lateOnly=(st.l===1);
-  return B.map(function(b){
+  // What share of the airport's own earnings moves with passengers. The statement
+  // prints no such split, so the default is zero, which reproduces its forecast
+  // exactly: boardings then move the charge and leave the covenant test alone. Above
+  // zero is this publication's assumption and the page says so.
+  var sens=st.e/100;
+  return vintage(st).map(function(b){
     var d=(lateOnly && b.year<=2028)?b.opr:b.opr*share;
     if(!st.D) d=0;
     // A share of the Authority's own deposit, not a flat percentage of debt service:
@@ -470,7 +504,10 @@ function compute(st){
     // rate would not reproduce the document. Raising it stops at the contractual cap.
     var cap=0.25*b.ads;
     var acct=st.C?Math.min(b.cov*cshare, cap):0;
-    var earned=b.net-b.opr;               // Net Revenues before anything designated in
+    // Net Revenues before anything designated in, then the passenger-sensitive part of
+    // it moved with boardings. Designated money is a state appropriation and the
+    // Coverage Account is a share of debt service, so neither follows traffic.
+    var earned=(b.net-b.opr)*(1+sens*dpax);
     var promise=COV*b.ads;
     var enpl=b.enpl*(1+dpax);
     var req=(b.cpe+b.opr/b.enpl)*b.enpl;  // the airline requirement before any designation
@@ -492,9 +529,12 @@ var CH=null, UNIT=null;
 // A fixed vertical scale in both units. Recomputing per state would make a smaller
 // stack redraw at the same height as a larger one, so two scenarios could not be
 // compared by eye, which is the whole point of being able to switch between them.
+// Scanned across both vintages so the bars do not rescale when the scenario is
+// switched. A stress case that redrew at the same height as the base case could not
+// be compared with it by eye, which is the only reason to offer the switch.
 function domain(){
   var hi=0;
-  B.forEach(function(b){
+  B.concat(BS).forEach(function(b){
     var earned=b.net-b.opr;
     hi=Math.max(hi, earned+1.1*b.opr+0.25*b.ads, COV*b.ads);
   });
@@ -842,7 +882,17 @@ function render(){
   el('v0').textContent=(S.d===100?'as forecast':(S.d===0?'nothing':S.d+'%'));
   el('v1').textContent=(S.a===100?'as forecast':(S.a===0?'nothing':S.a+'%'));
   el('v2').textContent=(S.p===0?'as forecast':(S.p>0?'+':'')+S.p+'%');
+  el('v4').textContent=(S.e===0?'none':S.e+'%');
   var fy=rows[S.y];
+  var bs=vintage(S)[S.y];
+  el('rt').innerHTML=S.t===1
+    ? 'The statement prints a second forecast in which traffic underperforms. Coverage falls '
+      +'about a hundredth. The charge does not.'
+    : 'The consultant&#8217;s forecast of April 8, 2025.';
+  el('r4').innerHTML=S.e===0
+    ? 'None, as the statement has it. Boardings move the charge and leave the test alone.'
+    : '<b>'+m(fy.earned)+'</b> earned in '+fy.year+', against '+m(bs.net-bs.opr)
+      +' before this assumption';
   // At the baseline the readout would otherwise say a figure "against" itself.
   el('r0').innerHTML=!S.D ? 'Not counted. Switch the decision back on to move this.'
     : '<b>'+m(fy.desig)+'</b> designated in '+fy.year
@@ -854,18 +904,34 @@ function render(){
                     :', against '+m(fy.base.cov)+' in the statement'));
   el('r2').innerHTML='<b>'+(fy.base.enpl*(1+S.p/100)/1000).toFixed(2)+'m</b> boardings in '
     +fy.year+', against '+(fy.base.enpl/1000).toFixed(2)+'m forecast';
+  // Under the stress scenario the document prints its own charge, and with the levers
+  // where the document left them that printed figure is the one to show. Computing it
+  // here would use base-case boardings, because the stress column carries no
+  // enplanement series, and would come out low. Move a lever and the computed figure
+  // takes over, with the printed one named beside it.
   el('cy').textContent=fy.year;
-  el('cv').textContent='$'+fy.cpe.toFixed(2);
-  var dc=fy.cpe-fy.base.cpe, cd=el('cd');
+  var printed=(S.t===1 && bs.scpe!=null), untouched=(S.p===0 && S.d===100 && S.C===1 && S.D===1);
+  var show=(printed && untouched)?bs.scpe:fy.cpe;
+  el('cv').textContent='$'+show.toFixed(2);
+  var dc=show-B[S.y].cpe, cd=el('cd');
   cd.textContent=(Math.abs(dc)<0.005)?'as the Authority forecasts it'
-    :((dc>0?'+':'−')+'$'+Math.abs(dc).toFixed(2)+' against its forecast of $'
-      +fy.base.cpe.toFixed(2));
+    :((dc>0?'+':'−')+'$'+Math.abs(dc).toFixed(2)+' against its base forecast of $'
+      +B[S.y].cpe.toFixed(2));
   cd.className='cd'+(Math.abs(dc)<0.005?'':(dc>0?' up':' down'));
+  el('rs').innerHTML=!printed ? ''
+    : (untouched
+        ? 'The figure the stress column prints. Coverage in this scenario falls about a '
+          +'hundredth against the base case; the charge rises more than four dollars.'
+        : 'The stress column itself prints <b>$'+bs.scpe.toFixed(2)+'</b> for '+fy.year+'. This '
+          +'record carries no enplanement series for that scenario, so the figure above is '
+          +'computed on base-case boardings and runs low.');
 
   c0.closest('.sw').classList.toggle('off',!S.D);
   c1.closest('.sw').classList.toggle('off',!S.C);
   [].forEach.call(document.querySelectorAll('#scope button'),function(b){
     b.setAttribute('aria-pressed',String(+b.dataset.l===S.l))});
+  [].forEach.call(document.querySelectorAll('#vint button'),function(b){
+    b.setAttribute('aria-pressed',String(+b.dataset.t===S.t))});
   [].forEach.call(document.querySelectorAll('.chead .seg button'),function(b){
     b.setAttribute('aria-pressed',String(+b.dataset.u===S.u))});
   el('ctitle').textContent=(S.u===1
@@ -931,7 +997,8 @@ function render(){
    back button under a hundred of them. The cost is that Back does not step through
    scenarios; hashchange still restores a link someone pastes or follows. */
 function writeURL(){
-  var q='d='+S.d+'&a='+S.a+'&p='+S.p+'&l='+S.l+'&D='+S.D+'&C='+S.C+'&y='+S.y+'&u='+S.u;
+  var q='d='+S.d+'&a='+S.a+'&p='+S.p+'&l='+S.l+'&D='+S.D+'&C='+S.C+'&y='+S.y+'&u='+S.u
+       +'&t='+S.t+'&e='+S.e;
   try{history.replaceState(null,'','#'+q)}catch(e){}
 }
 function clamp(v,lo,hi,dflt){v=parseInt(v,10);
@@ -943,16 +1010,24 @@ function readURL(){
   S.d=clamp(q.d,0,110,100); S.a=clamp(q.a,0,120,100); S.p=clamp(q.p,-25,10,0);
   S.l=clamp(q.l,0,1,0); S.D=clamp(q.D,0,1,1); S.C=clamp(q.C,0,1,1);
   S.y=clamp(q.y,0,B.length-1,1); S.u=clamp(q.u,0,1,0);
+  // Absent on links written before the scenario and sensitivity controls existed, so
+  // both fall back to the values that reproduce the document.
+  S.t=clamp(q.t,0,1,0); S.e=clamp(q.e,0,60,0);
   return true;
 }
 function toInputs(){
-  s0.value=S.d; s1.value=S.a; s2.value=S.p; c0.checked=!!S.D; c1.checked=!!S.C;
+  s0.value=S.d; s1.value=S.a; s2.value=S.p; s4.value=S.e;
+  c0.checked=!!S.D; c1.checked=!!S.C;
 }
 
-var P={base:{d:100,a:100,p:0,l:0,D:1,C:1},
-       alone:{d:100,a:100,p:0,l:0,D:0,C:0},
-       after28:{d:0,a:100,p:0,l:1,D:1,C:1},
-       short:{d:100,a:100,p:-10,l:0,D:1,C:1}};
+var P={base:{d:100,a:100,p:0,l:0,D:1,C:1,t:0,e:0},
+       alone:{d:100,a:100,p:0,l:0,D:0,C:0,t:0,e:0},
+       after28:{d:0,a:100,p:0,l:1,D:1,C:1,t:0,e:0},
+       // Was "boardings ten percent short", which moved the charge and left the chart
+       // exactly where it was, because in the statement's own arithmetic traffic does
+       // not reach the covenant test. The stress case is the document making that point
+       // itself, and it moves printed numbers.
+       stress:{d:100,a:100,p:0,l:0,D:1,C:1,t:1,e:0}};
 [].forEach.call(document.querySelectorAll('.scen button'),function(btn){
   btn.addEventListener('click',function(){
     var p=P[btn.dataset.p]; for(var k in p) S[k]=p[k];
@@ -970,11 +1045,15 @@ c1.addEventListener('change',function(){S.C=c1.checked?1:0;manual()});
 [].forEach.call(document.querySelectorAll('#scope button'),function(b){
   b.addEventListener('click',function(){S.l=+b.dataset.l;manual()});
 });
+[].forEach.call(document.querySelectorAll('#vint button'),function(b){
+  // A different row set, so the chart is rebuilt rather than redrawn.
+  b.addEventListener('click',function(){S.t=+b.dataset.t;CH=null;manual()});
+});
 [].forEach.call(document.querySelectorAll('.chead .seg button'),function(b){
   // The unit switch is not a scenario change, so it does not clear the preset.
   b.addEventListener('click',function(){S.u=+b.dataset.u;render()});
 });
-[[s0,'d'],[s1,'a'],[s2,'p']].forEach(function(pair){
+[[s0,'d'],[s1,'a'],[s2,'p'],[s4,'e']].forEach(function(pair){
   var x=pair[0], k=pair[1];
   x.addEventListener('input',function(){S[k]=+x.value;manual()});
   // A range input under the cursor swallows the wheel and rewrites itself, so simply
