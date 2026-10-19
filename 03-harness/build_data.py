@@ -23,6 +23,18 @@ BUILT = "2026-09-01"
 # What each table is for. A file with no entry still lists, marked unannotated, so
 # adding a CSV cannot silently produce a row that says nothing.
 WHAT = {
+    "timeline-events.csv": ("What they said, and what they filed", "S1",
+        "One row per dated event, 2013 to 2056. Lane a is a public statement with its speaker "
+        "and clip; lane b is a filing or action with the pot the plan reached into. Carries "
+        "the source id, the PDF page, the tier and the status, and feeds both the explorer's "
+        "rail and the two-lane timeline video."),
+    "cited-pages.csv": ("Every page a claim rests on", "F1",
+        "One row per document page cited by any of the three claim ledgers, with the figures "
+        "to look for on it and the claim ids that cite it. Input to render_pages.py."),
+    "page-manifest.csv": ("The rendered pages", "F1",
+        "One row per page image under documents/pages/, with how many cited figures were "
+        "located on it and how many were not. Written by render_pages.py; the figures it "
+        "could not find are this record's own arithmetic, which no page prints."),
     "coverage-three-layers.csv": ("The covenant decomposed", "F1",
         "The consultant's six forecast years separated into operating revenue, designated "
         "revenue and the Coverage Account. Carries the ratio at each layer and the reserve as a "

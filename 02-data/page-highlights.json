@@ -1,0 +1,1307 @@
+[
+ {
+  "doc_id": "acfr-2019",
+  "pdf_page": 19,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2019-p019.jpg",
+  "thumb": "documents/pages/thumb/acfr-2019-p019.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "4438575eed275f757eeff0750c34a396c948294a9a0170bd862c4a20907a6ca7",
+  "terms_found": {
+   "$107.5": [
+    [
+     0.6283,
+     0.3831,
+     0.6777,
+     0.3984
+    ]
+   ],
+   "$12.4": [
+    [
+     0.4192,
+     0.4151,
+     0.4597,
+     0.4304
+    ],
+    [
+     0.2851,
+     0.447,
+     0.3255,
+     0.4624
+    ]
+   ],
+   "$150.0": [
+    [
+     0.8395,
+     0.3831,
+     0.8889,
+     0.3984
+    ],
+    [
+     0.6671,
+     0.3991,
+     0.7165,
+     0.4144
+    ]
+   ],
+   "$8.0": [
+    [
+     0.7139,
+     0.4311,
+     0.7453,
+     0.4464
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "V29-057",
+   "V29-058"
+  ]
+ },
+ {
+  "doc_id": "acfr-2019",
+  "pdf_page": 66,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2019-p066.jpg",
+  "thumb": "documents/pages/thumb/acfr-2019-p066.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "4438575eed275f757eeff0750c34a396c948294a9a0170bd862c4a20907a6ca7",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "acfr-2020",
+  "pdf_page": 56,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2020-p056.jpg",
+  "thumb": "documents/pages/thumb/acfr-2020-p056.jpg",
+  "width_px": 2200,
+  "height_px": 1700,
+  "sha256": "99477050a2d24d4e50784fe77fc4057a6b0f73d951f47300bc461e2ea33402dc",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "acfr-2021",
+  "pdf_page": 62,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2021-p062.jpg",
+  "thumb": "documents/pages/thumb/acfr-2021-p062.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "a86edabb0e004abd603716bdec64209bf1eecb699d0b0ed8164fd11898d421a0",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "acfr-2022",
+  "pdf_page": 75,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2022-p075.jpg",
+  "thumb": "documents/pages/thumb/acfr-2022-p075.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "e4e7ee8f43c6742957ae04f80fed292244bc740e2f3f50151efb7393721d2951",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "acfr-2023",
+  "pdf_page": 70,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2023-p070.jpg",
+  "thumb": "documents/pages/thumb/acfr-2023-p070.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "1ccb595f1f02ca0e607bad945351fb5d4b1f6b070d51ec8000acc919b3ab0d8d",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "acfr-2024",
+  "pdf_page": 66,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2024-p066.jpg",
+  "thumb": "documents/pages/thumb/acfr-2024-p066.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "89eee05fa77406e0016e38c6b2022050a9809fd18b25ffadd4b9359ca6443c59",
+  "terms_found": {
+   "$58,437,440": [
+    [
+     0.2917,
+     0.3836,
+     0.326,
+     0.3945
+    ],
+    [
+     0.2917,
+     0.4138,
+     0.3259,
+     0.4247
+    ]
+   ]
+  },
+  "terms_missing": [
+   "$83,667,983"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T23"
+  ]
+ },
+ {
+  "doc_id": "acfr-2024",
+  "pdf_page": 68,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2024-p068.jpg",
+  "thumb": "documents/pages/thumb/acfr-2024-p068.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "89eee05fa77406e0016e38c6b2022050a9809fd18b25ffadd4b9359ca6443c59",
+  "terms_found": {
+   "$36,444,805": [
+    [
+     0.2772,
+     0.5649,
+     0.3153,
+     0.5771
+    ]
+   ],
+   "$7.34": [
+    [
+     0.3004,
+     0.63,
+     0.3152,
+     0.6421
+    ]
+   ]
+  },
+  "terms_missing": [
+   "$11.56"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C10",
+   "C12",
+   "C14",
+   "C17"
+  ]
+ },
+ {
+  "doc_id": "acfr-2024",
+  "pdf_page": 70,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2024-p070.jpg",
+  "thumb": "documents/pages/thumb/acfr-2024-p070.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "89eee05fa77406e0016e38c6b2022050a9809fd18b25ffadd4b9359ca6443c59",
+  "terms_found": {},
+  "terms_missing": [
+   "$58,437,440",
+   "$83,667,983"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T23"
+  ]
+ },
+ {
+  "doc_id": "acfr-2024",
+  "pdf_page": 72,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2024-p072.jpg",
+  "thumb": "documents/pages/thumb/acfr-2024-p072.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "89eee05fa77406e0016e38c6b2022050a9809fd18b25ffadd4b9359ca6443c59",
+  "terms_found": {},
+  "terms_missing": [
+   "$58,437,440",
+   "$83,667,983"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T23"
+  ]
+ },
+ {
+  "doc_id": "acfr-2025",
+  "pdf_page": 66,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2025-p066.jpg",
+  "thumb": "documents/pages/thumb/acfr-2025-p066.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "9932b0119590384abb170f3f88b53a8cdbc4bdf1ece207f7765647418273e0e8",
+  "terms_found": {},
+  "terms_missing": [
+   "$58,437,440",
+   "$83,667,983"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T23"
+  ]
+ },
+ {
+  "doc_id": "acfr-2025",
+  "pdf_page": 70,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2025-p070.jpg",
+  "thumb": "documents/pages/thumb/acfr-2025-p070.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "9932b0119590384abb170f3f88b53a8cdbc4bdf1ece207f7765647418273e0e8",
+  "terms_found": {
+   "$58,437,440": [
+    [
+     0.3582,
+     0.3852,
+     0.3925,
+     0.396
+    ],
+    [
+     0.3582,
+     0.4154,
+     0.3924,
+     0.4262
+    ]
+   ],
+   "$83,667,983": [
+    [
+     0.2919,
+     0.3852,
+     0.3261,
+     0.396
+    ]
+   ],
+   "37,217,368": [
+    [
+     0.6236,
+     0.3852,
+     0.6579,
+     0.396
+    ]
+   ],
+   "39,050,630": [
+    [
+     0.5573,
+     0.3852,
+     0.5915,
+     0.396
+    ]
+   ],
+   "42,890,270": [
+    [
+     0.4909,
+     0.3852,
+     0.5251,
+     0.396
+    ]
+   ],
+   "47,691,608": [
+    [
+     0.69,
+     0.3852,
+     0.7242,
+     0.396
+    ]
+   ],
+   "49,793,061": [
+    [
+     0.7563,
+     0.3852,
+     0.7906,
+     0.396
+    ]
+   ],
+   "52,199,020": [
+    [
+     0.4246,
+     0.3852,
+     0.4588,
+     0.396
+    ]
+   ],
+   "53,392,720": [
+    [
+     0.8891,
+     0.3852,
+     0.9233,
+     0.396
+    ]
+   ],
+   "57,361,966": [
+    [
+     0.8227,
+     0.3852,
+     0.8569,
+     0.396
+    ]
+   ],
+   "58,437,440": [
+    [
+     0.3582,
+     0.3852,
+     0.3925,
+     0.396
+    ]
+   ]
+  },
+  "terms_missing": [
+   "$11.77",
+   "$13.92",
+   "$16.33",
+   "$17.01",
+   "$17.010",
+   "$21,992,635",
+   "$7.34",
+   "36,444,805",
+   "4,918,899",
+   "4,964,361",
+   "52,870,264"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 10,
+  "claim_ids": [
+   "T23",
+   "T4",
+   "V29-001",
+   "V29-016",
+   "V29-019",
+   "V29-062",
+   "V29-072"
+  ]
+ },
+ {
+  "doc_id": "acfr-2025",
+  "pdf_page": 72,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2025-p072.jpg",
+  "thumb": "documents/pages/thumb/acfr-2025-p072.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "9932b0119590384abb170f3f88b53a8cdbc4bdf1ece207f7765647418273e0e8",
+  "terms_found": {
+   "$16.33": [
+    [
+     0.2995,
+     0.6321,
+     0.318,
+     0.6439
+    ]
+   ],
+   "$54,413,945": [
+    [
+     0.2806,
+     0.4243,
+     0.3176,
+     0.436
+    ]
+   ],
+   "$80,325,742": [
+    [
+     0.2804,
+     0.5702,
+     0.3174,
+     0.5819
+    ]
+   ],
+   "4,918,899": [
+    [
+     0.2848,
+     0.6012,
+     0.3177,
+     0.6129
+    ]
+   ],
+   "4,964,361": [
+    [
+     0.3599,
+     0.6012,
+     0.3927,
+     0.6129
+    ]
+   ]
+  },
+  "terms_missing": [
+   "$17.01",
+   "$58,437,440",
+   "$83,667,983",
+   "$83,667,983,",
+   "0.92",
+   "45,462"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T23",
+   "T25",
+   "T4",
+   "V29-020",
+   "V29-042"
+  ]
+ },
+ {
+  "doc_id": "acfr-2025",
+  "pdf_page": 75,
+  "printed_page": "",
+  "image": "documents/pages/acfr-2025-p075.jpg",
+  "thumb": "documents/pages/thumb/acfr-2025-p075.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "9932b0119590384abb170f3f88b53a8cdbc4bdf1ece207f7765647418273e0e8",
+  "terms_found": {
+   "$31,777": [
+    [
+     0.3403,
+     0.5702,
+     0.3629,
+     0.5819
+    ]
+   ],
+   "$51,467": [
+    [
+     0.3404,
+     0.5427,
+     0.363,
+     0.5544
+    ]
+   ],
+   "$53,831": [
+    [
+     0.3405,
+     0.6415,
+     0.363,
+     0.6533
+    ],
+    [
+     0.3405,
+     0.6833,
+     0.363,
+     0.695
+    ]
+   ],
+   "$83,244": [
+    [
+     0.3403,
+     0.5982,
+     0.3629,
+     0.6099
+    ]
+   ],
+   "1.55": [
+    [
+     0.3514,
+     0.7147,
+     0.3658,
+     0.7264
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "V29-073",
+   "V29-074",
+   "V29-075"
+  ]
+ },
+ {
+  "doc_id": "cafr-2015",
+  "pdf_page": 70,
+  "printed_page": "70",
+  "image": "documents/pages/cafr-2015-p070.jpg",
+  "thumb": "documents/pages/thumb/cafr-2015-p070.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "f8e060f79fd12a26280aa2f348971760c001ec83c9eedd69f1d4cf821846de01",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "cafr-2016",
+  "pdf_page": 75,
+  "printed_page": "75",
+  "image": "documents/pages/cafr-2016-p075.jpg",
+  "thumb": "documents/pages/thumb/cafr-2016-p075.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "c2b27098f96d781e531548519f7add361d3f6a92953edc69cbe37e85e9bcaf95",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "cafr-2017",
+  "pdf_page": 75,
+  "printed_page": "75",
+  "image": "documents/pages/cafr-2017-p075.jpg",
+  "thumb": "documents/pages/thumb/cafr-2017-p075.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "70926dd045ffcf10bdeea8636471ee3cc27efae66309c9a9f3841a86a46b40f0",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "cafr-2018",
+  "pdf_page": 17,
+  "printed_page": "17",
+  "image": "documents/pages/cafr-2018-p017.jpg",
+  "thumb": "documents/pages/thumb/cafr-2018-p017.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "52f54105acbfe5f7e55bba55ddb6b891d7a0b9e4f5d5487d9d090c23defc4e72",
+  "terms_found": {
+   "$150.0": [
+    [
+     0.1781,
+     0.5773,
+     0.2275,
+     0.5926
+    ]
+   ],
+   "$99.5": [
+    [
+     0.7023,
+     0.5613,
+     0.7428,
+     0.5766
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T57"
+  ]
+ },
+ {
+  "doc_id": "cafr-2018",
+  "pdf_page": 80,
+  "printed_page": "80",
+  "image": "documents/pages/cafr-2018-p080.jpg",
+  "thumb": "documents/pages/thumb/cafr-2018-p080.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "52f54105acbfe5f7e55bba55ddb6b891d7a0b9e4f5d5487d9d090c23defc4e72",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "os-2021ab",
+  "pdf_page": 35,
+  "printed_page": "",
+  "image": "documents/pages/os-2021ab-p035.jpg",
+  "thumb": "documents/pages/thumb/os-2021ab-p035.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "8da587b3e2ac52415632e433f2a739b5629b091105882ca0703a896880e2096d",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "os-2021ab",
+  "pdf_page": 37,
+  "printed_page": "",
+  "image": "documents/pages/os-2021ab-p037.jpg",
+  "thumb": "documents/pages/thumb/os-2021ab-p037.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "8da587b3e2ac52415632e433f2a739b5629b091105882ca0703a896880e2096d",
+  "terms_found": {
+   "125%": [
+    [
+     0.7687,
+     0.4724,
+     0.8069,
+     0.4893
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C1",
+   "C6"
+  ]
+ },
+ {
+  "doc_id": "os-2021ab",
+  "pdf_page": 185,
+  "printed_page": "",
+  "image": "documents/pages/os-2021ab-p185.jpg",
+  "thumb": "documents/pages/thumb/os-2021ab-p185.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "8da587b3e2ac52415632e433f2a739b5629b091105882ca0703a896880e2096d",
+  "terms_found": {
+   "1.25": [
+    [
+     0.4888,
+     0.3047,
+     0.5192,
+     0.318
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C15"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 1,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p001.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p001.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T18"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 2,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p002.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p002.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [
+   "$410,515,000"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T28"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 31,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p031.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p031.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "V29-065"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 32,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p032.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p032.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [
+   "125%"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C1",
+   "C6",
+   "T51"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 39,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p039.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p039.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {
+   "$3,232,650,565": [
+    [
+     0.8522,
+     0.7908,
+     0.9155,
+     0.809
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C11",
+   "T26",
+   "T68"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 61,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p061.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p061.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "TF4"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 62,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p062.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p062.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {
+   "$11.56": [
+    [
+     0.8141,
+     0.3277,
+     0.8546,
+     0.343
+    ]
+   ]
+  },
+  "terms_missing": [
+   "$7.34"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C14"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 67,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p067.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p067.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T61",
+   "V29-060"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 70,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p070.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p070.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [
+   "$11.575",
+   "$5 million"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T21",
+   "T64",
+   "V29-071"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 72,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p072.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p072.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": []
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 88,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p088.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p088.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "V29-064"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 194,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p194.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p194.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {
+   "1.25": [
+    [
+     0.2001,
+     0.3313,
+     0.2319,
+     0.3452
+    ],
+    [
+     0.8047,
+     0.5201,
+     0.8365,
+     0.534
+    ]
+   ],
+   "5.04": [
+    [
+     0.1935,
+     0.1347,
+     0.2255,
+     0.1485
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T47",
+   "T49",
+   "V29-052",
+   "V29-053"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 198,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p198.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p198.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T61"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 202,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p202.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p202.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {
+   "$15.71": [
+    [
+     0.4276,
+     0.4541,
+     0.4731,
+     0.4671
+    ]
+   ],
+   "$19.06": [
+    [
+     0.6852,
+     0.4541,
+     0.7307,
+     0.4671
+    ]
+   ],
+   "$19.13": [
+    [
+     0.5134,
+     0.4541,
+     0.559,
+     0.4671
+    ]
+   ],
+   "$19.44": [
+    [
+     0.5993,
+     0.4541,
+     0.6448,
+     0.4671
+    ]
+   ],
+   "$20.25": [
+    [
+     0.771,
+     0.4541,
+     0.8166,
+     0.4671
+    ]
+   ],
+   "$20.53": [
+    [
+     0.857,
+     0.4541,
+     0.9024,
+     0.4671
+    ]
+   ],
+   "1.36": [
+    [
+     0.611,
+     0.3894,
+     0.6403,
+     0.4025
+    ]
+   ],
+   "1.37": [
+    [
+     0.5251,
+     0.3894,
+     0.5544,
+     0.4025
+    ]
+   ],
+   "1.43": [
+    [
+     0.7828,
+     0.3894,
+     0.812,
+     0.4025
+    ]
+   ],
+   "1.44": [
+    [
+     0.8687,
+     0.3894,
+     0.8979,
+     0.4025
+    ]
+   ],
+   "1.60": [
+    [
+     0.4391,
+     0.3894,
+     0.4685,
+     0.4025
+    ]
+   ],
+   "101,815": [
+    [
+     0.6725,
+     0.2604,
+     0.7261,
+     0.2734
+    ]
+   ]
+  },
+  "terms_missing": [
+   "$83.0",
+   "$84.7",
+   "$90.2",
+   "$90.8",
+   "1.12",
+   "1.13",
+   "1.18",
+   "1.19",
+   "1.25",
+   "1.35"
+  ],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [
+   "102,774",
+   "107,144",
+   "107,243",
+   "58,980",
+   "79,417",
+   "84,670",
+   "90,264",
+   "90,556",
+   "90,827",
+   "91,112",
+   "94,616"
+  ],
+  "rects_capped": 12,
+  "claim_ids": [
+   "C13",
+   "C14",
+   "C16",
+   "C2",
+   "C3",
+   "C4",
+   "C5",
+   "C7",
+   "T27",
+   "T5",
+   "T52",
+   "V29-017",
+   "V29-054",
+   "V29-055",
+   "V29-056"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 287,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p287.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p287.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {
+   "$11.575": [
+    [
+     0.4488,
+     0.77,
+     0.5082,
+     0.7838
+    ]
+   ],
+   "$5 million": [
+    [
+     0.4784,
+     0.2073,
+     0.5505,
+     0.2212
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "T63",
+   "T65",
+   "T66",
+   "T67",
+   "V29-067"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 295,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p295.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p295.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C8",
+   "TF4"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 316,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p316.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p316.jpg",
+  "width_px": 1650,
+  "height_px": 1275,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {
+   "$11,575": [
+    [
+     0.8608,
+     0.6141,
+     0.8871,
+     0.6265
+    ],
+    [
+     0.8124,
+     0.6141,
+     0.8387,
+     0.6265
+    ],
+    [
+     0.766,
+     0.6141,
+     0.7923,
+     0.6265
+    ],
+    [
+     0.7176,
+     0.6141,
+     0.7439,
+     0.6265
+    ],
+    [
+     0.6692,
+     0.6141,
+     0.6955,
+     0.6265
+    ]
+   ],
+   "$3,815": [
+    [
+     0.3297,
+     0.5705,
+     0.3513,
+     0.5829
+    ]
+   ]
+  },
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "C4",
+   "C5",
+   "C8",
+   "C9",
+   "T50",
+   "TF4",
+   "V29-068"
+  ]
+ },
+ {
+  "doc_id": "os-2025ab",
+  "pdf_page": 391,
+  "printed_page": "",
+  "image": "documents/pages/os-2025ab-p391.jpg",
+  "thumb": "documents/pages/thumb/os-2025ab-p391.jpg",
+  "width_px": 1275,
+  "height_px": 1650,
+  "sha256": "885183dbe4e2b48a81b00ac5e9a5180e7191764b4650ec7da1be7c384593713f",
+  "terms_found": {},
+  "terms_missing": [],
+  "terms_common_dropped": {},
+  "terms_found_unplotted": [],
+  "rects_capped": 0,
+  "claim_ids": [
+   "V29-066"
+  ]
+ }
+]

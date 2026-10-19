@@ -643,6 +643,10 @@ def build():
     b.append('<p>The two aggregation tools hold the material the findings are drawn from. Neither '
              'requires taking this publication\'s word for anything.</p>')
     b.append('<div class="grid">'
+             f'<a class="card" href="explore/index.html"><h3>Explore the record</h3>'
+             f'<p>What they said and what they filed, along the years; the 1.25 test taken apart '
+             f'as you scroll; every number on the page it sits on, boxed; every claim and where it '
+             f'stands.</p></a>'
              f'<a class="card" href="claims/index.html"><h3>What the reporting says</h3>'
              f'<p>Every claim, with the document behind it and a link that opens the source at '
              f'the page cited.</p></a>'

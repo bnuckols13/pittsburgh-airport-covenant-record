@@ -90,7 +90,10 @@ than writing around it. This package is a working record.
 ```
 index.html              front door
 report/                 six modules, each with the plate that carries it
+explore/                the record four ways: two-lane timeline, the 1.25 test taken apart
+                        as you scroll, every number boxed on its page, every claim's standing
 documents/              every source, graded and searchable, with what each proves
+documents/pages/        the cited pages rendered from the hashed PDFs (render_pages.py)
 factcheck/              the two machine gates, the conflicts register, the held claims
 appendix-dataviz/       the plates
 covenant/               the printed ratio decomposed
