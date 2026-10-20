@@ -32,6 +32,9 @@ WHAT = {
         "Seven dated public predictions and budget figures for the cost per enplaned passenger, "
         "each with its speaker, the year it was made for, its source and tier. Open marks on the "
         "chart are Tier C: reported in the Post-Gazette, not a document the record holds."),
+    "cpe-chart-bands.csv": ("The three eras named on the chart", "F3",
+        "The subsidy years, the capitalized-interest years, and the end of the airline agreement, "
+        "each with the document that dates it."),
     "cpe-billed.csv": ("The billed charge, 2024 and 2025", "F3",
         "Total rate base fees (Table III) over enplaned passengers (Table IV) from the 2025 audited "
         "report. The division is the record's own; the report prints its own figures on a cost "

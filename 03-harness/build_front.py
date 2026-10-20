@@ -644,9 +644,8 @@ def build():
              'requires taking this publication\'s word for anything.</p>')
     b.append('<div class="grid">'
              f'<a class="card" href="explore/index.html"><h3>Cost per passenger: predicted, reported, forecast</h3>'
-             f'<p>One chart, 2011 to 2030: the Authority\'s reported cost per enplaned passenger, the two '
-             f'consultant forecasts, the billed charge, and every public prediction and budget figure at '
-             f'the year it was made for.</p></a>'
+             f'<p>One chart, 2011 to 2030: what officials said the charge would be, what the Authority '
+             f'reported, the 2025 bill, and its consultant\'s forecast to 2030.</p></a>'
              f'<a class="card" href="claims/index.html"><h3>What the reporting says</h3>'
              f'<p>Every claim, with the document behind it and a link that opens the source at '
              f'the page cited.</p></a>'
