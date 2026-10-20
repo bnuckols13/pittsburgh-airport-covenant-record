@@ -28,6 +28,14 @@ WHAT = {
         "and clip; lane b is a filing or action with the pot the plan reached into. Carries "
         "the source id, the PDF page, the tier and the status, and feeds both the explorer's "
         "rail and the two-lane timeline video."),
+    "cpe-predictions.csv": ("What officials said the charge would be", "F3",
+        "Seven dated public predictions and budget figures for the cost per enplaned passenger, "
+        "each with its speaker, the year it was made for, its source and tier. Open marks on the "
+        "chart are Tier C: reported in the Post-Gazette, not a document the record holds."),
+    "cpe-billed.csv": ("The billed charge, 2024 and 2025", "F3",
+        "Total rate base fees (Table III) over enplaned passengers (Table IV) from the 2025 audited "
+        "report. The division is the record's own; the report prints its own figures on a cost "
+        "basis, and the two are never subtracted across."),
     "cited-pages.csv": ("Every page a claim rests on", "F1",
         "One row per document page cited by any of the three claim ledgers, with the figures "
         "to look for on it and the claim ids that cite it. Input to render_pages.py."),
