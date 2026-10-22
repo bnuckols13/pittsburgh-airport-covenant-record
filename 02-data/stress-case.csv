@@ -1,7 +1,7 @@
 year,aggregate_annual_debt_service_k,net_revenues_incl_OPR_k,coverage_amount_k,designated_k,cpe_stress,coverage_printed,coverage_on_net_revenues_alone,source_id,source_page,note
-2025,60911,80837,15228,8800,,1.58,1.3271,os-2025ab,PDF 202 (printed B-16) stress column,"The statement's own stress scenario. Net Revenues are higher than the base case because the airline agreement is residual: when traffic falls the carriers are billed the difference, so the airport's revenue holds and the charge per passenger rises. The stress column prints no cost per enplaned passenger for 2025."
-2026,86449,95839,21612,11575,23.29,1.36,1.1086,os-2025ab,PDF 202 (printed B-16) stress column,"Coverage falls one hundredth against the base case while the charge rises $4.16, from $19.13 to $23.29."
-2027,92917,104021,21612,11575,23.64,1.35,1.1195,os-2025ab,PDF 202 (printed B-16) stress column,
-2028,92659,103071,23165,11575,23.23,1.36,1.1124,os-2025ab,PDF 202 (printed B-16) stress column,
-2029,92415,108417,23104,11575,24.54,1.42,1.1732,os-2025ab,PDF 202 (printed B-16) stress column,
-2030,92151,108532,23038,11575,24.86,1.43,1.1778,os-2025ab,PDF 202 (printed B-16) stress column,"Coverage 1.43 against the base case's 1.44. The charge reaches $24.86 against $20.53."
+2025,60911,80837,15228,8800,19.47,1.58,1.3271,os-2025ab,PDF 323 (printed B-137) Exhibit H,"The statement's own stress scenario. Net Revenues are higher than the base case because the airline agreement is residual: when traffic falls the carriers are billed the difference, so the airport's revenue holds and the charge per passenger rises. Exhibit H prints $19.47 for 2025 against $15.71 in the base case. Stress enplanements 4,567 thousand in 2025, 8.0 percent below the 2024 actual and 9.8 percent below the 2025 base forecast. Source page corrected Oct. 22, 2026: these rows are on Exhibit H at PDF 323, not the base-case summary at PDF 202."
+2026,86449,95839,21612,11575,23.29,1.36,1.1086,os-2025ab,PDF 323 (printed B-137) Exhibit H,"Coverage falls one hundredth against the base case while the charge rises $4.16, from $19.13 to $23.29."
+2027,92917,104021,21612,11575,23.64,1.35,1.1195,os-2025ab,PDF 323 (printed B-137) Exhibit H,
+2028,92659,103071,23165,11575,23.23,1.36,1.1124,os-2025ab,PDF 323 (printed B-137) Exhibit H,
+2029,92415,108417,23104,11575,24.54,1.42,1.1732,os-2025ab,PDF 323 (printed B-137) Exhibit H,
+2030,92151,108532,23038,11575,24.86,1.43,1.1778,os-2025ab,PDF 323 (printed B-137) Exhibit H,Coverage 1.43 against the base case's 1.44. The charge reaches $24.86 against $20.53.
