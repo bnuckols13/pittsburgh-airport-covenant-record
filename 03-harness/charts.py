@@ -494,6 +494,84 @@ def _bracket(x, y0, y1, label, faint=False) -> str:
             f'{esc(label)}</text>')
 
 
+def dumbbell_h(f: Frame, sc: Scale, b: Band, rows: Sequence[dict], said_lo_key: str,
+               said_hi_key: str, came_key: str, label_key: str, said_tier_key: str,
+               came_tier_key: str, note_key: str | None = None,
+               gap_fmt: Callable[[float], str] = lambda v: f"{v:+.2f}") -> str:
+    """Horizontal dumbbell: what was said (left mark, shape by tier) joined to what came
+    in (right mark, always a hashed document). A said range draws as a short bar between
+    its two ends and the join starts at the end nearer the outcome. The gap is computed
+    here from the row, never typed. The label sits above the row; an optional note sits
+    under the gap so the basis of each outcome is on the figure."""
+    out = []
+    for r in rows:
+        lab = r[label_key]
+        y = b.center(lab)
+        lo = float(r[said_lo_key])
+        hi = float(r[said_hi_key]) if (r.get(said_hi_key) or "").strip() else lo
+        came = float(r[came_key])
+        near = hi if abs(came - hi) < abs(came - lo) else lo
+        out.append(f'<text class="lab" x="{f.x0}" y="{y-14:.1f}">{esc(lab)}</text>')
+        if hi != lo:
+            out.append(f'<rect x="{sc(lo):.1f}" y="{y-3:.1f}" width="{sc(hi)-sc(lo):.1f}" '
+                       f'height="6" rx="3" fill="{C["ink2"]}" opacity="0.35"/>')
+        out.append(f'<line x1="{sc(near):.1f}" y1="{y:.1f}" x2="{sc(came):.1f}" y2="{y:.1f}" '
+                   f'stroke="{C["blue"]}" stroke-width="3" opacity="0.45" stroke-linecap="round"/>')
+        out.append(mark(r.get(said_tier_key) or "C", C["ink"], sc(lo), y, r=5))
+        if hi != lo:
+            out.append(mark(r.get(said_tier_key) or "C", C["ink"], sc(hi), y, r=5))
+        out.append(mark(r.get(came_tier_key) or "A", C["blue"], sc(came), y, r=5.5))
+        gap = came - near
+        # the gap label sits on the outcome's far side, so it never covers the said mark
+        if came >= near:
+            out.append(f'<text class="val" x="{sc(came)+10:.1f}" y="{y+4:.1f}">'
+                       f'{esc(gap_fmt(gap))}</text>')
+        else:
+            out.append(f'<text class="val" x="{sc(came)-10:.1f}" y="{y+4:.1f}" text-anchor="end">'
+                       f'{esc(gap_fmt(gap))}</text>')
+        if note_key and r.get(note_key):
+            out.append(f'<text class="ax" x="{f.x1}" y="{y-14:.1f}" text-anchor="end">'
+                       f'{esc(r[note_key])}</text>')
+    return "".join(out)
+
+
+def change_bars_h(f: Frame, sc: Scale, b: Band, rows: Sequence[dict], value_key: str,
+                  label_key: str, group_key: str | None = None,
+                  right_key: str | None = None,
+                  fmt: Callable[[float], str] = lambda v: f"{v:+,.0f}") -> str:
+    """Horizontal change bars from a zero baseline, positive in blue, negative in orange.
+    Orange is the house colour for the other side of a two-sided figure, not for loss.
+    Group headers are drawn once above the first row of each group; an optional right-hand
+    text column carries a second reading of the same row."""
+    out = []
+    x_zero = sc(0)
+    last_group = None
+    for r in rows:
+        y = b.center(r[label_key])
+        if group_key and r.get(group_key) != last_group:
+            last_group = r.get(group_key)
+            out.append(f'<text class="ax" x="{f.x0}" y="{y-b.step*0.62:.1f}" '
+                       f'style="font-weight:700;letter-spacing:.06em">{esc(str(last_group).upper())}</text>')
+        v = float(r[value_key])
+        colour = C["blue"] if v >= 0 else C["orange"]
+        out.append(f'<rect x="{min(x_zero, sc(v)):.1f}" y="{y-8:.1f}" '
+                   f'width="{abs(sc(v)-x_zero):.1f}" height="16" fill="{colour}" opacity="0.88"/>')
+        if v >= 0:
+            out.append(f'<text class="val" x="{sc(v)+6:.1f}" y="{y+4:.1f}">{esc(fmt(v))}</text>')
+        else:
+            out.append(f'<text class="val" x="{sc(v)-6:.1f}" y="{y+4:.1f}" text-anchor="end">'
+                       f'{esc(fmt(v))}</text>')
+        out.append(f'<text class="lab2" x="{f.x0-8}" y="{y+4:.1f}" text-anchor="end">'
+                   f'{esc(r[label_key])}</text>')
+        if right_key:
+            # the second reading lives in the right margin, clear of the longest bar
+            out.append(f'<text class="ax" x="{f.w-8:.1f}" y="{y+4:.1f}" text-anchor="end">'
+                       f'{esc(r[right_key])}</text>')
+    out.append(f'<line x1="{x_zero:.1f}" y1="{f.ytop}" x2="{x_zero:.1f}" y2="{f.ybot:.1f}" '
+               f'stroke="{C["ink"]}" stroke-width="1"/>')
+    return "".join(out)
+
+
 DEFS = ('<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" '
         'markerHeight="6" orient="auto-start-reverse">'
         f'<path d="M 0 0 L 10 5 L 0 10 z" fill="{C["ink2"]}"/></marker></defs>')

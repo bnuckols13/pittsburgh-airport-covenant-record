@@ -1,0 +1,26 @@
+line,year,cpe,source_id,pdf_page,printed_page,what
+reported,2020,20.57,os-2025ab,62,52,Authority's table 'Airline Costs Per Enplaned Passenger 2020-2024' in the 2025 bond statement (2024 unaudited)
+reported,2021,12.35,os-2025ab,62,52,Authority's table 'Airline Costs Per Enplaned Passenger 2020-2024' in the 2025 bond statement (2024 unaudited)
+reported,2022,10.57,os-2025ab,62,52,Authority's table 'Airline Costs Per Enplaned Passenger 2020-2024' in the 2025 bond statement (2024 unaudited)
+reported,2023,11.34,os-2025ab,62,52,Authority's table 'Airline Costs Per Enplaned Passenger 2020-2024' in the 2025 bond statement (2024 unaudited)
+reported,2024,11.56,os-2025ab,62,52,Authority's table 'Airline Costs Per Enplaned Passenger 2020-2024' in the 2025 bond statement (2024 unaudited)
+forecast-2021,2021,12.76,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2021,2022,9.78,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2021,2023,9.73,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2021,2024,9.83,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2021,2025,12.92,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2021,2026,13.47,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2021,2027,13.41,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2021,2028,13.36,os-2021ab,185,B-19,"airport consultant's forecast, base case, in the 2021 bond statement"
+forecast-2023,2023,11.11,os-2023abc,208,B-16,airport consultant's forecast in the 2023 bond statement
+forecast-2023,2024,11.52,os-2023abc,208,B-16,airport consultant's forecast in the 2023 bond statement
+forecast-2023,2025,16.46,os-2023abc,208,B-16,airport consultant's forecast in the 2023 bond statement
+forecast-2023,2026,16.9,os-2023abc,208,B-16,airport consultant's forecast in the 2023 bond statement
+forecast-2023,2027,16.32,os-2023abc,208,B-16,airport consultant's forecast in the 2023 bond statement
+forecast-2023,2028,16.01,os-2023abc,208,B-16,airport consultant's forecast in the 2023 bond statement
+forecast-2025,2025,15.71,os-2025ab,202,B-16,"airport consultant's forecast, base case, in the 2025 bond statement"
+forecast-2025,2026,19.13,os-2025ab,202,B-16,"airport consultant's forecast, base case, in the 2025 bond statement"
+forecast-2025,2027,19.44,os-2025ab,202,B-16,"airport consultant's forecast, base case, in the 2025 bond statement"
+forecast-2025,2028,19.06,os-2025ab,202,B-16,"airport consultant's forecast, base case, in the 2025 bond statement"
+forecast-2025,2029,20.25,os-2025ab,202,B-16,"airport consultant's forecast, base case, in the 2025 bond statement"
+forecast-2025,2030,20.53,os-2025ab,202,B-16,"airport consultant's forecast, base case, in the 2025 bond statement"

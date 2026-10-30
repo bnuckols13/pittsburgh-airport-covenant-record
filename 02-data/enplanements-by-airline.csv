@@ -1,0 +1,18 @@
+airline,group,enpl_2014,enpl_2019,enpl_2024,share_2014,share_2019,share_2024,source_id,source_page,tier,note
+Southwest,low-cost,1062692,1231855,1257127,26.7,25.3,25.3,os-2025ab,PDF 251 (printed B-65) Table 9,A,Southwest and AirTran reported together
+American,legacy,1384201,1136330,1098929,34.7,23.3,22.1,os-2025ab,PDF 251 (printed B-65) Table 9,A,American and US Airways reported together; regional affiliates grouped with the mainline partner
+Delta,legacy,741063,921353,794186,18.6,18.9,16.0,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+United,legacy,650568,763085,693939,16.3,15.7,14.0,os-2025ab,PDF 251 (printed B-65) Table 9,A,United and Continental reported together
+Spirit,low-cost,0,286901,481163,0,5.9,9.7,os-2025ab,PDF 251 (printed B-65) Table 9,A,no service in 2014; shut down nationwide in early May 2026 (blueskypit-spirit.html)
+Allegiant,low-cost,0,187874,218759,0,3.9,4.4,os-2025ab,PDF 251 (printed B-65) Table 9,A,no service in 2014
+JetBlue,low-cost,104709,151570,97696,2.6,3.1,2.0,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+Breeze,low-cost,0,0,86765,0,0,1.7,os-2025ab,PDF 251 (printed B-65) Table 9,A,service began July 2021
+Alaska,legacy,0,50897,67710,0,1.0,1.4,os-2025ab,PDF 251 (printed B-65) Table 9,A,Alaska and Virgin America reported together
+Frontier,low-cost,14055,29848,51208,0.4,0.6,1.0,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+British Airways,foreign-flag,0,25909,46596,0,0.5,0.9,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+Air Canada,foreign-flag,23325,55220,39162,0.6,1.1,0.8,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+Icelandair,foreign-flag,0,0,11556,0,0,0.2,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+Sun Country,low-cost,0,0,8533,0,0,0.2,os-2025ab,PDF 251 (printed B-65) Table 9,A,service began June 2022
+Southern Airways,other,592,20536,9140,0,0.4,0.2,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+All Other,other,4023,13651,1892,2.6,0.3,0.0,os-2025ab,PDF 251 (printed B-65) Table 9,A,
+Airport Total,total,3985228,4875029,4964361,100,100,100,os-2025ab,PDF 251 (printed B-65) Table 9,A,scheduled passengers only; Authority records

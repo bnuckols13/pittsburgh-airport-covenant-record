@@ -1,0 +1,38 @@
+date,post,kind,printed_figure,callout,vault_id,link,text_sha256_media_archive
+2018-08-23,bluesky-10304,description,,,,https://blueskypit.com/the-long-and-winding-road-that-leads-to-your-bag/,01ece2a4e038f85fa29ded9b08c5850a1942a4ee1273100947dfd3d09e4b6334
+2018-09-20,bluesky-10233,description,,,,https://blueskypit.com/coming-soon-new-airport-retailers-with-a-local-touch-and-finally-a-shoeshine/,54912d3788dc3ced4add76eccc9828715033752f3908bd727d5204e452bc58b1
+2018-10-19,bluesky-10318,figure,$10.35,the airport’s Cost Per Enplaned Passenger decreased to $10.35,bluesky-10318,https://blueskypit.com/airport-budget-lowers-airline-costs-again/,eeaf1455d90bdfeeabce4f1c2a0a0fe2cad4652979f814ae65d4cfd1ea5ea74e
+2018-11-09,bluesky-10307,description,,,,https://blueskypit.com/how-pittsburgh-got-its-groove-back/,39c22a82e535d7d06a85dbf3e34a563ba31cc21545af78fe0560f5fe774fe2ee
+2018-12-06,bluesky-10351,description,,,,https://blueskypit.com/innovation-campus-offers-new-runway-to-the-world/,9b32ebeaa928d9a12a032c2348eee7cd8af4fb60df940e6543cae507efc8759a
+2019-02-20,bluesky-10417,description,,,,https://blueskypit.com/many-ups-a-few-downs-and-a-big-reveal/,e531c5de4753fc3223a31459c169ac55c2b5437d9356dd1db460e262dde05ff4
+2019-02-20,bluesky-10420,description,,PIT will have the capacity to take on new debt without spiking costs to the airlines,bluesky-10420,https://blueskypit.com/whos-paying-for-pits-new-terminal/,9e3d5969e8955f0cd3d352d03607c13ea2c32c8ee50818fc3fd3928a84eb31a3
+2019-02-22,bluesky-10423,description,,,,https://blueskypit.com/virtual-reality-offers-inside-look-at-pits-new-airport/,2feffb007c445af7b5efb236314a0271c337a298c1a1a629d92e263e8a336841
+2019-06-21,bluesky-10565,description,,,,https://blueskypit.com/why-airline-tickets-cost-so-much-or-dont/,84241e5ed5b653b67e76ca513d1d8751a77448200f486ad856ce22265664bba0
+2019-07-26,bluesky-10592,description,,,,https://blueskypit.com/air-service-development-is-economic-development/,c01c2f8806638d135e709771e097740706a80d5abb7df9ddd8a6555b78aba80d
+2019-11-18,bluesky-10715,figure,$9.29,PIT’s cost per enplaned passenger – or CPE – will dip to a projected $9.29,bluesky-10715,https://blueskypit.com/pits-cost-per-enplaned-passenger-hits-lowest-level-since-2002/,b7553257708a1527a0d12654fefc9bbbbceff2d576422bbd7528841617bfe335
+2020-12-14,bluesky-11023,description,,,,https://blueskypit.com/pact-with-airlines-keeps-terminal-project-on-track/,989c9c8f6108f08ce0bd70f55bfbede65c6defa1636cdfc0a6fe6d3594c932ec
+2021-01-17,bluesky-11039,description,,,,https://blueskypit.com/part-3-ready-for-takeoff/,c2c941f80ac037c2a6ad46778476a7aab2d26d06f1a2dd6b8974534a0eeeee7d
+2021-02-01,bluesky-11046,description,,,,https://blueskypit.com/pits-terminal-modernization-program-ready-to-move-ahead/,7e00e512848471fa9dde6596b3abafd12737ee450d2ddc0c7f254f14f99f068a
+2021-03-15,bluesky-11080,description,,,,https://blueskypit.com/nbcs-dateline-features-pits-progress-in-pandemic-special/,b9af286b4dcf04ea869252ec9852402ce6492975240bb5b674dba756158ea366
+2021-03-22,bluesky-11086,description,,,,https://blueskypit.com/airlines-approve-restart-of-new-pit-terminal/,42340de323da227724c6a226c233ed5655eaa31c2d726aa4bea62d33e72ae477
+2021-04-02,bluesky-11096,description,,,,https://blueskypit.com/biden-gives-a-shout-out-to-pits-new-terminal/,9f033769f4f4dee754920be7ca9c1075542f9facca5b4ad097f31cd22c5e24a2
+2021-06-24,bluesky-11156,description,,,,https://blueskypit.com/with-airline-approval-pits-new-terminal-takes-off/,cc1c5f789daa87efe7964166b156cae39e51857e0cc56ac0243e0fec5d9caf35
+2021-08-02,bluesky-11185,description,,,,https://blueskypit.com/rating-agencies-give-pit-straight-as-for-modernization/,e8ff866e6123b4c10a41bf300a099827abbba09749e1f9426c717abf52a2c260
+2021-10-11,bluesky-11237,description,,,,https://blueskypit.com/officials-set-to-break-ground-for-pits-new-terminal/,9ba4a7386cc3d1f446e9a67cd7ef75fb1f0d1e92c85ad9b289858eb77ef7c358
+2021-11-08,bluesky-11263,description,,,,https://blueskypit.com/pit-ceo-airports-airlines-can-partner-to-tackle-global-issues/,86548016075b416e6d74c49615f4b107c50a437e3958b57f9aa337be6c651417
+2021-11-15,bluesky-11271,description,,,,https://blueskypit.com/pit-ceo-to-see-infrastructure-up-close-come-to-pittsburgh/,d1c4760bfce06ba407ec782c600017454c99eed0263d97166bf1cbaa00f0fa03
+2022-05-23,bluesky-11403,description,,,,https://blueskypit.com/pit-cnx-develop-fuel-strategy-to-reduce-emissions-costs-for-aviation/,9e7421c448e435e51a0b777ee6e5c08b7c0aa7289380fdf6c41990d85691612f
+2022-06-13,bluesky-11422,description,,,,https://blueskypit.com/pit-executive-sprys-honored-by-industry-group/,962c812e771f25bf479f8efd707cd10c586b2c326ec53edd6c8ff0867b994d7a
+2022-07-08,bluesky-11438,description,,,,https://blueskypit.com/85-u-s-airports-split-1b-for-infrastructure-upgrades/,82c390ff1d248a415bf30fca61ab0076c0c3ca56e6010d462d326fd84fcc7d2b
+2023-03-06,bluesky-11632,description,,,,https://blueskypit.com/pit-lands-second-federal-infrastructure-grant/,f8ccd62c6c6785606113527f8728a1d13bfb102281b7bd8982481d5454c10573
+2023-09-12,bluesky-38026,description,,,,https://blueskypit.com/new-terminal-construction-passes-halfway-mark/,773503b784c4ddec873160c317a703dd0fc48d827c802dd098384d2223951c60
+2023-09-28,bluesky-38110,description,,,,https://blueskypit.com/financial-ratings-agencies-give-acaa-straight-as/,fe0d6a4116258a789cf367207e8f12f43d48a1bc14aa93ed843067bcaed774c4
+2023-10-16,bluesky-38268,description,,,,https://blueskypit.com/inside-look-officials-showcase-passenger-journey-at-new-terminal/,0255918194480fc1e998a3b8c913fda0888dda86c7b8e0156604b4c8627f3f4b
+2023-11-13,bluesky-38662,description,,,,https://blueskypit.com/pit-ceo-its-time-to-have-pittsburghs-airport-designed-for-us/,61e9193af50f07ffc7bd8ddede6b1dfa1ba09281535ea7f647c417de5e6145bd
+2023-11-20,bluesky-38734,description,,,,https://blueskypit.com/photos-of-the-week-bright-future-ahead/,5badf7e38a6ca3feed664843436ffa10b64ba50f02422ded3da86f200a63e91b
+2024-02-29,bluesky-39800,description,,,,https://blueskypit.com/take-an-up-close-look-at-airports-construction-progress/,fa0b06e502a7c16c42b00fd9bebb0abfc57401a996647b2011b71e3c078f7c13
+2024-04-22,bluesky-40007,description,,,,https://blueskypit.com/president-visits-pits-terminal-construction-site/,6aa3c70fa1653be35333987f2444eb3cab23d14f9ab874a11e68af5fa4ea463f
+2024-08-19,bluesky-40690,description,,,,https://blueskypit.com/cassotis-viewpoint-governance-structure-matters-especially-for-airports/,fade87a311596403fafd5492c090b3fe78372b2cd21ba763079f2d83658cbe71
+2025-04-04,bluesky-45080,description,,,,https://blueskypit.com/financial-ratings-agencies-give-acaa-straight-as-again/,a36ff28fdf9fdf7435baf47d6c08618c95fee5c2ca47d3e1d4f529ffa71e8d11
+2025-10-06,bluesky-49562,description,,"its airline partners, which are the primary funders of the new terminal project",bluesky-49562,https://blueskypit.com/a-testament-to-where-pittsburgh-is-going/,9477e387a374b64da6d51d487f70e40d92c108ce18489d70e67bce6477d1b582
+2025-10-11,bluesky-49656,description,,,,https://blueskypit.com/a-new-era-pittsburgh-cuts-the-ribbon-for-pits-new-terminal/,a78d6c89241dd40643895f3237d3bff72678bc158f4406f6d37449c27c8d1759

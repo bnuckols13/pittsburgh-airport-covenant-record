@@ -585,7 +585,7 @@ def build():
              '<p>Six modules, each with the figure that carries it and the arithmetic beneath '
              'it.</p></a>'
              '<a class="card" href="appendix-dataviz/index.html"><h3>The figures</h3>'
-             '<p>Eight plates and two held cards. Every coordinate recomputes from a CSV naming '
+             '<p>Ten plates and two held cards. Every coordinate recomputes from a CSV naming '
              'its document, page and hash.</p></a></div>')
 
     # ---- what the charge is forecast to do, year by year --------------------

@@ -102,6 +102,14 @@ WHAT = {
         "Share of traffic by airline, by year."),
     "plan-of-finance.csv": ("How the terminal was paid for", "S1",
         "The plan of finance by source: bonds, federal and state grants, and the rest."),
+    "cpe-said-vs-came-in.csv": ("What they said the charge would be", "F3",
+        "Five dated predictions of the airline charge, each with the figure the record holds "
+        "for the year predicted and the basis of that figure. Predictions from newspaper clips "
+        "are tier C and are drawn as utterances; the gap is computed at build time. Plate IX."),
+    "enplanements-by-airline.csv": ("Boardings by airline", "F4",
+        "Enplaned passengers by airline for 2014, 2019 and 2024 with each carrier's share, from "
+        "Table 9 of the 2025 bond statement. Regional affiliates are grouped with their "
+        "mainline partner. Plate X."),
     "budget-revisions.csv": ("What the budget became", "S1",
         "Each published cost figure for the program and the revision that followed it."),
     "documents.csv": ("The source registry", "all",

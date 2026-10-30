@@ -365,6 +365,42 @@
       "tier": "A",
       "vault_filename": "eis-full.pdf",
       "capture_kind": "file"
+    },
+    "bluesky-10318": {
+      "title": "Blue Sky News, Oct. 19, 2018: airport budget lowers airline costs again, published by the Authority",
+      "url": "https://blueskypit.com/wp-json/wp/v2/posts/10318?_fields=id,date,modified,link,title,content",
+      "sha256": "f43d11d76b1aae3c2b00839753a418218c28a2146c25409757adb9059a24e5be",
+      "tier": "D",
+      "vault_filename": "bluesky-10318.json",
+      "capture_kind": "snapshot",
+      "captured": "2026-10-30T00:52:16Z"
+    },
+    "bluesky-10420": {
+      "title": "Blue Sky News, Feb. 20, 2019: who's paying for PIT's new terminal, published by the Authority",
+      "url": "https://blueskypit.com/wp-json/wp/v2/posts/10420?_fields=id,date,modified,link,title,content",
+      "sha256": "dc2d2902bf7b439d1d5f86fdb65aeeeeaf72f00e346a75addb2e98bf5326c8c7",
+      "tier": "D",
+      "vault_filename": "bluesky-10420.json",
+      "capture_kind": "snapshot",
+      "captured": "2026-10-30T00:52:16Z"
+    },
+    "bluesky-10715": {
+      "title": "Blue Sky News, Nov. 18, 2019: cost per enplaned passenger hits lowest level since 2002, published by the Authority",
+      "url": "https://blueskypit.com/wp-json/wp/v2/posts/10715?_fields=id,date,modified,link,title,content",
+      "sha256": "d7ce1c0b5a838fb38a98430b7d6fb10ed0b43cfbe3a675449673743fef6f9f41",
+      "tier": "D",
+      "vault_filename": "bluesky-10715.json",
+      "capture_kind": "snapshot",
+      "captured": "2026-10-30T00:52:16Z"
+    },
+    "bluesky-49562": {
+      "title": "Blue Sky News, Oct. 6, 2025: post on the new terminal before its opening, published by the Authority",
+      "url": "https://blueskypit.com/wp-json/wp/v2/posts/49562?_fields=id,date,modified,link,title,content",
+      "sha256": "b301f2cdb06cb4fb89e05b752f1877183ba4000c63fb2f6fd96dc232cb2f6a0a",
+      "tier": "D",
+      "vault_filename": "bluesky-49562.json",
+      "capture_kind": "snapshot",
+      "captured": "2026-10-30T00:52:16Z"
     }
   }
 }
